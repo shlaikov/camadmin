@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
+/**
+ * Database\Factories\UserFactory
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|User create()
+ * @method static \Illuminate\Database\Eloquent\Builder|User unverified()
+
+ * @mixin \Eloquent
+ */
 class UserFactory extends Factory
 {
     /**

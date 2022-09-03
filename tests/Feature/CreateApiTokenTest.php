@@ -3,14 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Features;
 use Tests\TestCase;
 
 class CreateApiTokenTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_api_tokens_can_be_created()
     {
         if (! Features::hasApiFeatures()) {
@@ -19,7 +16,7 @@ class CreateApiTokenTest extends TestCase
 
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-        $response = $this->post('/user/api-tokens', [
+        $this->post('/user/api-tokens', [
             'name' => 'Test Token',
             'permissions' => [
                 'read',

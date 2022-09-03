@@ -3,9 +3,11 @@ import laravel from 'laravel-vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
-    eslintPlugin(),
+    eslintPlugin({
+      failOnError: command === 'build',
+    }),
     laravel({
       input: 'resources/js/app.js',
       ssr: 'resources/js/ssr.js',
@@ -23,4 +25,4 @@ export default defineConfig({
   ssr: {
     noExternal: ['@inertiajs/server'],
   },
-})
+}))

@@ -4,13 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Team;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteTeamTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_teams_can_be_deleted()
     {
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
@@ -20,7 +17,8 @@ class DeleteTeamTest extends TestCase
         ]));
 
         $team->users()->attach(
-            $otherUser = User::factory()->create(), ['role' => 'test-role']
+            $otherUser = User::factory()->create(),
+            ['role' => 'test-role']
         );
 
         $response = $this->delete('/teams/'.$team->id);

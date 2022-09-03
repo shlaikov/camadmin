@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Cloud Filesystem Disk
+    |--------------------------------------------------------------------------
+    |
+    | Many applications store files both locally and in the cloud. For this
+    | reason, you may specify a default "cloud" driver here. This driver
+    | will be bound as the Cloud disk implementation in the container.
+    |
+    */
+
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
@@ -57,12 +70,14 @@ return [
         ],
 
         'minio' => [
-            'driver' => 'minio',
-            'key' => env('MINIO_KEY'),
-            'secret' => env('MINIO_SECRET'),
-            'region' => 'us-east-1',
-            'bucket' => env('MINIO_BUCKET'),
-            'endpoint' => env('MINIO_ENDPOINT', 'http://localhost:9000'),
+            'driver' => 's3',
+            'key' => env('MINIO_ACCESS_KEY_ID', 'key'),
+            'secret' => env('MINIO_SECRET_ACCESS_KEY', 'secret'),
+            'region' => env('MINIO_DEFAULT_REGION', 'us-east-1'),
+            'bucket' => env('MINIO_BUCKET', 'bucket-name'),
+            'url' => env('MINIO_URL', 'http://minio:9000'),
+            'endpoint' => env('MINIO_ENDPOINT', 'http://minio:9000'),
+            'use_path_style_endpoint' => true,
         ],
 
     ],

@@ -6,6 +6,11 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * Database\Factories\TeamFactory
+ *
+ * @mixin \Eloquent
+ */
 class TeamFactory extends Factory
 {
     /**

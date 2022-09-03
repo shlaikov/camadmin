@@ -3,24 +3,22 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LeaveTeamTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_users_can_leave_teams()
     {
         $user = User::factory()->withPersonalTeam()->create();
 
         $user->currentTeam->users()->attach(
-            $otherUser = User::factory()->create(), ['role' => 'admin']
+            $otherUser = User::factory()->create(),
+            ['role' => 'admin']
         );
 
         $this->actingAs($otherUser);
 
-        $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
+        $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
 
         $this->assertCount(0, $user->currentTeam->fresh()->users);
     }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EditorController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,4 +34,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+    Route::get('/projects/create', [ProjectController::class, 'create'])->name('process.create');
+    Route::post('/projects/create', [ProjectController::class, 'store'])->name('process.store');
+
+    Route::get('/process/{uuid}', [EditorController::class, 'show'])->name('editor');
 });
