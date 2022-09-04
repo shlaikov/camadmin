@@ -1,6 +1,5 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
-// import BpmnViewer from '@/Components/BPMN/BpmnViewer.vue'
 import BpmnModeler from '@/Components/BPMN/BpmnModeler.vue'
 </script>
 
@@ -13,7 +12,11 @@ import BpmnModeler from '@/Components/BPMN/BpmnModeler.vue'
     <div class="py-12 relative">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-          <BpmnModeler url="/example.bpmn" />
+          <BpmnModeler
+            :uuid="$page.props.process.uuid"
+            :diagram-x-m-l="$page.props.process.url"
+            properties-panel
+          />
         </div>
       </div>
     </div>

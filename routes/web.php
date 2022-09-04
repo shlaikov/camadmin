@@ -40,4 +40,7 @@ Route::middleware([
     Route::post('/projects/create', [ProjectController::class, 'store'])->name('process.store');
 
     Route::get('/process/{uuid}', [EditorController::class, 'show'])->name('editor');
+    Route::post('/process/{uuid}', [EditorController::class, 'deploy'])->name('deploy');
+    Route::get('/process/{uuid}/preview.svg', [EditorController::class, 'preview'])->name('process.preview');
+    Route::get('/process/{uuid}/file.bpmn', [EditorController::class, 'file'])->name('process.file');
 });

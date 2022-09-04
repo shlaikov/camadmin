@@ -32,6 +32,8 @@ class ProjectController extends Controller
             'uuid' => (string) Str::uuid(),
         ]);
 
-        return redirect()->route('editor', ['uuid' => $process->uuid]);
+        return redirect()->route('editor', [
+            'uuid' => $process->uuid,
+        ]);
     }
 }

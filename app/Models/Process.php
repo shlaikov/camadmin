@@ -19,5 +19,6 @@ class Process extends Model
         'team_id',
         'name',
         'url',
+        'preview',
     ];
 }
