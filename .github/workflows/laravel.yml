@@ -1,10 +1,10 @@
-name: Laravel
+name: Test application
 
 on:
   push:
-    branches: ['main']
+    branches: ['main', 'develop']
   pull_request:
-    branches: ['main']
+    branches: ['main', 'develop']
 
 jobs:
   laravel-tests:
@@ -16,7 +16,7 @@ jobs:
           php-version: '8.1'
       - uses: actions/checkout@v3
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: php -r "file_exists('.env') || copy('.github/.env.pipeline', '.env');"
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Generate key
@@ -29,15 +29,8 @@ jobs:
         run: |
           mkdir -p database
           touch database/database.sqlite
-
       - name: Make database migration
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
         run: |
           php artisan migrate
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
         run: vendor/bin/phpunit
