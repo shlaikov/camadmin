@@ -92,11 +92,6 @@ export default {
     this.modeler.destroy()
   },
   methods: {
-    fetchDiagram: function (url) {
-      const self = this
-
-      alert(url, self)
-    },
     updateCoordinates: function (event) {
       const canvas = this.$refs['canvas']
       const rect = canvas.getBoundingClientRect()
@@ -105,7 +100,6 @@ export default {
         x: event.clientX - rect.left,
         y: event.clientY - rect.top,
       }
-      // console.log(coord.x, coord.y)
     },
     deployProcess: async function () {
       const form = new FormData()
@@ -119,6 +113,7 @@ export default {
 
       try {
         const { xml } = await this.modeler.saveXML({ format: true })
+
         form.append('xml', xml)
       } catch (error) {
         console.error(`saveXML error ${error}`)

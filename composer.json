@@ -1,22 +1,27 @@
 {
-  "name": "laravel/laravel",
+  "name": "bpmn-hub/bpmn-hub",
   "type": "project",
   "description": "The Laravel Framework.",
   "keywords": [
     "framework",
-    "laravel"
+    "laravel",
+    "bpmn",
+    "self-hosted",
+    "business process",
+    "camunda"
   ],
+  "version": "1.0.0",
   "license": "MIT",
   "require": {
     "php": "^8.0.2",
     "guzzlehttp/guzzle": "^7.2",
     "inertiajs/inertia-laravel": "^0.6.3",
+    "laravel/fortify": "^1.13",
     "laravel/framework": "^9.19",
     "laravel/jetstream": "^2.11",
     "laravel/sanctum": "^3.0",
     "laravel/tinker": "^2.7",
     "league/flysystem-aws-s3-v3": "^3.0",
-    "pusher/pusher-php-server": "^7.0",
     "tightenco/ziggy": "^1.0"
   },
   "require-dev": {

@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import BpmnJS from 'bpmn-js'
 
 export default {
