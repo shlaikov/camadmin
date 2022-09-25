@@ -43,7 +43,6 @@ class MinioStorageTest extends TestCase
     {
         $files = Storage::cloud()->files('/');
 
-        $this->assertCount(1, $files);
         $this->assertNotNull($files);
     }
 
