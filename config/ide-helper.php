@@ -182,7 +182,9 @@ return [
         'Session' => ['Illuminate\Session\Store'],
     ],
 
-    'magic' => [],
+    'magic' => [
+        'Features' => ['Laravel\Fortify\Features'],
+    ],
 
     /*
     |--------------------------------------------------------------------------
