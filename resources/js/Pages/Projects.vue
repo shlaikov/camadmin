@@ -94,7 +94,10 @@ const { uploadFiles } = createUploader(route('process.import'))
                       >
                         <div class="w-48 mx-auto my-4 items-center justify-center text-center">
                           <NoData />
-                          <p class="mb-8 leading-relaxed">Create or import your business process</p>
+                          <p class="mx-2 mb-8 leading-relaxed">
+                            No data.<br />
+                            Create or import your business process
+                          </p>
                         </div>
                       </div>
                       <div
