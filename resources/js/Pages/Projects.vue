@@ -90,12 +90,12 @@ const { uploadFiles } = createUploader(route('process.import'))
                     <div class="mx-auto min-w-full overflow-hidden align-middle">
                       <div
                         v-show="files.length === 0 && processes.data.length === 0"
-                        class="w-full mb-4 mt-6 px-4"
+                        class="w-full mb-4 mt-6 px-4 text-gray-600 body-font"
                       >
                         <div class="w-48 mx-auto my-4 items-center justify-center text-center">
                           <NoData />
-                          <p class="mx-2 mb-8 leading-relaxed">
-                            No data.<br />
+                          <p class="mt-8 mb-8 leading-relaxed">
+                            <span class="mb-4 font-bold text-gray-900">No data</span><br />
                             Create or import your business process
                           </p>
                         </div>
