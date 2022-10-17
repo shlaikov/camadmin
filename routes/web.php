@@ -32,6 +32,7 @@ Route::middleware([
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('process.create');
     Route::post('/projects/create', [ProjectController::class, 'store'])->name('process.store');
+    Route::post('/projects/import', [ProjectController::class, 'import'])->name('process.import');
 
     Route::get('/process/{uuid}', [EditorController::class, 'show'])->name('editor');
     Route::post('/process/{uuid}', [EditorController::class, 'deploy'])->name('deploy');
