@@ -4,6 +4,11 @@ import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineConfig(({ command }) => ({
+  server: {
+    hmr: {
+      host: 'localhost',
+    },
+  },
   plugins: [
     eslintPlugin({
       failOnError: command === 'build',

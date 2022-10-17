@@ -9,6 +9,8 @@ import createUploader from '@/Compositions/file-uploader'
 import useFileList from '@/Compositions/file-list'
 import Process from '@/Components/Process.vue'
 
+import NoData from '@/Components/Icons/NoData.vue'
+
 defineProps({
   processes: Object,
 })
@@ -80,13 +82,21 @@ const { uploadFiles } = createUploader(route('process.import'))
               <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                 <DropZone v-slot="{ dropZoneActive }" class="drop-area" @files-dropped="addFiles">
                   <div
-                    v-show="!files.length"
                     :class="{
                       'border-2 border-black-300 border-dashed mx-4 my-4 rounded-lg opacity-50':
                         dropZoneActive,
                     }"
                   >
-                    <div class="mx-auto flex flex-wrap min-w-full overflow-hidden align-middle">
+                    <div class="mx-auto min-w-full overflow-hidden align-middle">
+                      <div
+                        v-show="files.length === 0 && processes.data.length === 0"
+                        class="w-full mb-4 mt-6 px-4"
+                      >
+                        <div class="w-48 mx-auto my-4 items-center justify-center text-center">
+                          <NoData />
+                          <p class="mb-8 leading-relaxed">Create or import your business process</p>
+                        </div>
+                      </div>
                       <div
                         v-for="process in processes.data"
                         :key="process.id"
@@ -98,7 +108,7 @@ const { uploadFiles } = createUploader(route('process.import'))
 
                     <Pagination class="mb-4 mt-6 px-4" :links="processes.links" />
                   </div>
-                  <div v-show="files.length" class="py-2 -my-2 pb-6">
+                  <div v-show="files.length > 0" class="py-2 -my-2 pb-6">
                     <div class="mx-4 mb-4 mt-6 px-4">
                       <input
                         id="file_input"
