@@ -8,7 +8,6 @@ import FilePreview from '@/Components/FilePreview.vue'
 import createUploader from '@/Compositions/file-uploader'
 import useFileList from '@/Compositions/file-list'
 import Process from '@/Components/Process.vue'
-
 import NoData from '@/Components/Icons/NoData.vue'
 
 defineProps({
@@ -87,9 +86,9 @@ const { uploadFiles } = createUploader(route('process.import'))
                         dropZoneActive,
                     }"
                   >
-                    <div class="mx-auto min-w-full overflow-hidden align-middle">
+                    <div class="mx-auto px-2 flex flex-wrap min-w-full align-middle">
                       <div
-                        v-show="files.length === 0 && processes.data.length === 0"
+                        v-if="files.length === 0 && processes.data.length === 0"
                         class="w-full mb-4 mt-6 px-4 text-gray-600 body-font"
                       >
                         <div class="w-48 mx-auto my-4 items-center justify-center text-center">
@@ -102,8 +101,9 @@ const { uploadFiles } = createUploader(route('process.import'))
                       </div>
                       <div
                         v-for="process in processes.data"
+                        v-else
                         :key="process.id"
-                        class="lg:w-1/3 md:w-1/2 w-full p-4"
+                        class="lg:w-1/4 md:w-1/2 sm:w-1/1 w-full p-2"
                       >
                         <Process :process="process" />
                       </div>

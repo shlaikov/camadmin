@@ -15,7 +15,8 @@ class ProjectController extends Controller
     {
         $teamId = request()->user()->currentTeam->id;
         $paginator = Process::where('team_id', $teamId)
-            ->paginate(6);
+            ->orderBy('updated_at', 'DESC')
+            ->paginate(8);
 
         return Inertia::render('Projects', [
             'processes' => $paginator,
