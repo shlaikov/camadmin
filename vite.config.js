@@ -3,6 +3,8 @@ import laravel from 'laravel-vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
 
+const path = require('path')
+
 export default defineConfig(({ command }) => ({
   server: {
     hmr: {
@@ -27,7 +29,15 @@ export default defineConfig(({ command }) => ({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      ziggy: path.resolve('vendor/tightenco/ziggy/dist'),
+    },
+  },
   ssr: {
     noExternal: ['@inertiajs/server'],
+  },
+  optimizeDeps: {
+    include: ['@inertiajs/inertia', '@inertiajs/inertia-vue3', 'axios', 'vue', 'ziggy'],
   },
 }))
