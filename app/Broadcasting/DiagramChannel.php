@@ -2,10 +2,10 @@
 
 namespace App\Broadcasting;
 
-use App\Models\Process;
+use App\Models\Diagram;
 use App\Models\User;
 
-class ProcessChannel
+class DiagramChannel
 {
     /**
      * Create a new channel instance.
@@ -20,12 +20,13 @@ class ProcessChannel
     /**
      * Authenticate the user's access to the channel.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Process  $process
+     * @param \App\Models\User $user
+     * @param \App\Models\Process $diagram
+     *
      * @return array|bool
      */
-    public function join(User $user, Process $process)
+    public function join(User $user, Diagram $diagram)
     {
-        return $user->currentTeam->id === $process->team_id;
+        return $user->currentTeam->id === $diagram->team_id;
     }
 }

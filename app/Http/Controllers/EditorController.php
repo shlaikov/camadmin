@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Process;
+use App\Models\Diagram;
+use App\Repository\Eloquent\ProjectRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Inertia\Inertia;
@@ -10,35 +12,26 @@ use Storage;
 
 class EditorController extends Controller
 {
+    public function __construct(
+        public ProjectRepository $projectRepository
+    ) {
+    }
+
     public function show($uuid)
     {
-        return Inertia::render('Process/Editor', [
-            'process' => Process::where('uuid', $uuid)->first(),
+        return Inertia::render('Diagram/Editor', [
+            'diagram' => Diagram::where('uuid', $uuid)->first(),
         ]);
     }
 
-    public function deploy($uuid, Request $request)
+    public function deploy($uuid, Request $request): JsonResponse
     {
-        $team = $request->user()->currentTeam;
-
-        if (! $process = Process::where(['uuid' => $uuid, 'team_id' => $team->id])->first()) {
-            return response()->json(['status' => 'error'], 401);
-        }
-
-        $path = "$team->id/$uuid";
-        Storage::cloud()->put("$path.bpmn", $request->xml);
-        Storage::cloud()->put("$path.svg", $request->svg);
-
-        $process->url = Storage::cloud()->url("$path.bpmn");
-        $process->preview = Storage::cloud()->url("$path.svg");
-        $process->save();
-
-        return response()->json(['status' => 'success'], 200);
+        return $this->projectRepository->deploy($uuid, $request);
     }
 
-    public function file($uuid): Response
+    public function file($uuid, $extension): Response
     {
-        return $this->getFile($uuid, 'bpmn')
+        return $this->getFile($uuid, $extension)
             ->header('Content-type', 'text/xml');
     }
 

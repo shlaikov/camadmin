@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('processes', function (Blueprint $table) {
+        Schema::create('diagrams', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->uuid('uuid');
             $table->foreignId('team_id');
             $table->string('name');
+            $table->string('type');
             $table->string('url')->nullable();
             $table->boolean('is_public')->default(false);
             $table->string('preview')->nullable();
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('processes');
+        Schema::dropIfExists('diagrams');
     }
 };

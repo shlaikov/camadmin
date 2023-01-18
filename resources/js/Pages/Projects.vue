@@ -7,11 +7,11 @@ import DropZone from '@/Components/DropZone.vue'
 import FilePreview from '@/Components/FilePreview.vue'
 import createUploader from '@/Compositions/file-uploader'
 import useFileList from '@/Compositions/file-list'
-import Process from '@/Components/Process.vue'
+import DiagramFiles from '@/Components/DiagramFiles.vue'
 import NoData from '@/Components/Icons/NoData.vue'
 
 defineProps({
-  processes: Object,
+  diagrams: Object,
 })
 
 const { files, addFiles, removeFile } = useFileList()
@@ -22,7 +22,7 @@ const onInputChange = (e) => {
   e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
 }
 
-const { uploadFiles } = createUploader(route('process.import'))
+const { uploadFiles } = createUploader(route('diagram.import'))
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const { uploadFiles } = createUploader(route('process.import'))
               <div class="mb-4 px-4 flex-end">
                 <Link
                   v-show="!files.length"
-                  :href="route('process.create')"
+                  :href="route('diagram.create')"
                   class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-md"
                 >
                   <svg
@@ -52,7 +52,7 @@ const { uploadFiles } = createUploader(route('process.import'))
                   >
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                   </svg>
-                  New Process</Link
+                  New Diagram</Link
                 >
                 <button
                   v-show="files.length"
@@ -88,28 +88,28 @@ const { uploadFiles } = createUploader(route('process.import'))
                   >
                     <div class="mx-auto px-2 flex flex-wrap min-w-full align-middle">
                       <div
-                        v-if="files.length === 0 && processes.data.length === 0"
+                        v-if="files.length === 0 && diagrams.data.length === 0"
                         class="w-full mb-4 mt-6 px-4 text-gray-600 body-font"
                       >
                         <div class="w-48 mx-auto my-4 items-center justify-center text-center">
                           <NoData />
                           <p class="mt-8 mb-8 leading-relaxed">
                             <span class="mb-4 font-bold text-gray-900">No data</span><br />
-                            Create or import your business process
+                            Create or import your diagrams
                           </p>
                         </div>
                       </div>
                       <div
-                        v-for="process in processes.data"
+                        v-for="diagram in diagrams.data"
                         v-else
-                        :key="process.id"
+                        :key="diagram.id"
                         class="lg:w-1/4 md:w-1/2 sm:w-1/1 w-full p-2"
                       >
-                        <Process :process="process" />
+                        <DiagramFiles :file="diagram" />
                       </div>
                     </div>
 
-                    <Pagination class="mb-4 mt-6 px-4" :links="processes.links" />
+                    <Pagination class="mb-4 mt-6 px-4" :links="diagrams.links" />
                   </div>
                   <div v-show="files.length > 0" class="py-2 -my-2 pb-6">
                     <div class="mx-4 mb-4 mt-6 px-4">

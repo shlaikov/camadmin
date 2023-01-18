@@ -3,29 +3,34 @@ import EmptyFile from '@/Components/Icons/EmptyFile.vue'
 import { timeSince } from '../helpers'
 
 defineProps({
-  process: Object,
+  file: Object,
 })
 
 const onRowClick = (row) => {
-  window.location = `/process/${row.uuid}`
+  window.location = `/diagram/${row.uuid}`
 }
 </script>
 
 <template>
   <div
     class="p-4 border border-grey-300 rounded cursor-pointer hover:shadow-md"
-    @click="() => onRowClick(process)"
+    @click="() => onRowClick(file)"
   >
     <img
-      v-if="process.preview"
+      v-if="file.preview"
       class="mb-4 mx-auto md:h-64 md:w-64 h-40 w-40"
-      :alt="process.name"
-      :src="`/process/${process.uuid}/preview.svg`"
+      :alt="file.name"
+      :src="`/diagram/${file.uuid}/preview.svg`"
     />
     <EmptyFile v-else class="mb-4 mx-auto md:h-64 md:w-16 h-20 w-20 opacity-25" />
 
-    <h4 class="mb-2 text-lg font-semibold truncate">{{ process.name }}</h4>
-    <p class="font-semibold text-sm text-gray-600 truncate">
+    <h4 class="mb-2 text-lg font-semibold truncate">{{ file.name }}</h4>
+    <p class="flex font-semibold text-sm text-gray-600 truncate">
+      <span
+        class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+      >
+        {{ file.type }}
+      </span>
       <span
         class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2"
       >
@@ -41,7 +46,7 @@ const onRowClick = (row) => {
             clip-rule="evenodd"
           ></path>
         </svg>
-        {{ timeSince(process.updated_at) + ' ago' }}
+        {{ timeSince(file.updated_at) + ' ago' }}
       </span>
     </p>
   </div>

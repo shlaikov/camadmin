@@ -1,6 +1,7 @@
 <template>
-  <div ref="container" class="vue-bpmn-modeler-container" @mousemove="updateCoordinates">
+  <div ref="container" class="vue-modeler-container" @mousemove="updateCoordinates">
     <div ref="canvas" class="canvas"></div>
+
     <div id="properties-panel-parent" class="properties-panel-parent">
       <div class="properties-deploy-btn">
         <button
@@ -22,14 +23,16 @@
 </template>
 
 <script>
-import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel'
-import minimapModule from 'diagram-js-minimap'
-
-import Modeler from './Modeler'
+import DiagramModeler from './DiagramModeler'
 
 export default {
-  name: 'BpmnModeler',
+  name: 'DiagramModeler',
   props: {
+    type: {
+      type: String,
+      required: true,
+    },
+    options: Object,
     uuid: {
       type: String,
       required: true,
@@ -38,6 +41,7 @@ export default {
       type: String,
       required: false,
     },
+    additionalModules: Array,
     propertiesPanel: Boolean,
   },
   emits: ['loading', 'shown', 'error'],
@@ -58,17 +62,11 @@ export default {
   mounted: function () {
     const container = this.$refs.container
 
-    let canvas = this.$refs['canvas']
-    let additionalModules = [minimapModule]
-
-    if (this.propertiesPanel === '' || this.propertiesPanel) {
-      additionalModules = additionalModules.concat([
-        BpmnPropertiesPanelModule,
-        BpmnPropertiesProviderModule,
-      ])
-    }
-
-    this.modeler = new Modeler({ canvas, additionalModules })
+    this.modeler = new DiagramModeler(this.type, {
+      ...this.options,
+      container: this.$refs['canvas'],
+      additionalModules: this.additionalModules,
+    })
 
     if (container) {
       this.modeler.attachTo(container)
@@ -81,7 +79,7 @@ export default {
     }
 
     axios
-      .get(route('process.file', { uuid: this.uuid }), {
+      .get(route('diagram.file', { uuid: this.uuid, extension: this.type }), {
         headers: { Accept: 'application/xml' },
       })
       .then(({ data }) => {
@@ -106,6 +104,7 @@ export default {
 
       try {
         const { svg } = await this.modeler.saveSVG()
+
         form.append('svg', svg)
       } catch (error) {
         console.error(`saveSVG error ${error}`)
@@ -128,15 +127,7 @@ export default {
 </script>
 
 <style>
-@import 'bpmn-js-properties-panel/dist/assets/properties-panel.css';
-
-.canvas {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-.vue-bpmn-modeler-container {
+.vue-modeler-container {
   display: block;
   position: absolute;
   width: 100%;
@@ -146,6 +137,12 @@ export default {
   bottom: 0;
   background: white;
   z-index: 1;
+}
+.canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 .properties-panel-parent {
   position: absolute;
