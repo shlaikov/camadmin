@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/vue3'
+
 import JetActionSection from '@/Components/ActionSection.vue'
 import JetConfirmationModal from '@/Components/ConfirmationModal.vue'
 import JetDangerButton from '@/Components/DangerButton.vue'
@@ -11,7 +12,7 @@ const props = defineProps({
 })
 
 const confirmingTeamDeletion = ref(false)
-const form = useForm()
+const form = useForm({})
 
 const confirmTeamDeletion = () => {
   confirmingTeamDeletion.value = true

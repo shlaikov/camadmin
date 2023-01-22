@@ -35,9 +35,9 @@ export default defineConfig(({ command }) => ({
     },
   },
   ssr: {
-    noExternal: ['@inertiajs/server'],
+    noExternal: ['@inertiajs/vue3/server'],
   },
   optimizeDeps: {
-    include: ['@inertiajs/inertia', '@inertiajs/inertia-vue3', 'axios', 'vue', 'ziggy'],
+    include: ['@inertiajs/vue3', 'axios', 'vue', 'ziggy'],
   },
 }))

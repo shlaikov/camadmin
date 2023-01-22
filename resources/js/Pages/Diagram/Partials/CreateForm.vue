@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import { useForm } from '@inertiajs/inertia-vue3'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { useForm, usePage } from '@inertiajs/vue3'
+
 import JetButton from '@/Components/Button.vue'
 import JetFormSection from '@/Components/FormSection.vue'
 import JetInput from '@/Components/Input.vue'
@@ -9,7 +9,7 @@ import JetSelect from '@/Components/Select.vue'
 import JetInputError from '@/Components/InputError.vue'
 import JetLabel from '@/Components/Label.vue'
 
-const diagramTypes = computed(() => usePage().props.value.diagram_types)
+const diagramTypes = computed(() => usePage().props.diagram_types)
 
 const form = useForm({
   name: '',

@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import { Head, Link, useForm } from '@inertiajs/vue3'
+
 import JetAuthenticationCard from '@/Components/AuthenticationCard.vue'
 import JetAuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue'
 import JetButton from '@/Components/Button.vue'
@@ -9,7 +10,7 @@ const props = defineProps({
   status: String,
 })
 
-const form = useForm()
+const form = useForm({})
 
 const submit = () => {
   form.post(route('verification.send'))

@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from 'vue'
-import { Link as InertiaLink } from '@inertiajs/inertia-vue3'
+import { Link as InertiaLink } from '@inertiajs/vue3'
 
 export default defineComponent({
   components: {
