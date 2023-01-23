@@ -2,6 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue'
 import BpmnModeler from '@/Components/DiagramEditors/BPMN/Modeler.vue'
 import CmmnModeler from '@/Components/DiagramEditors/CMMN/Modeler.vue'
+import DmnModeler from '@/Components/DiagramEditors/DMN/Modeler.vue'
 </script>
 
 <template>
@@ -27,6 +28,13 @@ import CmmnModeler from '@/Components/DiagramEditors/CMMN/Modeler.vue'
               :uuid="$page.props.diagram.uuid"
               :diagram-x-m-l="$page.props.diagram.url"
               properties-panel
+            />
+          </div>
+          <div v-else-if="$page.props.diagram.type === 'dmn'">
+            <component
+              :is="DmnModeler"
+              :uuid="$page.props.diagram.uuid"
+              :diagram-x-m-l="$page.props.diagram.url"
             />
           </div>
         </div>

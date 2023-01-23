@@ -1,5 +1,7 @@
 import BpmnModeler from 'bpmn-js/lib/Modeler'
+
 import CmmnModeler from './CMMN/Modeler'
+import DmnModeler from './DMN/Modeler'
 
 export default class DiagramModeler {
   constructor(type, options) {
@@ -10,6 +12,8 @@ export default class DiagramModeler {
         return new BpmnModeler(modelerOptions)
       case 'cmmn':
         return new CmmnModeler(modelerOptions)
+      case 'dmn':
+        return new DmnModeler(modelerOptions)
       default:
         throw new Error('Missing type of diagram')
     }

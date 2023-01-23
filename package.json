@@ -39,6 +39,7 @@
     "cmmn-js": "^0.20.0",
     "cmmn-js-properties-panel": "^0.9.0",
     "diagram-js-minimap": "^2.1.1",
+    "dmn-js": "^14.0.2",
     "min-dash": "^4.0.0",
     "min-dom": "^4.1.0",
     "tiny-svg": "^3.0.0",
