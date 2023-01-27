@@ -2,6 +2,7 @@
 
 namespace App\Repository\Eloquent;
 
+use App\Enums\DiagramEnum;
 use App\Models\Project;
 use App\Repository\BaseRepository;
 use App\Models\Diagram;
@@ -13,10 +14,6 @@ use Storage;
 
 class ProjectRepository extends BaseRepository
 {
-    const DIAGRAM_TYPES = [
-        'bpmn', 'dmn', 'cmmn'
-    ];
-
     /**
      * ProjectRepository constructor.
      *
@@ -31,7 +28,7 @@ class ProjectRepository extends BaseRepository
     {
         $diagrams = [];
 
-        foreach (self::DIAGRAM_TYPES as $diagram) {
+        foreach (DiagramEnum::getValues() as $diagram) {
             $diagrams[] = [
                 'value' => $diagram,
                 'text' => __("diagrams.$diagram")

@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Data\DiagramData;
 use App\Enums\DiagramEnum;
 use App\Enums\EnumTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\LaravelData\WithData;
 
 class Diagram extends Model
 {
-    use HasFactory, EnumTrait;
+    use HasFactory, EnumTrait, WithData;
+
+    protected $dataClass = DiagramData::class;
 
     /**
      * The attributes that are mass assignable.

@@ -31,6 +31,7 @@ services:
       - redis
       - minio
       - mailhog
+      - camunda
   pgsql:
     image: 'postgres:14'
     ports:
@@ -84,6 +85,12 @@ services:
       - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
     networks:
       - sail
+  camunda:
+    image: camunda/camunda-bpm-platform:run-latest
+    ports:
+      - '8080:8080'
+    networks:
+      - sail
 networks:
   sail:
     driver: bridge
@@ -93,4 +100,6 @@ volumes:
   sail-redis:
     driver: local
   sail-minio:
+    driver: local
+  sail-camunda:
     driver: local
