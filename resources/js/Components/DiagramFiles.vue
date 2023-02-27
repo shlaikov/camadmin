@@ -13,7 +13,7 @@ const onRowClick = (row) => {
 
 <template>
   <div
-    class="p-4 border border-grey-300 rounded cursor-pointer hover:shadow-md"
+    class="p-4 border border-grey-300 rounded-md cursor-pointer hover:shadow-md transition"
     @click="() => onRowClick(file)"
   >
     <img

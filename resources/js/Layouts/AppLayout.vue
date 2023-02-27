@@ -38,7 +38,7 @@ const logout = () => {
 
     <JetBanner />
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="flex flex-col min-h-screen bg-gray-100 justify-between">
       <nav class="bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,7 +70,7 @@ const logout = () => {
                     <span class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition"
+                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:bg-gray-50 active:bg-gray-50 transition"
                       >
                         {{ $page.props.user.current_team.name }}
 
@@ -146,7 +146,7 @@ const logout = () => {
                   <template #trigger>
                     <button
                       v-if="$page.props.jetstream.managesProfilePhotos"
-                      class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition"
+                      class="flex text-sm border-2 border-transparent rounded-full focus:border-gray-300 transition"
                     >
                       <img
                         class="h-8 w-8 rounded-full object-cover"
@@ -158,7 +158,7 @@ const logout = () => {
                     <span v-else class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 transition"
                       >
                         {{ $page.props.user.name }}
 
@@ -205,7 +205,7 @@ const logout = () => {
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
               <button
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-500 transition"
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
               >
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -353,9 +353,43 @@ const logout = () => {
       </header>
 
       <!-- Page Content -->
-      <main>
+      <main class="mb-auto min-h-max">
         <slot />
       </main>
+
+      <!-- Page Footer -->
+      <footer class="bg-white max-w border-t text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4 py-2">
+            <nav class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 md:gap-6">
+              <a
+                href="#"
+                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                >About</a
+              >
+              <a
+                href="#"
+                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                >Github</a
+              >
+              <a
+                href="#"
+                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                >Roadmap</a
+              >
+              <a
+                href="#"
+                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                >Twitter</a
+              >
+            </nav>
+
+            <div>
+              <p class="text-gray-500">v1.0</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
 </template>

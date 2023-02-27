@@ -136,7 +136,7 @@ const displayableRole = (role) => {
                 v-for="(role, i) in availableRoles"
                 :key="role.key"
                 type="button"
-                class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200"
+                class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:border-blue-300 focus:ring focus:ring-blue-200"
                 :class="{
                   'border-t border-gray-200 rounded-t-none': i > 0,
                   'rounded-b-none': i != Object.keys(availableRoles).length - 1,
@@ -224,7 +224,7 @@ const displayableRole = (role) => {
                 <!-- Cancel Team Invitation -->
                 <button
                   v-if="userPermissions.canRemoveTeamMembers"
-                  class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                  class="cursor-pointer ml-6 text-sm text-red-500"
                   @click="cancelTeamInvitation(invitation)"
                 >
                   Cancel
@@ -309,7 +309,7 @@ const displayableRole = (role) => {
               v-for="(role, i) in availableRoles"
               :key="role.key"
               type="button"
-              class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200"
+              class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:border-blue-300 focus:ring focus:ring-blue-200"
               :class="{
                 'border-t border-gray-200 rounded-t-none': i > 0,
                 'rounded-b-none': i !== Object.keys(availableRoles).length - 1,

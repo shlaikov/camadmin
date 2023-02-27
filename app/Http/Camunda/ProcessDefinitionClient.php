@@ -8,9 +8,38 @@ use App\Data\Camunda\ProcessDefinition;
 use App\Data\Camunda\ProcessInstance;
 use App\Exceptions\InvalidArgumentException;
 use App\Exceptions\ObjectNotFoundException;
+use Illuminate\Http\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
+#[Route("/process-definition", methods: ["GET", "POST"])]
 class ProcessDefinitionClient extends CamundaClient
 {
+    public static function index(Request $request): array
+    {
+        $processDefinition = [];
+
+        foreach (self::make()->get('process-definition', $request->all())->json() as $res) {
+            $processDefinition[] = ProcessDefinition::from($res);
+        }
+
+        return $processDefinition;
+    }
+
+    public static function find(Request $request): ProcessDefinition
+    {
+        if ($request->isXml()) {
+            return self::xml($request);
+        }
+
+        $response = self::make()->get("process-definition/$request->id");
+
+        if ($response->status() === 404) {
+            throw new ObjectNotFoundException($response->json('message'));
+        }
+
+        return ProcessDefinition::from($response->json());
+    }
+
     public static function start(...$args): ProcessInstance
     {
         $variables = $args['variables'] ?? [];
@@ -39,32 +68,8 @@ class ProcessDefinitionClient extends CamundaClient
         throw new InvalidArgumentException($response->body());
     }
 
-    public static function xml(...$args): string
+    public static function xml($request): string
     {
-        $path = self::makeIdentifierPath(path: 'process-definition/{identifier}/xml', args: $args);
-
-        return self::make()->get($path)->json('bpmn20Xml');
-    }
-
-    public static function get(array $parameters = []): array
-    {
-        $processDefinition = [];
-
-        foreach (self::make()->get('process-definition', $parameters)->json() as $res) {
-            $processDefinition[] = ProcessDefinition::from($res);
-        }
-
-        return $processDefinition;
-    }
-
-    public static function find(...$args): ProcessDefinition
-    {
-        $response = self::make()->get(self::makeIdentifierPath('process-definition/{identifier}', $args));
-
-        if ($response->status() === 404) {
-            throw new ObjectNotFoundException($response->json('message'));
-        }
-
-        return ProcessDefinition::from($response->json());
+        return self::make()->get("process-definition/$request->id/xml")->json('bpmn20Xml');
     }
 }

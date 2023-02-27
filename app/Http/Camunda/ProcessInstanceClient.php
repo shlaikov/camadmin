@@ -8,21 +8,23 @@ use App\Collections\VariableCollection;
 use App\Data\Camunda\ProcessInstance;
 use App\Data\Camunda\Variable;
 use App\Exceptions\ObjectNotFoundException;
+use Illuminate\Http\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProcessInstanceClient extends CamundaClient
 {
-    public static function get(array $parameters = []): array
+    public static function get(Request $request): array
     {
         $instances = [];
 
-        foreach (self::make()->get('process-instance', $parameters)->json() as $res) {
+        foreach (self::make()->get('process-instance', $request->all())->json() as $res) {
             $instances[] = ProcessInstance::from($res);
         }
 
         return $instances;
     }
 
-    public static function getByVariables(array $variables = []): array
+    protected static function getByVariables(array $variables = []): array
     {
         $instances = [];
 

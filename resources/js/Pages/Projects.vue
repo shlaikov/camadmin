@@ -34,29 +34,24 @@ const { uploadFiles } = createUploader(route('diagram.import'))
     <div class="py-12 relative">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-          <div class="flex flex-col">
+          <div class="flex flex-col mb-6">
             <div class="flex flex-col mt-8">
-              <div class="mb-4 px-4 flex-end">
+              <div class="mb-4 px-4 flex items-center justify-between">
                 <Link
                   v-show="!files.length"
                   :href="route('diagram.create')"
-                  class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-md"
+                  class="hover:bg-indigo-400 group flex items-center rounded-md bg-indigo-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm transition"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                  <svg width="20" height="20" fill="currentColor" class="mr-2" aria-hidden="true">
+                    <path
+                      d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
+                    />
                   </svg>
                   New Diagram</Link
                 >
                 <button
                   v-show="files.length"
-                  class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-md"
+                  class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 hover:bg-gray-200 rounded text-md transition"
                   @click.prevent="uploadFiles(files)"
                 >
                   <svg
@@ -115,7 +110,7 @@ const { uploadFiles } = createUploader(route('diagram.import'))
                     <div class="mx-4 mb-4 mt-6 px-4">
                       <input
                         id="file_input"
-                        class="hidden w-full px-2 py-6 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
+                        class="hidden w-full px-2 py-6 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer transition"
                         aria-describedby="file_input_help"
                         type="file"
                         multiple

@@ -17,11 +17,11 @@ class DiagramData extends Data
 {
     public function __construct(
         #[Required]
-        public string $id,
+        public readonly ?int $id,
         #[Date]
-        public Carbon $created_at,
+        public readonly ?Carbon $created_at,
         #[Date]
-        public Carbon $updated_at,
+        public readonly ?Carbon $updated_at,
         #[Required, Uuid]
         public string $uuid,
         #[Nullable, StringType]

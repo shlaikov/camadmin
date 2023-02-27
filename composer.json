@@ -24,6 +24,7 @@
     "laravel/sanctum": "^3.0",
     "laravel/tinker": "^2.7",
     "league/flysystem-aws-s3-v3": "^3.0",
+    "mtownsend/request-xml": "^2.2",
     "spatie/laravel-data": "^2.2",
     "tightenco/ziggy": "^1.0"
   },
@@ -52,7 +53,6 @@
   "scripts": {
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "@php vendor/bin/testbench package:discover --ansi",
       "@php artisan package:discover --ansi"
     ],
     "post-update-cmd": [

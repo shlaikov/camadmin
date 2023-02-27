@@ -1,5 +1,6 @@
 <script setup>
 import JetApplicationLogo from '@/Components/ApplicationLogo.vue'
+import DiagramFiles from '@/Components/DiagramFiles.vue'
 </script>
 
 <template>
@@ -9,164 +10,117 @@ import JetApplicationLogo from '@/Components/ApplicationLogo.vue'
         <JetApplicationLogo class="block h-12 w-auto" />
       </div>
 
-      <div class="mt-8 text-2xl">Welcome to your Jetstream application!</div>
-
-      <div class="mt-6 text-gray-500">
-        Laravel Jetstream provides a beautiful, robust starting point for your next Laravel
-        application. Laravel is designed to help you build your application using a development
-        environment that is simple, powerful, and enjoyable. We believe you should love expressing
-        your creativity through programming, so we have spent time carefully crafting the Laravel
-        ecosystem to be a breath of fresh air. We hope you love it.
+      <div class="mt-8 text-xl">
+        Welcome,
+        <span class="rounded-full ring-2 ring-white">
+          <img
+            class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
+            :src="$page.props.user.profile_photo_url"
+            :alt="$page.props.user.name"
+          />
+          {{ $page.props.user.name }}</span
+        >
       </div>
     </div>
 
-    <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
-      <div class="p-6">
-        <div class="flex items-center">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            class="w-8 h-8 text-gray-400"
-          >
-            <path
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+    <div class="mt-2 bg-gray-200 bg-opacity-25 grid grid-cols-1">
+      <section>
+        <header class="bg-white space-y-4 p-6 sm:px-20">
+          <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-slate-900">Projects</h2>
+            <a
+              :href="route('instances.create')"
+              class="hover:bg-indigo-400 group flex items-center rounded-md bg-indigo-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm transition"
+            >
+              <svg width="20" height="20" fill="currentColor" class="mr-2" aria-hidden="true">
+                <path
+                  d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
+                />
+              </svg>
+              Add new camunda instance
+            </a>
+          </div>
+          <form class="group relative">
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              />
+            </svg>
+            <input
+              class="w-full text-sm leading-6 text-slate-900 placeholder-slate-400 py-2 pl-10 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+              type="text"
+              aria-label="Filter projects"
+              placeholder="Filter projects..."
             />
-          </svg>
-          <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-            <a href="https://laravel.com/docs">Documentation</a>
+          </form>
+        </header>
+        <ul
+          class="bg-slate-50 p-6 sm:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 text-sm leading-6"
+        >
+          <li v-for="instance in $page.props.instances" :key="instance.id" class="flex">
+            <a
+              :href="route('instances.show', instance.id)"
+              class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 hover:shadow-md group rounded-md p-3 bg-white ring-1 ring-slate-200 shadow-sm transition"
+            >
+              <dl class="grid sm:block lg:grid xl:block grid-cols-2 grid-rows-2 items-center">
+                <div>
+                  <dt class="sr-only">Title</dt>
+                  <dd class="group-hover:text-indigo-800 font-semibold text-slate-900">
+                    {{ instance.name }}
+                  </dd>
+                </div>
+                <div>
+                  <dt class="sr-only">Url</dt>
+                  <dd class="group-hover:text-indigo-800">{{ instance.url }}</dd>
+                </div>
+              </dl>
+            </a>
+          </li>
+          <li class="flex">
+            <a
+              :href="route('instances.create')"
+              class="hover:border-indigo-500 hover:border-solid hover:bg-white group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3 transition"
+            >
+              <svg
+                class="group-hover:text-indigo-500 mb-1 text-slate-400"
+                width="20"
+                height="20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
+                />
+              </svg>
+              Add new camunda instance
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section v-if="$page.props.recent_work.length > 0">
+        <div class="bg-white space-y-4 p-6 sm:px-20">
+          <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-slate-900">Recent work</h2>
           </div>
         </div>
-
-        <div class="ml-12">
-          <div class="mt-2 text-sm text-gray-500">
-            Laravel has wonderful documentation covering every aspect of the framework. Whether
-            you're new to the framework or have previous experience, we recommend reading all of the
-            documentation from beginning to end.
-          </div>
-
-          <a href="https://laravel.com/docs">
-            <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-              <div>Explore the documentation</div>
-
-              <div class="ml-1 text-indigo-500">
-                <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
-        <div class="flex items-center">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            class="w-8 h-8 text-gray-400"
+        <div class="relative bg-white mx-auto pb-6 px-20 flex flex-wrap align-middle">
+          <div
+            v-for="diagram in $page.props.recent_work"
+            :key="diagram.id"
+            class="px-1 w-full md:w-1/2 lg:my-2 lg:w-1/4"
           >
-            <path
-              d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-            />
-            <path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-            <a href="https://laracasts.com">Laracasts</a>
+            <DiagramFiles :file="diagram" />
           </div>
         </div>
-
-        <div class="ml-12">
-          <div class="mt-2 text-sm text-gray-500">
-            Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript
-            development. Check them out, see for yourself, and massively level up your development
-            skills in the process.
-          </div>
-
-          <a href="https://laracasts.com">
-            <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-              <div>Start watching Laracasts</div>
-
-              <div class="ml-1 text-indigo-500">
-                <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="p-6 border-t border-gray-200">
-        <div class="flex items-center">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            class="w-8 h-8 text-gray-400"
-          >
-            <path
-              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-          <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-            <a href="https://tailwindcss.com/">Tailwind</a>
-          </div>
-        </div>
-
-        <div class="ml-12">
-          <div class="mt-2 text-sm text-gray-500">
-            Laravel Jetstream is built with Tailwind, an amazing utility first CSS framework that
-            doesn't get in your way. You'll be amazed how easily you can build and maintain fresh,
-            modern designs with this wonderful framework at your fingertips.
-          </div>
-        </div>
-      </div>
-
-      <div class="p-6 border-t border-gray-200 md:border-l">
-        <div class="flex items-center">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            class="w-8 h-8 text-gray-400"
-          >
-            <path
-              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-            />
-          </svg>
-          <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Authentication</div>
-        </div>
-
-        <div class="ml-12">
-          <div class="mt-2 text-sm text-gray-500">
-            Authentication and registration views are included with Laravel Jetstream, as well as
-            support for user email verification and resetting forgotten passwords. So, you're free
-            to get started what matters most: building your application.
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   </div>
 </template>

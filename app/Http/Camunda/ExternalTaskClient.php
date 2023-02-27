@@ -14,10 +14,6 @@ class ExternalTaskClient extends CamundaClient
         return self::$subscribers;
     }
 
-    /**
-     * @param string $topic
-     * @param class-string|array $job
-     */
     public static function subscribe(string $topic, string|array $job): void
     {
         self::$subscribers[$topic] = [
@@ -27,11 +23,6 @@ class ExternalTaskClient extends CamundaClient
         ];
     }
 
-    /**
-     * @param string $processInstanceId
-     *
-     * @return ExternalTask[]
-     */
     public static function getByProcessInstanceId(string $id): array
     {
         $response = self::make()->get("external-task?processInstanceId=$id");
@@ -46,13 +37,6 @@ class ExternalTaskClient extends CamundaClient
         return $data;
     }
 
-    /**
-     * @param string $workerId
-     * @param array $topics
-     * @param int $maxTasks
-     *
-     * @return ExternalTask[]
-     */
     public static function fetchAndLock(string $workerId, array $topics, int $maxTasks = 10): array
     {
         $payload = [
