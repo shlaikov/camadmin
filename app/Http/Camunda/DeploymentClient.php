@@ -5,14 +5,28 @@ namespace App\Http\Camunda;
 use App\Data\Camunda\Deployment;
 use App\Exceptions\ObjectNotFoundException;
 use App\Exceptions\ParseException;
-use Symfony\Component\Routing\Annotation\Route;
 
 class DeploymentClient extends CamundaClient
 {
-    public static function create(string $name, string|array $bpmnFiles): Deployment
+    public static function index(array $params = []): array
     {
+        $params = [...request()->all(), ...$params];
+
+        $response = self::make()->get('deployment', $params);
+        $result = [];
+
+        foreach ($response->json() as $data) {
+            $result[] = Deployment::from($data);
+        }
+
+        return $result;
+    }
+
+    public static function create(array $params = []): Deployment
+    {
+        $bpmnFiles = (array) $params['bpmnFiles'];
         $multipart = [
-            ['name' => 'deployment-name', 'contents' => $name],
+            ['name' => 'deployment-name', 'contents' => request()->name ?? $params['name']],
             ['name' => 'deployment-source', 'contents' => sprintf('%s (%s)', config('app.name'), config('app.env'))],
             ['name' => 'enable-duplicate-filtering', 'contents' => 'true'],
         ];
@@ -25,7 +39,7 @@ class DeploymentClient extends CamundaClient
         }
 
         $request = self::make()->asMultipart();
-        foreach ((array) $bpmnFiles as $bpmn) {
+        foreach ($bpmnFiles as $bpmn) {
             $filename = pathinfo($bpmn)['basename'];
             $request->attach($filename, file_get_contents($bpmn), $filename);
         }
@@ -50,27 +64,6 @@ class DeploymentClient extends CamundaClient
         return Deployment::from($response->json());
     }
 
-    public static function get(array $parameters = []): array
-    {
-        $response = self::make()->get('deployment', $parameters);
-        $result = [];
-
-        foreach ($response->json() as $data) {
-            $result[] = Deployment::from($data);
-        }
-
-        return $result;
-    }
-
-    public static function truncate(bool $cascade = false): void
-    {
-        $deployments = self::get();
-
-        foreach ($deployments as $deployment) {
-            self::delete($deployment->id, $cascade);
-        }
-    }
-
     public static function delete(string $id, bool $cascade = false): bool
     {
         $cascadeFlag = $cascade ? 'cascade=true' : '';
@@ -81,5 +74,14 @@ class DeploymentClient extends CamundaClient
         }
 
         return $response->status() === 204;
+    }
+
+    public static function truncate(bool $cascade = false): void
+    {
+        $deployments = self::index();
+
+        foreach ($deployments as $deployment) {
+            self::delete($deployment->id, $cascade);
+        }
     }
 }

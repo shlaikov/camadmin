@@ -2,17 +2,15 @@
 
 namespace App\Http\Camunda;
 
-use Psr\Http\Message\ResponseInterface;
-
 interface ClientInterface
 {
-    public static function index(): ResponseInterface;
+    public static function index(array $params = []);
 
-    public static function find(): ResponseInterface;
+    public static function find(string $id);
 
-    public static function create(): ResponseInterface;
+    public static function create(array $params = []);
 
-    public static function delete(): ResponseInterface;
+    public static function delete(string $id, bool $cascade = false);
 
-    public static function update(): ResponseInterface;
+    public static function update(string $id);
 }

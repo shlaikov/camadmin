@@ -31,11 +31,4 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'camunda' => [
-        'url' => env('CAMUNDA_URL'),
-        'user' => env('CAMUNDA_USER', 'demo'),
-        'password' => env('CAMUNDA_PASSWORD', 'demo'),
-        'tenant_id' => env('CAMUNDA_TENANT_ID', ''),
-    ]
-
 ];

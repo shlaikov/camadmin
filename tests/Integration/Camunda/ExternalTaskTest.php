@@ -13,9 +13,13 @@ class ExternalTaskTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $files = [__DIR__ . '/../../../resources/diagrams/external-task.bpmn'];
 
-        DeploymentClient::create('External Task', $files);
+        DeploymentClient::create([
+            'name' => 'External Task',
+            'bpmnFiles' => $files
+        ]);
     }
 
     public function test_fetch_and_lock()

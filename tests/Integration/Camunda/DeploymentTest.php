@@ -18,7 +18,10 @@ class DeploymentTest extends TestCase
     public function test_deploy_bpmn(): void
     {
         $files = __DIR__ . '/../../../resources/diagrams/sample.bpmn';
-        $deployment = DeploymentClient::create('test', $files);
+        $deployment = DeploymentClient::create([
+            'name' => 'test',
+            'bpmnFiles' => $files
+        ]);
 
         $this->assertEquals('test', $deployment->name);
     }
@@ -28,7 +31,10 @@ class DeploymentTest extends TestCase
         config()->set('services.camunda.tenant_id', 'sample-tenant');
 
         $files = __DIR__ . '/../../../resources/diagrams/sample.bpmn';
-        $deployment = DeploymentClient::create('test', $files);
+        $deployment = DeploymentClient::create([
+            'name' => 'test',
+            'bpmnFiles' => $files
+        ]);
 
         $this->assertEquals('test', $deployment->name);
     }
@@ -39,7 +45,10 @@ class DeploymentTest extends TestCase
             __DIR__ . '/../../../resources/diagrams/sample.bpmn',
             __DIR__ . '/../../../resources/diagrams/sample2.bpmn',
         ];
-        $deployment = DeploymentClient::create('test', $files);
+        $deployment = DeploymentClient::create([
+            'name' => 'test',
+            'bpmnFiles' => $files
+        ]);
 
         $this->assertEquals('test', $deployment->name);
     }
@@ -49,13 +58,19 @@ class DeploymentTest extends TestCase
         $this->expectException(ParseException::class);
 
         $files = __DIR__ . '/../../../resources/diagrams/invalid.bpmn';
-        DeploymentClient::create('test', $files);
+        DeploymentClient::create([
+            'name' => 'test',
+            'bpmnFiles' => $files
+        ]);
     }
 
     public function test_get_deployment_by_id(): void
     {
         $files = __DIR__ . '/../../../resources/diagrams/sample.bpmn';
-        $deployment1 = DeploymentClient::create('test', $files);
+        $deployment1 = DeploymentClient::create([
+            'name' => 'test',
+            'bpmnFiles' => $files
+        ]);
 
         $deployment2 = DeploymentClient::find($deployment1->id);
         $this->assertEquals($deployment1->id, $deployment2->id);
@@ -71,16 +86,26 @@ class DeploymentTest extends TestCase
     public function test_get_list_deployment(): void
     {
         $this->truncateDeployment();
-        DeploymentClient::create('deployment1', __DIR__ . '/../../../resources/diagrams/sample.bpmn');
-        DeploymentClient::create('deployment2', __DIR__ . '/../../../resources/diagrams/sample2.bpmn');
 
-        $deployments = DeploymentClient::get();
+        DeploymentClient::create([
+            'name' => 'deployment1',
+            'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample.bpmn'
+        ]);
+        DeploymentClient::create([
+            'name' => 'deployment2',
+            'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample2.bpmn'
+        ]);
+
+        $deployments = DeploymentClient::index();
         $this->assertCount(2, $deployments);
     }
 
     public function test_delete_deployment(): void
     {
-        $deployment = DeploymentClient::create('deployment1', __DIR__ . '/../../../resources/diagrams/sample.bpmn');
+        $deployment = DeploymentClient::create([
+            'name' => 'deployment1',
+            'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample.bpmn'
+        ]);
         $deleted = DeploymentClient::delete($deployment->id);
 
         $this->assertTrue($deleted);
@@ -102,12 +127,18 @@ class DeploymentTest extends TestCase
 
     public function test_truncate_deployment(): void
     {
-        DeploymentClient::create('deployment1', __DIR__ . '/../../../resources/diagrams/sample.bpmn');
-        DeploymentClient::create('deployment2', __DIR__ . '/../../../resources/diagrams/sample2.bpmn');
+        DeploymentClient::create([
+            'name' => 'deployment1',
+            'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample.bpmn'
+        ]);
+        DeploymentClient::create([
+            'name' => 'deployment2',
+            'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample2.bpmn'
+        ]);
 
         DeploymentClient::truncate();
 
-        $deployments = DeploymentClient::get();
+        $deployments = DeploymentClient::index();
         $this->assertCount(0, $deployments);
     }
 }

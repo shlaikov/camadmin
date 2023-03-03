@@ -8,16 +8,15 @@ use App\Collections\VariableCollection;
 use App\Data\Camunda\ProcessInstance;
 use App\Data\Camunda\Variable;
 use App\Exceptions\ObjectNotFoundException;
-use Illuminate\Http\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
 class ProcessInstanceClient extends CamundaClient
 {
-    public static function get(Request $request): array
+    public static function index(array $params = []): array
     {
         $instances = [];
+        $data = [...request()->all(), ...$params];
 
-        foreach (self::make()->get('process-instance', $request->all())->json() as $res) {
+        foreach (self::make()->get('process-instance', $data)->json() as $res) {
             $instances[] = ProcessInstance::from($res);
         }
 
@@ -73,7 +72,7 @@ class ProcessInstanceClient extends CamundaClient
         );
     }
 
-    public static function delete(string $id): bool
+    public static function delete(string $id, bool $cascade = false): bool
     {
         return self::make()->delete("process-instance/$id")->status() === 204;
     }

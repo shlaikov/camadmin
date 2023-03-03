@@ -42,7 +42,7 @@ class ProcessDefinitionTest extends TestCase
     public function test_get_list_process_definition(): void
     {
         $this->deploySampleBpmn();
-        $processDefinitions = ProcessDefinitionClient::get();
+        $processDefinitions = ProcessDefinitionClient::index();
         $this->assertCount(1, $processDefinitions);
         $this->assertInstanceOf(ProcessDefinition::class, $processDefinitions[0]);
     }
@@ -50,7 +50,7 @@ class ProcessDefinitionTest extends TestCase
     public function test_find_by_id(): void
     {
         $this->deploySampleBpmn();
-        $processDefinitions = ProcessDefinitionClient::get();
+        $processDefinitions = ProcessDefinitionClient::index();
 
         $processDefinition = ProcessDefinitionClient::find($processDefinitions[0]->id);
         $this->assertNotNull($processDefinition);
@@ -91,7 +91,7 @@ class ProcessDefinitionTest extends TestCase
     public function test_find_xml_by_id(): void
     {
         $this->deploySampleBpmn();
-        $processDefinitions = ProcessDefinitionClient::get();
+        $processDefinitions = ProcessDefinitionClient::index();
         $id = $processDefinitions[0]->id;
         $xml = ProcessDefinitionClient::xml(id: $id);
         $this->assertNotNull($xml);

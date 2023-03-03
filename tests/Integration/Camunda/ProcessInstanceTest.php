@@ -31,7 +31,7 @@ class ProcessInstanceTest extends TestCase
     {
         $variables = ['title' => ['value' => 'Foo', 'type' => 'string']];
         ProcessDefinitionClient::start(key: 'process_1', variables: $variables);
-        $processInstances = ProcessInstanceClient::get();
+        $processInstances = ProcessInstanceClient::index();
 
         $this->assertCount(1, $processInstances);
     }
@@ -41,10 +41,10 @@ class ProcessInstanceTest extends TestCase
         $variables = ['title' => ['value' => 'Foo', 'type' => 'string']];
         ProcessDefinitionClient::start(key: 'process_1', variables: $variables, businessKey: '001');
 
-        $processInstances = ProcessInstanceClient::get(['businessKey' => '001']);
+        $processInstances = ProcessInstanceClient::index(['businessKey' => '001']);
         $this->assertCount(1, $processInstances);
 
-        $processInstances = ProcessInstanceClient::get(['businessKey' => '002']);
+        $processInstances = ProcessInstanceClient::index(['businessKey' => '002']);
         $this->assertCount(0, $processInstances);
     }
 

@@ -6,35 +6,50 @@ namespace App\Http\Camunda;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
-use App\Exceptions\InvalidArgumentException;
+use App\Models\Instance;
+use App\Repository\Services\CamundaRepository;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
-class CamundaClient
+abstract class CamundaClient implements ClientInterface
 {
     public static function make(): PendingRequest
     {
-        return Http::baseUrl(config('services.camunda.url'));
+        $instance = Instance::find(request()->segment(3));
+
+        return Http::baseUrl($instance ? $instance->url : env('CAMUNDA_URL'));
+    }
+
+    public static function index(array $params = [])
+    {
+        $params = implode(',', $params);
+
+        throw new BadRequestException("Method with params [$params] not found");
+    }
+
+    public static function find(string $id)
+    {
+        throw new BadRequestException("Method not found by $id");
+    }
+
+    public static function create(array $params = [])
+    {
+        $params = implode(',', $params);
+
+        throw new BadRequestException("Method with params [$params] not found");
+    }
+
+    public static function update(string $id)
+    {
+        throw new BadRequestException("Method not found by $id");
+    }
+
+    public static function delete(string $id, bool $cascade = false)
+    {
+        throw new BadRequestException("Method not found by $id");
     }
 
     protected static function makeIdentifierPath(string $path, array $args): string
     {
-        if (count($args) === 1 && isset($args[0])) {
-            $args['id'] = $args[0];
-        }
-
-        $args += ['id' => false, 'key' => false, 'tenantId' => false];
-        $identifier = $args['id'];
-
-        if ($args['key']) {
-            $identifier = 'key/' . $args['key'];
-            if ($args['tenantId']) {
-                $identifier .= '/tenant-id/' . $args['tenantId'];
-            }
-        }
-
-        if (!$identifier) {
-            throw new InvalidArgumentException('');
-        }
-
-        return str_replace('{identifier}', $identifier, $path);
+        return CamundaRepository::makeIdentifierPath($path, $args);
     }
 }

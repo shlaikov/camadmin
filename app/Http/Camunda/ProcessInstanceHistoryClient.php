@@ -11,14 +11,14 @@ use App\Exceptions\ObjectNotFoundException;
 class ProcessInstanceHistoryClient extends CamundaClient
 {
     /**
-     * @param  array  $parameters
+     * @param  array  $params
      *
      * @return array|ProcessInstanceHistory[]
      */
-    public static function get(array $parameters = []): array
+    public static function get(array $params = []): array
     {
         $instances = [];
-        foreach (self::make()->get('history/process-instance', $parameters)->json() as $res) {
+        foreach (self::make()->get('history/process-instance', $params)->json() as $res) {
             $instances[] = ProcessInstanceHistory::from($res);
         }
 
