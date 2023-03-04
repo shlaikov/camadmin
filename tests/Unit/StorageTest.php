@@ -5,13 +5,8 @@ namespace Tests\Unit;
 use Storage;
 use Tests\TestCase;
 
-class MinioStorageTest extends TestCase
+class StorageTest extends TestCase
 {
-    /**
-     * test create new file.
-     *
-     * @return void
-     */
     public function testCreateNewFile()
     {
         $created = Storage::cloud()->put('/test.txt', 'Hello World!');

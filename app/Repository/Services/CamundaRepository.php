@@ -134,7 +134,7 @@ class CamundaRepository
         return array_filter(array_map(function ($file) {
             $class = self::CAMUNDA_NAMESPACE . '\\' . str_replace('.php', '', $file);
 
-            if (class_exists($class) && is_subclass_of(new $class(), self::CLIENT_CLASS)) {
+            if (class_exists($class) && is_subclass_of((string) $class, self::CLIENT_CLASS)) {
                 return new ReflectionClass($class);
             }
         }, scandir(self::getNamespaceDirectory(self::CAMUNDA_NAMESPACE))));

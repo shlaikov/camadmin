@@ -8,6 +8,18 @@ use App\Exceptions\ObjectNotFoundException;
 
 class TenantClient extends CamundaClient
 {
+    public static function index(array $params = []): array
+    {
+        $response = self::make()->get('tenant', $params);
+        $result = [];
+
+        foreach ($response->json() as $data) {
+            $result[] = Tenant::from($data);
+        }
+
+        return $result;
+    }
+
     public static function find(string $id): Tenant
     {
         $response = self::make()->get("tenant/$id");
@@ -19,18 +31,7 @@ class TenantClient extends CamundaClient
         return Tenant::from($response->json());
     }
 
-    public static function get(array $parameters = []): array
-    {
-        $response = self::make()->get('tenant', $parameters);
-        $result = [];
-        foreach ($response->json() as $data) {
-            $result[] = Tenant::from($data);
-        }
-
-        return $result;
-    }
-
-    public static function create(string $id, string $name): bool
+    public static function create(array $params = []): bool
     {
         $response = self::make()->post(
             "tenant/create",
@@ -44,7 +45,7 @@ class TenantClient extends CamundaClient
         throw new CamundaException($response->body(), $response->status());
     }
 
-    public static function delete(string $id): bool
+    public static function delete(string $id, bool $cascade = false)
     {
         $response = self::make()->delete("tenant/{$id}");
 
@@ -57,7 +58,7 @@ class TenantClient extends CamundaClient
 
     public static function truncate(): void
     {
-        foreach (self::get() as $tenant) {
+        foreach (self::index() as $tenant) {
             self::delete($tenant->id);
         }
     }

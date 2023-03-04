@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repository\Services\CamundaRepository;
+use Illuminate\Http\JsonResponse;
 
 class CamundaController extends Controller
 {
@@ -11,7 +12,7 @@ class CamundaController extends Controller
     ) {
     }
 
-    public function __invoke($id, $requestString = '/')
+    public function __invoke($id, $requestString = '/'): JsonResponse
     {
         $execution = $this->camundaRepository->execute($id, $requestString);
 

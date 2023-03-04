@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route("/version", methods: ["GET"])]
 class VersionClient extends CamundaClient
 {
-    public static function index()
+    public static function index(array $params = []): array
     {
         $response = self::make()->get('version');
 
