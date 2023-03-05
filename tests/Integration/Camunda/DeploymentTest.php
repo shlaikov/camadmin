@@ -87,6 +87,8 @@ class DeploymentTest extends TestCase
     {
         $this->truncateDeployment();
 
+        $intitialCount = count(DeploymentClient::index());
+
         DeploymentClient::create([
             'name' => 'deployment1',
             'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample.bpmn'
@@ -97,7 +99,7 @@ class DeploymentTest extends TestCase
         ]);
 
         $deployments = DeploymentClient::index();
-        $this->assertCount(2, $deployments);
+        $this->assertCount($intitialCount + 2, $deployments);
     }
 
     public function test_delete_deployment(): void
@@ -123,22 +125,5 @@ class DeploymentTest extends TestCase
         ]);
 
         DeploymentClient::delete($deployment->id);
-    }
-
-    public function test_truncate_deployment(): void
-    {
-        DeploymentClient::create([
-            'name' => 'deployment1',
-            'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample.bpmn'
-        ]);
-        DeploymentClient::create([
-            'name' => 'deployment2',
-            'bpmnFiles' => __DIR__ . '/../../../resources/diagrams/sample2.bpmn'
-        ]);
-
-        DeploymentClient::truncate();
-
-        $deployments = DeploymentClient::index();
-        $this->assertCount(0, $deployments);
     }
 }

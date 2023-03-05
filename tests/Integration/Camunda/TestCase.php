@@ -8,6 +8,8 @@ use Tests\TestCase as MainTestCase;
 
 class TestCase extends MainTestCase
 {
+    protected $deployId;
+
     /**
      * Define test setup.
      *
@@ -39,14 +41,24 @@ class TestCase extends MainTestCase
     {
         $files = [__DIR__ . '/../../../resources/diagrams/sample.bpmn'];
 
-        return DeploymentClient::create([
+        $deploy = DeploymentClient::create([
             'name' => 'test',
             'bpmnFiles' => $files
         ]);
+
+        $this->deployId = $deploy->id;
+
+        return $deploy;
     }
 
     protected function truncateDeployment(): void
     {
-        DeploymentClient::truncate(true);
+        if (!$this->deployId) {
+            return;
+        }
+
+        if (DeploymentClient::delete($this->deployId, true)) {
+            $this->deployId = null;
+        }
     }
 }

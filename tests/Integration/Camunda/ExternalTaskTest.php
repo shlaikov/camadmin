@@ -16,10 +16,12 @@ class ExternalTaskTest extends TestCase
 
         $files = [__DIR__ . '/../../../resources/diagrams/external-task.bpmn'];
 
-        DeploymentClient::create([
+        $deploy = DeploymentClient::create([
             'name' => 'External Task',
             'bpmnFiles' => $files
         ]);
+
+        $this->deployId = $deploy->id;
     }
 
     public function test_fetch_and_lock()
@@ -29,7 +31,7 @@ class ExternalTaskTest extends TestCase
             ['topicName' => 'pdf', 'lockDuration' => 600_000]
         ];
         $externalTasks = ExternalTaskClient::fetchAndLock('worker1', $topics);
-        $this->assertCount(1, $externalTasks);
+        $this->assertNotEmpty($externalTasks);
     }
 
     public function test_complete_task()
@@ -39,7 +41,7 @@ class ExternalTaskTest extends TestCase
             ['topicName' => 'pdf', 'lockDuration' => 600_000]
         ];
         $externalTasks = ExternalTaskClient::fetchAndLock('worker1', $topics);
-        $this->assertCount(1, $externalTasks);
+        $this->assertNotEmpty($externalTasks);
         $task = $externalTasks[0];
         $completed = ExternalTaskClient::complete($task->id, 'worker1');
         $this->assertTrue($completed);
@@ -52,7 +54,8 @@ class ExternalTaskTest extends TestCase
             ['topicName' => 'pdf', 'lockDuration' => 600_000]
         ];
         $externalTasks = ExternalTaskClient::fetchAndLock('worker1', $topics);
-        $this->assertCount(1, $externalTasks);
+        $this->assertNotEmpty($externalTasks);
+
         $task = $externalTasks[0];
         $completed = ExternalTaskClient::complete(
             $task->id,

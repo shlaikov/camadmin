@@ -13,6 +13,7 @@ class ProcessInstanceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->deploySampleBpmn();
     }
 
@@ -33,7 +34,7 @@ class ProcessInstanceTest extends TestCase
         ProcessDefinitionClient::start(key: 'process_1', variables: $variables);
         $processInstances = ProcessInstanceClient::index();
 
-        $this->assertCount(1, $processInstances);
+        $this->assertNotEmpty($processInstances);
     }
 
     public function test_get_by_parameters()

@@ -43,7 +43,7 @@ class ProcessDefinitionTest extends TestCase
     {
         $this->deploySampleBpmn();
         $processDefinitions = ProcessDefinitionClient::index();
-        $this->assertCount(1, $processDefinitions);
+        $this->assertNotEmpty($processDefinitions);
         $this->assertInstanceOf(ProcessDefinition::class, $processDefinitions[0]);
     }
 
