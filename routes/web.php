@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CamundaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstanceController;
+use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,3 +49,10 @@ Route::middleware([
         ->where('id', '[0-9]+')
         ->where('request', '.*')->name('instances.camunda');
 });
+
+Route::get('/management/health', fn () => response()->json([
+    'status' => 'healthy',
+    'app_version' => InstalledVersions::getRootPackage()['version'],
+    'framework_version' => app()->version(),
+    'app_enviroment' => App::environment()
+]));
