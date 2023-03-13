@@ -10,9 +10,9 @@ use App\Exceptions\InvalidArgumentException;
 use App\Exceptions\ObjectNotFoundException;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route("/process-definition", methods: ["GET", "POST"])]
 class ProcessDefinitionClient extends CamundaClient
 {
+    #[Route("/process-definition", method: "GET")]
     public static function index(array $params = []): array
     {
         $processDefinition = [];
@@ -25,6 +25,13 @@ class ProcessDefinitionClient extends CamundaClient
         return $processDefinition;
     }
 
+    #[Route("/process-definition/count", method: "GET")]
+    public static function count(): array
+    {
+        return self::make()->get('process-definition/count')->json();
+    }
+
+    #[Route("/process-definition/{identifier}", method: "GET")]
     public static function find(...$args): ProcessDefinition
     {
         if (request()->isXml()) {
@@ -40,6 +47,7 @@ class ProcessDefinitionClient extends CamundaClient
         return ProcessDefinition::from($response->json());
     }
 
+    #[Route("/process-definition", method: "POST")]
     public static function start(...$args): ProcessInstance
     {
         $variables = $args['variables'] ?? [];

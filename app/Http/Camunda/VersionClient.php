@@ -5,9 +5,9 @@ namespace App\Http\Camunda;
 use App\Exceptions\ObjectNotFoundException;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route("/version", methods: ["GET"])]
 class VersionClient extends CamundaClient
 {
+    #[Route("/version", method: "GET")]
     public static function index(array $params = []): array
     {
         $response = self::make()->get('version');

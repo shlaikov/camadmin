@@ -6,11 +6,10 @@ namespace App\Repository\Services;
 
 use App\Exceptions\InvalidArgumentException;
 use App\Http\Camunda\CamundaClient;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Illuminate\Http\Request as HttpRequest;
 use ReflectionClass;
 use ReflectionMethod;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class CamundaRepository
 {
@@ -61,72 +60,43 @@ class CamundaRepository
         return str_replace('{identifier}', $identifier, $path);
     }
 
-
     protected function invokeRequest(): array
     {
         foreach ($this->getCamundaClasses() as $class) {
-            if (!$this->isInvokedByAttributes($class)) {
-                continue;
+            if ($method = $this->getRequestByClass($class)) {
+                return $method->invoke($class, request()->all());
             }
-
-            $method = $this->getMethodOfClass($class);
-            $args = $this->hasIndetifier() ? $this->getIndetifier() : request()->all();
-
-            return $method->invoke($class, $args);
         }
 
         throw new BadRequestException("There is no method by $this->requestString path");
     }
 
-    protected function getMethodOfClass($class): ReflectionMethod
+    protected function getRequestByClass($class): ?ReflectionMethod
     {
-        switch (request()->method()) {
-            case HttpRequest::METHOD_GET:
-                return $class->getMethod($this->hasIndetifier() ? 'find' : 'index');
-            case HttpRequest::METHOD_POST:
-                return $class->getMethod('create');
-            case HttpRequest::METHOD_PUT:
-                return $class->getMethod('update');
-            case HttpRequest::METHOD_DELETE:
-                return  $class->getMethod('delete');
-            default:
-                throw new BadRequestException("This HTTP method doesn't supported");
-        }
-    }
+        foreach ($class->getMethods() as $method) {
+            $attribute = $method->getAttributes()[0] ?? null;
 
-    protected function isInvokedByAttributes($class): bool
-    {
-        foreach ($class->getAttributes() as $attribute) {
-            if ($attribute->getName() !== Route::class) {
-                return false;
+            if (!isset($attribute) || $attribute->getName() !== Route::class) {
+                continue;
             }
 
             $args = $attribute->getArguments();
 
-            if (!in_array(request()->method(), $args['methods'])) {
+            if (request()->method() !== $args['method']) {
                 continue;
             }
 
             if ($this->requestString === $args[0]) {
-                return true;
-            }
-
-            if ($this->hasIndetifier()) {
-                return '/' . $this->requestPaths[0] === $args[0];
+                return $method;
             }
         }
 
-        return false;
-    }
-
-    protected function hasIndetifier(): bool
-    {
-        return count($this->requestPaths) === 2;
+        return null;
     }
 
     protected function getIndetifier(): ?string
     {
-        return $this->hasIndetifier() ? end($this->requestPaths) : null;
+        return end($this->requestPaths);
     }
 
     protected static function getCamundaClasses(): array

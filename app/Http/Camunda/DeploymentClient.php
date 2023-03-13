@@ -5,9 +5,11 @@ namespace App\Http\Camunda;
 use App\Data\Camunda\Deployment;
 use App\Exceptions\ObjectNotFoundException;
 use App\Exceptions\ParseException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DeploymentClient extends CamundaClient
 {
+    #[Route("/deployment", method: "GET")]
     public static function index(array $params = []): array
     {
         $params = [...request()->all(), ...$params];
@@ -22,6 +24,7 @@ class DeploymentClient extends CamundaClient
         return $result;
     }
 
+    #[Route("/deployment", method: "POST")]
     public static function create(array $params = []): Deployment
     {
         $bpmnFiles = (array) $params['bpmnFiles'];
@@ -53,6 +56,7 @@ class DeploymentClient extends CamundaClient
         return Deployment::from($response->json());
     }
 
+    #[Route("/deployment/{identifier}", method: "GET")]
     public static function find(string $id): Deployment
     {
         $response = self::make()->get("deployment/$id");
@@ -64,6 +68,7 @@ class DeploymentClient extends CamundaClient
         return Deployment::from($response->json());
     }
 
+    #[Route("/deployment/{identifier}", method: "DELETE")]
     public static function delete(string $id, bool $cascade = false): bool
     {
         $cascadeFlag = $cascade ? 'cascade=true' : '';

@@ -7,15 +7,12 @@ namespace App\Http\Camunda;
 use App\Data\Camunda\ProcessInstanceHistory;
 use App\Data\Camunda\Variable;
 use App\Exceptions\ObjectNotFoundException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProcessInstanceHistoryClient extends CamundaClient
 {
-    /**
-     * @param  array  $params
-     *
-     * @return array|ProcessInstanceHistory[]
-     */
-    public static function get(array $params = []): array
+    #[Route("/history/process-instance", method: "GET")]
+    public static function index(array $params = []): array
     {
         $instances = [];
         foreach (self::make()->get('history/process-instance', $params)->json() as $res) {
@@ -25,11 +22,7 @@ class ProcessInstanceHistoryClient extends CamundaClient
         return $instances;
     }
 
-    /**
-     * @param  string  $id
-     *
-     * @return \App\Data\Camunda\ProcessInstanceHistory
-     */
+    #[Route("/history/process-instance/{identifier}", method: "GET")]
     public static function find(string $id): ProcessInstanceHistory
     {
         $response = self::make()->get("history/process-instance/$id");
@@ -43,7 +36,9 @@ class ProcessInstanceHistoryClient extends CamundaClient
 
     public static function variables(string $id): array
     {
-        $variables = self::make()->get("history/variable-instance", ['processInstanceId' => $id])->json();
+        $variables = self::make()->get("history/variable-instance", [
+            'processInstanceId' => $id
+        ])->json();
 
         return collect($variables)->mapWithKeys(
             fn ($data) => [$data['name'] => Variable::from([...$data])]
