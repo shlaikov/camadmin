@@ -7,13 +7,20 @@ defineProps({
 })
 
 const onRowClick = (row) => {
+  if (!row.uuid) {
+    const { pathname } = window.location
+
+    return (window.location = `${pathname}/process-definition/${row.id}/diagram`)
+  }
+
   window.location = `/diagram/${row.uuid}`
 }
 </script>
 
 <template>
   <div
-    class="p-4 border border-grey-300 rounded-md cursor-pointer hover:shadow-md transition"
+    class="w-full p-4 bg-white border border-grey-300 rounded-md cursor-pointer hover:shadow-md transition"
+    :title="file.name"
     @click="() => onRowClick(file)"
   >
     <img
@@ -22,16 +29,20 @@ const onRowClick = (row) => {
       :alt="file.name"
       :src="`/diagram/${file.uuid}/preview.svg`"
     />
-    <EmptyFile v-else class="mb-4 mx-auto md:h-64 md:w-16 h-20 w-20 opacity-25" />
+    <div v-else class="mb-4 mx-auto md:h-64 md:w-64 h-40 w-40">
+      <EmptyFile class="mx-auto md:h-64 md:w-16 h-20 w-20 opacity-25" />
+    </div>
 
     <h4 class="mb-2 text-lg font-semibold truncate">{{ file.name }}</h4>
     <p class="flex font-semibold text-sm text-gray-600 truncate">
       <span
+        v-if="file.type"
         class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
       >
         {{ file.type }}
       </span>
       <span
+        v-if="file.updated_at"
         class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2"
       >
         <svg
@@ -47,6 +58,18 @@ const onRowClick = (row) => {
           ></path>
         </svg>
         {{ timeSince(file.updated_at) + ' ago' }}
+      </span>
+      <span
+        v-if="file.runningInstances"
+        class="bg-green-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+      >
+        {{ file.runningInstances }} in process
+      </span>
+      <span
+        v-if="file.failedJobs"
+        class="bg-red-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+      >
+        {{ file.failedJobs }} failed
       </span>
     </p>
   </div>

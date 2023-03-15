@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Storage;
 
 class EditorController extends Controller
@@ -17,7 +18,7 @@ class EditorController extends Controller
     ) {
     }
 
-    public function show($uuid)
+    public function show($uuid): InertiaResponse
     {
         return Inertia::render('Diagram/Editor', [
             'diagram' => Diagram::where('uuid', $uuid)->first(),

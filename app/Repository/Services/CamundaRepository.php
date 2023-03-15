@@ -7,7 +7,6 @@ namespace App\Repository\Services;
 use App\Exceptions\InvalidArgumentException;
 use App\Http\Camunda\CamundaClient;
 use ReflectionClass;
-use ReflectionMethod;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
@@ -16,23 +15,33 @@ class CamundaRepository
     const CAMUNDA_NAMESPACE = "App\Http\Camunda";
 
     const CLIENT_CLASS = CamundaClient::class;
+    const ROUTE_REPLACE_MASK = '{identifier}';
+
+    const ROUTE_SIMPLE_TYPE = 'simple';
+    const ROUTE_WITH_ID_TYPE = 'with_identifier';
+    const ROUTE_TYPES = [
+        self::ROUTE_SIMPLE_TYPE, self::ROUTE_WITH_ID_TYPE
+    ];
+
+    const RESERVED_WORDS = [
+        'id', 'key', 'tenant-id', 'group', 'members',
+        'count', 'xml', 'statistics', 'diagram'
+    ];
 
     protected string $instanceId;
 
     protected string $requestString;
     protected array $requestPaths;
+    protected array $requestCombitations;
 
-    public function execute($id, $requestString = '/'): array
+    public function execute($id, $requestString = '/')
     {
         $this->instanceId = $id;
 
         $requestString = strtok($requestString, '?');
         $this->requestPaths = explode('/', $requestString);
         $this->requestString = "/$requestString";
-
-        if (count($this->requestPaths) > 2) {
-            throw new BadRequestException("There is no method by $this->requestString path");
-        }
+        $this->requestCombitations = $this->getRouteCombinations();
 
         return $this->invokeRequest();
     }
@@ -57,21 +66,27 @@ class CamundaRepository
             throw new InvalidArgumentException('');
         }
 
-        return str_replace('{identifier}', $identifier, $path);
+        return str_replace(self::ROUTE_REPLACE_MASK, $identifier, $path);
     }
 
-    protected function invokeRequest(): array
+    protected function invokeRequest()
     {
         foreach ($this->getCamundaClasses() as $class) {
             if ($method = $this->getRequestByClass($class)) {
-                return $method->invoke($class, request()->all());
+                $reflectMethod = $method['method'];
+
+                if ($method['type'] === self::ROUTE_WITH_ID_TYPE) {
+                    return $reflectMethod->invoke($class, id: $method['id']);
+                }
+
+                return $reflectMethod->invoke($class, request()->all());
             }
         }
 
         throw new BadRequestException("There is no method by $this->requestString path");
     }
 
-    protected function getRequestByClass($class): ?ReflectionMethod
+    protected function getRequestByClass($class): ?array
     {
         foreach ($class->getMethods() as $method) {
             $attribute = $method->getAttributes()[0] ?? null;
@@ -87,16 +102,39 @@ class CamundaRepository
             }
 
             if ($this->requestString === $args[0]) {
-                return $method;
+                return ['type' => self::ROUTE_SIMPLE_TYPE, 'method' => $method];
+            }
+
+            if (in_array($args[0], $this->requestCombitations)) {
+                $key = array_search($args[0], $this->requestCombitations);
+
+                return [
+                    'type' => self::ROUTE_WITH_ID_TYPE,
+                    'method' => $method,
+                    'id' => $this->requestPaths[$key + 1]
+                ];
             }
         }
 
         return null;
     }
 
-    protected function getIndetifier(): ?string
+    protected function getRouteCombinations(): array
     {
-        return end($this->requestPaths);
+        $combinations = [];
+
+        foreach ($this->requestPaths as $key => $path) {
+            if ($key === 0 || in_array($path, self::RESERVED_WORDS)) {
+                continue;
+            }
+
+            $paths = $this->requestPaths;
+            $paths[$key] = self::ROUTE_REPLACE_MASK;
+
+            $combinations[] = '/' . implode('/', $paths);
+        }
+
+        return $combinations;
     }
 
     protected static function getCamundaClasses(): array

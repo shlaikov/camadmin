@@ -1,5 +1,6 @@
 <?php
 
+use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -16,6 +17,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+
+    'version' => InstalledVersions::getRootPackage()['pretty_version'],
 
     /*
     |--------------------------------------------------------------------------

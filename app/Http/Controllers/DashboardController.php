@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diagram;
-use App\Models\Instance;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(): InertiaResponse
     {
         return Inertia::render('Dashboard', [
-            'instances' => Instance::all(),
             'recent_work' => Diagram::orderBy('updated_at', 'DESC')
                 ->limit(4)->get()
         ]);

@@ -5,6 +5,8 @@ import { useForm } from '@inertiajs/vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Camunda from '@/Repository/Camunda'
 import camundaApi from '@/Api/Camunda'
+import DiagramFiles from '@/Components/DiagramFiles.vue'
+import { mergeDefenitions } from '@/DTO/defenitions'
 
 const props = defineProps({
   instance: {
@@ -15,6 +17,7 @@ const props = defineProps({
 
 const isEditMode = ref(!props.instance.description)
 const version = ref('')
+const statistics = ref([])
 const logs = ref([])
 
 const form = useForm({
@@ -35,6 +38,16 @@ onMounted(() => {
     .get(`${props.instance.id}/version`)
     .then(({ data }) => {
       version.value = data.version
+
+      camundaApi()
+        .get(`${props.instance.id}/process-definition/statistics`, {
+          params: {
+            incidents: true,
+          },
+        })
+        .then(({ data }) => {
+          statistics.value = mergeDefenitions(data)
+        })
 
       camundaApi()
         .get(`${props.instance.id}/history/activity-instance`, {
@@ -76,7 +89,7 @@ onMounted(() => {
           </div>
           <div class="border-t border-gray-200">
             <dl>
-              <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Description</dt>
                 <dd v-if="isEditMode" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                   <textarea
@@ -112,6 +125,14 @@ onMounted(() => {
                     </svg>
                   </div>
                 </dd>
+              </div>
+              <div
+                v-show="statistics.length > 0"
+                class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6"
+              >
+                <div v-for="data in statistics" :key="data.key">
+                  <DiagramFiles :file="data.diagram" />
+                </div>
               </div>
               <div
                 v-show="logs.length > 0"

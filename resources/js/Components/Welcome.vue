@@ -1,6 +1,12 @@
 <script setup>
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+
 import JetApplicationLogo from '@/Components/ApplicationLogo.vue'
 import DiagramFiles from '@/Components/DiagramFiles.vue'
+
+const user = computed(() => usePage().props.user)
+const instances = computed(() => usePage().props.instances)
 </script>
 
 <template>
@@ -15,10 +21,10 @@ import DiagramFiles from '@/Components/DiagramFiles.vue'
         <span class="rounded-full ring-2 ring-white">
           <img
             class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-            :src="$page.props.user.profile_photo_url"
-            :alt="$page.props.user.name"
+            :src="user.profile_photo_url"
+            :alt="user.name"
           />
-          {{ $page.props.user.name }}</span
+          {{ user.name }}</span
         >
       </div>
     </div>
@@ -65,7 +71,7 @@ import DiagramFiles from '@/Components/DiagramFiles.vue'
         <ul
           class="bg-slate-50 p-6 sm:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 text-sm leading-6"
         >
-          <li v-for="instance in $page.props.instances" :key="instance.id" class="flex">
+          <li v-for="instance in instances" :key="instance.id" class="flex">
             <a
               :href="route('instances.show', instance.id)"
               class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 hover:shadow-md group rounded-md p-3 bg-white ring-1 ring-slate-200 shadow-sm transition"

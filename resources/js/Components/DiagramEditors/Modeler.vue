@@ -131,7 +131,7 @@ export default {
   display: block;
   position: absolute;
   width: 100%;
-  height: calc(100vh - 130px);
+  height: calc(100vh - 100px);
   top: 0;
   left: 0;
   bottom: 0;

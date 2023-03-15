@@ -9,6 +9,8 @@ use App\Data\Camunda\ProcessInstance;
 use App\Exceptions\InvalidArgumentException;
 use App\Exceptions\ObjectNotFoundException;
 use Symfony\Component\Routing\Annotation\Route;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class ProcessDefinitionClient extends CamundaClient
 {
@@ -77,6 +79,15 @@ class ProcessDefinitionClient extends CamundaClient
         throw new InvalidArgumentException($response->body());
     }
 
+    #[Route("/process-definition/{identifier}/diagram", method: "GET")]
+    public static function diagram($id): InertiaResponse
+    {
+        return Inertia::render('Diagram/Editor', [
+            'diagram' => ProcessDefinitionClient::find($id),
+        ]);
+    }
+
+    #[Route("/process-definition/{identifier}/xml", method: "GET")]
     public static function xml(...$args): string
     {
         $path = self::makeIdentifierPath(path: 'process-definition/{identifier}/xml', args: $args);

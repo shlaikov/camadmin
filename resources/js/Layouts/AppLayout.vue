@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { router, Head, Link } from '@inertiajs/vue3'
+import { ref, computed } from 'vue'
+import { router, Head, Link, usePage } from '@inertiajs/vue3'
 
 import JetApplicationMark from '@/Components/ApplicationMark.vue'
 import JetBanner from '@/Components/Banner.vue'
@@ -8,6 +8,8 @@ import JetDropdown from '@/Components/Dropdown.vue'
 import JetDropdownLink from '@/Components/DropdownLink.vue'
 import JetNavLink from '@/Components/NavLink.vue'
 import JetResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+
+const instances = computed(() => usePage().props.instances)
 
 defineProps({
   title: String,
@@ -56,6 +58,64 @@ const logout = () => {
                 <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                   Dashboard
                 </JetNavLink>
+
+                <JetNavLink>
+                  <JetDropdown align="center" width="160">
+                    <template #trigger>
+                      <button
+                        class="flex items-center gap-x-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300"
+                        aria-expanded="false"
+                      >
+                        Instances
+                        <svg
+                          class="h-5 w-5 flex-none text-gray-400"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </template>
+
+                    <template #content>
+                      <div class="w-60">
+                        <template v-if="instances.length > 0">
+                          <JetDropdownLink
+                            v-for="instance in instances"
+                            :key="instance.id"
+                            :href="route('instances.show', instance.id)"
+                          >
+                            {{ instance.name }}
+                          </JetDropdownLink>
+                          <div class="border-t border-gray-100" />
+                          <a
+                            :href="route('instances.create')"
+                            class="hover:bg-gray-100 focus:bg-gray-100 leading-5 group flex items-center text-gray-700 text-sm w-full px-2 py-2 transition"
+                          >
+                            <svg
+                              width="20"
+                              height="20"
+                              fill="currentColor"
+                              class="mr-2"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
+                              />
+                            </svg>
+                            Add new camunda instance
+                          </a>
+                        </template>
+                      </div>
+                    </template>
+                  </JetDropdown>
+                </JetNavLink>
+
                 <JetNavLink :href="route('projects')" :active="route().current('projects')">
                   Projects
                 </JetNavLink>
@@ -385,7 +445,7 @@ const logout = () => {
             </nav>
 
             <div>
-              <p class="text-gray-500">v1.0</p>
+              <p class="text-gray-500">v{{ $page.props.app_version }}</p>
             </div>
           </div>
         </div>

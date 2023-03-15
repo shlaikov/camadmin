@@ -52,7 +52,7 @@ Route::middleware([
 
 Route::get('/management/health', fn () => response()->json([
     'status' => 'healthy',
-    'app_version' => InstalledVersions::getRootPackage()['pretty_version'],
+    'app_version' => config('app.version'),
     'framework_version' => app()->version(),
     'app_enviroment' => App::environment()
 ]));
