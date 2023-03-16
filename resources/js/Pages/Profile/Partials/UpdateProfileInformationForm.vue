@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { router, useForm, Link } from '@inertiajs/vue3'
 
 import JetButton from '@/Components/Button.vue'
@@ -9,15 +9,15 @@ import JetInputError from '@/Components/InputError.vue'
 import JetLabel from '@/Components/Label.vue'
 import JetActionMessage from '@/Components/ActionMessage.vue'
 import JetSecondaryButton from '@/Components/SecondaryButton.vue'
+import { useUserStore } from '@/Stores/user'
 
-const props = defineProps({
-  user: Object,
-})
+const userStore = useUserStore()
+const user = computed(() => userStore.user)
 
 const form = useForm({
   _method: 'PUT',
-  name: props.user.name,
-  email: props.user.email,
+  name: user.value.name,
+  email: user.value.email,
   photo: null,
 })
 
@@ -33,7 +33,14 @@ const updateProfileInformation = () => {
   form.post(route('user-profile-information.update'), {
     errorBag: 'updateProfileInformation',
     preserveScroll: true,
-    onSuccess: () => clearPhotoFileInput(),
+    onSuccess: () => {
+      userStore.$patch((state) => {
+        state.user.name = form.name
+        state.user.email = form.email
+      })
+
+      clearPhotoFileInput()
+    },
   })
 }
 

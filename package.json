@@ -42,6 +42,7 @@
     "dmn-js": "^14.0.2",
     "min-dash": "^4.0.0",
     "min-dom": "^4.1.0",
+    "pinia": "^2.0.33",
     "tiny-svg": "^3.0.0",
     "vue3-table-lite": "^1.2.4"
   }

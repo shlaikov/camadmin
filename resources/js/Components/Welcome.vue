@@ -4,8 +4,11 @@ import { usePage } from '@inertiajs/vue3'
 
 import JetApplicationLogo from '@/Components/ApplicationLogo.vue'
 import DiagramFiles from '@/Components/DiagramFiles.vue'
+import { useUserStore } from '@/Stores/user'
 
-const user = computed(() => usePage().props.user)
+const userStore = useUserStore()
+
+const user = computed(() => userStore.user)
 const instances = computed(() => usePage().props.instances)
 </script>
 
