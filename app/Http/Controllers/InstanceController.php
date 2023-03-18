@@ -25,11 +25,9 @@ class InstanceController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function show($id, Instance $model)
+    public function show($id)
     {
-        return Inertia::render('Instance/Partials/Camunda/Show', [
-            'instance' => $model->findOrFail($id)
-        ]);
+        return Inertia::render('Instance/Partials/Camunda/Show', ['instanceId' => $id]);
     }
 
     public function update($id, Instance $model)

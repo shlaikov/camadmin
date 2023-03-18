@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { router, Head, Link, usePage } from '@inertiajs/vue3'
+import { ref, computed, onMounted } from 'vue'
+import { router, Head, Link } from '@inertiajs/vue3'
 
 import JetApplicationMark from '@/Components/ApplicationMark.vue'
 import JetBanner from '@/Components/Banner.vue'
@@ -8,11 +8,20 @@ import JetDropdown from '@/Components/Dropdown.vue'
 import JetDropdownLink from '@/Components/DropdownLink.vue'
 import JetNavLink from '@/Components/NavLink.vue'
 import JetResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+import { useInstanceStore } from '@/Stores/instance'
 
-const instances = computed(() => usePage().props.instances)
+const instanceStore = useInstanceStore()
+
+const instances = computed(() => instanceStore.instances)
 
 defineProps({
   title: String,
+})
+
+onMounted(() => {
+  instances.value.forEach((instance) => {
+    instanceStore.fetchDefenitions(instance.id)
+  })
 })
 
 const showingNavigationDropdown = ref(false)

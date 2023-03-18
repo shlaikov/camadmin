@@ -1,15 +1,16 @@
 <script setup>
 import { computed } from 'vue'
-import { usePage } from '@inertiajs/vue3'
 
 import JetApplicationLogo from '@/Components/ApplicationLogo.vue'
 import DiagramFiles from '@/Components/DiagramFiles.vue'
 import { useUserStore } from '@/Stores/user'
+import { useInstanceStore } from '@/Stores/instance'
 
 const userStore = useUserStore()
+const instanceStore = useInstanceStore()
 
 const user = computed(() => userStore.user)
-const instances = computed(() => usePage().props.instances)
+const instances = computed(() => instanceStore.instances)
 </script>
 
 <template>
@@ -77,7 +78,11 @@ const instances = computed(() => usePage().props.instances)
           <li v-for="instance in instances" :key="instance.id" class="flex">
             <a
               :href="route('instances.show', instance.id)"
-              class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 hover:shadow-md group rounded-md p-3 bg-white ring-1 ring-slate-200 shadow-sm transition"
+              class="w-full border-gray-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 group rounded-md p-3 bg-white ring-1 ring-slate-200 shadow-sm transition"
+              :class="{
+                'hover:shadow-md focus:border-indigo-300 ': !instance.error,
+                'bg-red-200 focus:ring-red-200': instance.error,
+              }"
             >
               <dl class="grid sm:block lg:grid xl:block grid-cols-2 grid-rows-2 items-center">
                 <div>
@@ -89,6 +94,46 @@ const instances = computed(() => usePage().props.instances)
                 <div>
                   <dt class="sr-only">Url</dt>
                   <dd class="group-hover:text-indigo-800">{{ instance.url }}</dd>
+                </div>
+
+                <div v-if="instance.error">
+                  <span
+                    class="bg-red-300 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-3 h-3"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                      /></svg
+                    >&nbsp; Connection error
+                  </span>
+                </div>
+                <div v-else>
+                  <span
+                    v-if="instance.statistics && instance.statistics.length > 0"
+                    class="bg-green-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+                  >
+                    {{ instance.statistics.reduce((sum, i) => sum + i.instances, 0) }}
+                    in process
+                  </span>
+                  <span
+                    v-if="instance.statistics && instance.statistics.length > 0"
+                    class="bg-slate-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+                    :class="{
+                      'bg-red-100':
+                        instance.statistics.reduce((sum, i) => sum + i.failedJobs, 0) > 0,
+                    }"
+                  >
+                    {{ instance.statistics.reduce((sum, i) => sum + i.failedJobs, 0) }} failed
+                  </span>
                 </div>
               </dl>
             </a>

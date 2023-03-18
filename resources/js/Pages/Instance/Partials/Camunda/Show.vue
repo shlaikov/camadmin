@@ -1,32 +1,35 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Camunda from '@/Repository/Camunda'
 import camundaApi from '@/Api/Camunda'
 import DiagramFiles from '@/Components/DiagramFiles.vue'
-import { mergeDefenitions } from '@/DTO/defenitions'
+import { useInstanceStore } from '@/Stores/instance'
+
+const instanceStore = useInstanceStore()
+const instances = computed(() => instanceStore.instances)
 
 const props = defineProps({
-  instance: {
-    type: Object,
-    default: () => {},
+  instanceId: {
+    required: true,
+    type: String,
   },
 })
 
-const isEditMode = ref(!props.instance.description)
-const version = ref('')
-const statistics = ref([])
+const instance = instances.value.find((i) => i.id == props.instanceId)
+
+const isEditMode = ref(!instance.description)
 const logs = ref([])
 
 const form = useForm({
-  description: props.instance.description,
-  version,
+  description: instance.description,
+  version: instance.version,
 })
 
 const saveDescription = () => {
-  form.put(route('instances.update', props.instance.id), {
+  form.put(route('instances.update', props.instanceId), {
     errorBag: 'createInstance',
     preserveScroll: true,
     onSuccess: () => (isEditMode.value = false),
@@ -34,33 +37,19 @@ const saveDescription = () => {
 }
 
 onMounted(() => {
-  camundaApi()
-    .get(`${props.instance.id}/version`)
-    .then(({ data }) => {
-      version.value = data.version
-
-      camundaApi()
-        .get(`${props.instance.id}/process-definition/statistics`, {
-          params: {
-            incidents: true,
-          },
-        })
-        .then(({ data }) => {
-          statistics.value = mergeDefenitions(data)
-        })
-
-      camundaApi()
-        .get(`${props.instance.id}/history/activity-instance`, {
-          params: {
-            sortBy: 'startTime',
-            sortOrder: 'desc',
-            maxResults: 8,
-          },
-        })
-        .then(({ data }) => {
-          logs.value = data
-        })
-    })
+  if (!instance.error) {
+    camundaApi()
+      .get(`${props.instanceId}/history/activity-instance`, {
+        params: {
+          sortBy: 'startTime',
+          sortOrder: 'desc',
+          maxResults: 8,
+        },
+      })
+      .then(({ data }) => {
+        logs.value = data
+      })
+  }
 })
 </script>
 
@@ -70,20 +59,20 @@ onMounted(() => {
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Camunda instance</h2>
     </template>
 
-    <div>
+    <div v-if="instance">
       <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
         <div class="overflow-hidden bg-white shadow sm:rounded-lg">
           <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-              {{ $page.props.instance.name }}
+              {{ instance.name }}
             </h3>
             <p class="mt-1 text-sm text-gray-500">
-              {{ $page.props.instance.url }}
+              {{ instance.url }}
               <span
-                v-show="version"
+                v-show="instance.version"
                 class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 rounded mr-2"
               >
-                v{{ version }}
+                v{{ instance.version }}
               </span>
             </p>
           </div>
@@ -127,10 +116,10 @@ onMounted(() => {
                 </dd>
               </div>
               <div
-                v-show="statistics.length > 0"
+                v-show="instance.statistics && instance.statistics.length > 0"
                 class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6"
               >
-                <div v-for="data in statistics" :key="data.key">
+                <div v-for="data in instance.statistics" :key="data.key">
                   <DiagramFiles :file="data.diagram" />
                 </div>
               </div>

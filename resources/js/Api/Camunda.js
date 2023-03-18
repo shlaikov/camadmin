@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const camundaRequest = (baseURL = null) => {
+const camundaRequest = (baseURL = '/instances/camunda/') => {
   return axios.create({
     baseURL,
     headers: {
