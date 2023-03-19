@@ -15,6 +15,23 @@ export const useInstanceStore = defineStore('instance', {
     getInstanceById: (state) => {
       return (instanceId) => state.instances.find((instance) => instance.id === instanceId)
     },
+    instanceStatistics: (state) => {
+      let runningInstances = 0,
+        failedJobs = 0
+
+      state.instances.forEach((instance) => {
+        if (instance.error || !instance.statistics) {
+          return
+        }
+
+        instance.statistics.forEach((i) => {
+          runningInstances += i.instances
+          failedJobs += i.failedJobs
+        })
+      })
+
+      return { runningInstances, failedJobs }
+    },
   },
   actions: {
     async getVersion(instanceId) {
