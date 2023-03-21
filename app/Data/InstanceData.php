@@ -26,7 +26,7 @@ class InstanceData extends Data
         #[Required, StringType]
         public string $name,
         #[StringType]
-        public ?string $description = '',
+        public ?string $description,
         #[StringType]
         public readonly string $type,
         #[Required, StringType]

@@ -1,0 +1,19 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+parameters:
+    paths:
+        - app
+    level: 7
+    ignoreErrors:
+        -
+            message: '#^Unknown parameter \$method in call to Symfony\\Component\\Routing\\Annotation\\Route constructor\.$#'
+            paths:
+                - app/Http/Camunda/*
+        -
+            message: '#^Method App\\Http\\Camunda\\[a-zA-Z\\_]+\:\:[a-zA-Z\\_]+\(\) has parameter \$args with no type specified\.$#'
+            paths:
+                - app/Http/Camunda/*
+    excludePaths:
+    checkGenericClassInNonGenericObjectType: false
+    noUnnecessaryCollectionCall: false
+    checkMissingIterableValueType: false

@@ -6,8 +6,8 @@ namespace App\Data\Camunda\VariableType;
 
 class StringType
 {
-    public function __invoke($value): array
+    public function __invoke(string $value): array
     {
-        return ['value' => (string) $value, 'type' => 'String'];
+        return ['value' => $value, 'type' => 'String'];
     }
 }

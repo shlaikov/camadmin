@@ -40,6 +40,7 @@ class ProcessInstanceHistoryClient extends CamundaClient
             'processInstanceId' => $id
         ])->json();
 
+        /** @phpstan-ignore-next-line */
         return collect($variables)->mapWithKeys(
             fn ($data) => [$data['name'] => Variable::from([...$data])]
         )->toArray();

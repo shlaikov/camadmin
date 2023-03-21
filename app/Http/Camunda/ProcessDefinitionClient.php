@@ -34,7 +34,7 @@ class ProcessDefinitionClient extends CamundaClient
     }
 
     #[Route("/process-definition/{identifier}", method: "GET")]
-    public static function find(...$args): ProcessDefinition
+    public static function find(...$args): ProcessDefinition|string
     {
         if (request()->isXml()) {
             return (string) self::xml(id: $args['id']);
@@ -80,7 +80,7 @@ class ProcessDefinitionClient extends CamundaClient
     }
 
     #[Route("/process-definition/{identifier}/diagram", method: "GET")]
-    public static function diagram($id): InertiaResponse
+    public static function diagram(string $id): InertiaResponse
     {
         return Inertia::render('Diagram/Editor', [
             'diagram' => ProcessDefinitionClient::find($id),

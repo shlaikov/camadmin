@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Repository\EloquentRepositoryInterface;
-use App\Repository\Eloquent\BaseRepository;
+use App\Repository\BaseRepository;
 use Illuminate\Support\ServiceProvider;
 
 /** 
@@ -13,9 +13,9 @@ use Illuminate\Support\ServiceProvider;
 class RepositoryServiceProvider extends ServiceProvider
 {
     /** 
-     * Register services. 
+     * Register services.
      * 
-     * @return void  
+     * @return void
      */
     public function register()
     {

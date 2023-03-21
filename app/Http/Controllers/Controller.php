@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function flashMessage(string $message, $type = 'success'): void
+    protected function flashMessage(string $message, string $type = 'success'): void
     {
         if ($message) {
             session()->flash('flash.banner', $message);

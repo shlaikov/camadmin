@@ -31,19 +31,22 @@ class CamundaRepository
     protected string $instanceId;
 
     protected string $requestString;
-    protected array $requestPaths;
+    protected array $requestPaths = [];
     protected array $requestCombitations;
 
-    public function execute($id, $requestString = '/')
+    public function execute(string $id, string $requestString = '/'): mixed
     {
         $this->instanceId = $id;
 
-        $requestString = strtok($requestString, '?');
-        $this->requestPaths = explode('/', $requestString);
-        $this->requestString = "/$requestString";
-        $this->requestCombitations = $this->getRouteCombinations();
+        if (is_string($requestString = strtok($requestString, '?'))) {
+            $this->requestPaths = explode('/', $requestString);
+            $this->requestString = "/$requestString";
+            $this->requestCombitations = $this->getRouteCombinations();
 
-        return $this->invokeRequest();
+            return $this->invokeRequest();
+        }
+
+        throw new BadRequestException("There is no method by $requestString path");
     }
 
     public static function makeIdentifierPath(string $path, array $args): string
@@ -69,7 +72,7 @@ class CamundaRepository
         return str_replace(self::ROUTE_REPLACE_MASK, $identifier, $path);
     }
 
-    protected function invokeRequest()
+    protected function invokeRequest(): mixed
     {
         foreach ($this->getCamundaClasses() as $class) {
             if ($method = $this->getRequestByClass($class)) {
@@ -86,7 +89,7 @@ class CamundaRepository
         throw new BadRequestException("There is no method by $this->requestString path");
     }
 
-    protected function getRequestByClass($class): ?array
+    protected function getRequestByClass(ReflectionClass $class): ?array
     {
         foreach ($class->getMethods() as $method) {
             $attribute = $method->getAttributes()[0] ?? null;
@@ -106,7 +109,7 @@ class CamundaRepository
             }
 
             if (in_array($args[0], $this->requestCombitations)) {
-                $key = array_search($args[0], $this->requestCombitations);
+                $key = (int)array_search($args[0], $this->requestCombitations);
 
                 return [
                     'type' => self::ROUTE_WITH_ID_TYPE,
@@ -137,26 +140,39 @@ class CamundaRepository
         return $combinations;
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     protected static function getCamundaClasses(): array
     {
+        $directory = (string)self::getNamespaceDirectory(self::CAMUNDA_NAMESPACE);
+
+        if (!$files = scandir($directory)) {
+            return [];
+        }
+
         return array_filter(array_map(function ($file) {
+            if (!$file) {
+                return;
+            }
+
             $class = self::CAMUNDA_NAMESPACE . '\\' . str_replace('.php', '', $file);
 
             if (class_exists($class) && is_subclass_of((string) $class, self::CLIENT_CLASS)) {
                 return new ReflectionClass($class);
             }
-        }, scandir(self::getNamespaceDirectory(self::CAMUNDA_NAMESPACE))));
+        }, $files));
     }
 
     protected static function getDefinedNamespaces(): array
     {
         $composerJsonPath = base_path() . '/composer.json';
-        $composerConfig = json_decode(file_get_contents($composerJsonPath));
+        $composerConfig = json_decode((string)file_get_contents($composerJsonPath));
 
         return (array) $composerConfig->autoload->{'psr-4'};
     }
 
-    protected static function getNamespaceDirectory($namespace): string|false
+    protected static function getNamespaceDirectory(string $namespace): string|false
     {
         $composerNamespaces = self::getDefinedNamespaces();
 

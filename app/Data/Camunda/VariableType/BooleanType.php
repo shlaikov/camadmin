@@ -6,8 +6,8 @@ namespace App\Data\Camunda\VariableType;
 
 class BooleanType
 {
-    public function __invoke($value): array
+    public function __invoke(bool $value): array
     {
-        return ['value' => (bool) $value, 'type' => 'Boolean'];
+        return ['value' => $value, 'type' => 'Boolean'];
     }
 }

@@ -18,31 +18,31 @@ class EditorController extends Controller
     ) {
     }
 
-    public function show($uuid): InertiaResponse
+    public function show(string $uuid): InertiaResponse
     {
         return Inertia::render('Diagram/Editor', [
             'diagram' => Diagram::where('uuid', $uuid)->first(),
         ]);
     }
 
-    public function deploy($uuid, Request $request): JsonResponse
+    public function deploy(string $uuid, Request $request): JsonResponse
     {
         return $this->projectRepository->deploy($uuid, $request);
     }
 
-    public function file($uuid, $extension): Response
+    public function file(string $uuid, string $extension): Response
     {
         return $this->getFile($uuid, $extension)
             ->header('Content-type', 'text/xml');
     }
 
-    public function preview($uuid): Response
+    public function preview(string $uuid): Response
     {
         return $this->getFile($uuid, 'svg')
             ->header('Content-type', 'image/svg+xml');
     }
 
-    private function getFile($uuid, $format)
+    private function getFile(string $uuid, string $format): Response
     {
         $team = request()->user()->currentTeam;
 

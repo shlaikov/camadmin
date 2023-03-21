@@ -13,12 +13,12 @@ class Diagram extends Model
 {
     use HasFactory, EnumTrait, WithData;
 
-    protected $dataClass = DiagramData::class;
+    protected string $dataClass = DiagramData::class;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var array<int,string>
      */
     protected $fillable = [
         'uuid',
@@ -29,12 +29,18 @@ class Diagram extends Model
         'preview'
     ];
 
+    /**
+     * @var array<string,string>
+     */
     protected $casts = [
         'updated_at' => 'datetime:Y-m-d H:m:s',
         'created_at' => 'datetime:Y-m-d H:m:s',
     ];
 
-    protected $enums = [
+    /**
+     * @var array<string,string>
+     */
+    protected array $enums = [
         'type' => DiagramEnum::class
     ];
 }

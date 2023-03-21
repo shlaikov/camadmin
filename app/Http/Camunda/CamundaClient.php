@@ -19,31 +19,31 @@ abstract class CamundaClient implements ClientInterface
         return Http::baseUrl($instance ? $instance->url : env('CAMUNDA_URL'));
     }
 
-    public static function index(array $params = [])
+    public static function index(array $params = []): mixed
     {
         $params = implode(',', $params);
 
         throw new BadRequestException("Method with params [$params] not found");
     }
 
-    public static function find(string $id)
+    public static function find(string $id): mixed
     {
         throw new BadRequestException("Method not found by $id");
     }
 
-    public static function create(array $params = [])
+    public static function create(array $params = []): mixed
     {
         $params = implode(',', $params);
 
         throw new BadRequestException("Method with params [$params] not found");
     }
 
-    public static function update(string $id)
+    public static function update(string $id): mixed
     {
         throw new BadRequestException("Method not found by $id");
     }
 
-    public static function delete(string $id, bool $cascade = false)
+    public static function delete(string $id, bool $cascade = false): mixed
     {
         throw new BadRequestException("Method not found by $id");
     }

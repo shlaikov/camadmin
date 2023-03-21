@@ -11,7 +11,7 @@ class ObjectType
     /**
      * @throws \JsonException
      */
-    public function __invoke($value): array
+    public function __invoke(mixed $value): array
     {
         if ($value instanceof Collection) {
             return [

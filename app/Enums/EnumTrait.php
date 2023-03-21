@@ -9,6 +9,7 @@ trait EnumTrait
         $enumFields = array_keys($this->enums);
 
         if (in_array($key, $enumFields)) {
+            /** @var \App\Enums\AbstractEnum $enumObject */
             $enumObject = new $this->enums[$key]($value);
 
             $this->attributes[$key] = $enumObject->getValue();

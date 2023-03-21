@@ -11,12 +11,12 @@ class Instance extends Model
 {
     use HasFactory, WithData;
 
-    protected $dataClass = InstanceData::class;
+    protected string $dataClass = InstanceData::class;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var array<int,string>
      */
     protected $fillable = [
         'name',

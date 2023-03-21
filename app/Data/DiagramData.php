@@ -31,7 +31,7 @@ class DiagramData extends Data
         #[Nullable, StringType]
         public ?string $url,
         #[BooleanType]
-        public bool $is_public = false,
+        public bool $is_public,
         #[Nullable, StringType]
         public ?string $preview
     ) {

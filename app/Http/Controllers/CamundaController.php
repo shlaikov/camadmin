@@ -13,7 +13,7 @@ class CamundaController extends Controller
     ) {
     }
 
-    public function __invoke($id, $requestString = '/'): JsonResponse|InertiaResponse
+    public function __invoke(string $id, string $requestString = '/'): JsonResponse|InertiaResponse
     {
         $execution = $this->camundaRepository->execute($id, $requestString);
 

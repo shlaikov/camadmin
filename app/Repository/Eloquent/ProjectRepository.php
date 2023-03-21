@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository\Eloquent;
 
 use App\Enums\DiagramEnum;
@@ -38,14 +40,17 @@ class ProjectRepository extends BaseRepository
         return $diagrams;
     }
 
-    public function deploy($uuid, Request $request): JsonResponse
+    public function deploy(string $uuid, Request $request): JsonResponse
     {
         $request->validate([
             'xml' => 'required|string',
             'svg' => 'required|string',
         ]);
 
-        $team = $request->user()->currentTeam;
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+        /** @var \App\Models\Team $team */
+        $team = $user->currentTeam;
 
         if (!$diagram = Diagram::where(['uuid' => $uuid, 'team_id' => $team->id])->first()) {
             return response()->json(['status' => 'error'], 401);
@@ -68,15 +73,17 @@ class ProjectRepository extends BaseRepository
             return response()->json(['status' => 'BAD_REQUEST'], 400);
         }
 
+        /** @var \App\Models\User $user */
         $user = $request->user();
         $uuid = (string) Str::uuid();
+        /** @var \App\Models\Team $team */
         $team = $user->currentTeam;
 
         DB::beginTransaction();
 
         $diagram = Diagram::create([
             'name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-            'team_id' => $user->currentTeam->id,
+            'team_id' => $team->id,
             'uuid' => $uuid,
         ]);
 

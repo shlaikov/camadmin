@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Enums\DiagramEnum;
 use App\Models\Diagram;
 use App\Repository\Eloquent\ProjectRepository;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class ProjectController extends Controller
 {
@@ -16,7 +21,7 @@ class ProjectController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(): InertiaResponse
     {
         $teamId = request()->user()->currentTeam->id;
         $paginator = Diagram::where('team_id', $teamId)
@@ -28,14 +33,14 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): InertiaResponse
     {
         return Inertia::render('Diagram/Create', [
             'diagram_types' => $this->projectRepository->getDiagramTypes()
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $user = $request->user();
         $type = new DiagramEnum($request->type);
@@ -53,7 +58,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function import(Request $request)
+    public function import(Request $request): JsonResponse
     {
         return $this->projectRepository->importFile($request);
     }

@@ -32,5 +32,7 @@ jobs:
       - name: Make database migration
         run: |
           php artisan migrate
+      - name: Scan whole codebase via PHPStan
+        run: vendor/bin/phpstan analyse --no-progress
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: vendor/bin/phpunit --no-interaction

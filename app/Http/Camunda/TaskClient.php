@@ -21,7 +21,7 @@ class TaskClient extends CamundaClient
     }
 
     /**
-     * @param  string  $processInstanceId
+     * @param  string $id
      *
      * @return Task[]
      */

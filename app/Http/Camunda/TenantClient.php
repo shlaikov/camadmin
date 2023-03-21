@@ -33,10 +33,7 @@ class TenantClient extends CamundaClient
 
     public static function create(array $params = []): bool
     {
-        $response = self::make()->post(
-            "tenant/create",
-            compact('id', 'name')
-        );
+        $response = self::make()->post("tenant/create", $params);
 
         if ($response->status() === 204) {
             return true;
@@ -45,7 +42,7 @@ class TenantClient extends CamundaClient
         throw new CamundaException($response->body(), $response->status());
     }
 
-    public static function delete(string $id, bool $cascade = false)
+    public static function delete(string $id, bool $cascade = false): bool
     {
         $response = self::make()->delete("tenant/{$id}");
 

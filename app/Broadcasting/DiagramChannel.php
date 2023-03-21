@@ -21,11 +21,11 @@ class DiagramChannel
      * Authenticate the user's access to the channel.
      *
      * @param \App\Models\User $user
-     * @param \App\Models\Process $diagram
+     * @param \App\Models\Diagram $diagram
      *
      * @return array|bool
      */
-    public function join(User $user, Diagram $diagram)
+    public function join(User $user, Diagram $diagram): array|bool
     {
         return $user->currentTeam->id === $diagram->team_id;
     }

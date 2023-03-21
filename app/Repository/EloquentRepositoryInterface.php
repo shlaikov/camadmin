@@ -17,14 +17,16 @@ interface EloquentRepositoryInterface
     public function all(): Collection;
 
     /**
-     * @param array $attributes
+     * @param array<int, mixed> $attributes
+     * 
      * @return Model
      */
     public function create(array $attributes): Model;
 
     /**
-     * @param $id
-     * @return Model
+     * @param string $id
+     * 
+     * @return Model|null
      */
-    public function find($id): ?Model;
+    public function find(string $id): ?Model;
 }

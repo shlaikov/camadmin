@@ -7,9 +7,9 @@ use InvalidArgumentException;
 
 abstract class AbstractEnum
 {
-    private $value;
+    private mixed $value;
 
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         if (!in_array($value, $this->getValues())) {
             throw new InvalidArgumentException;
@@ -18,17 +18,17 @@ abstract class AbstractEnum
         $this->value = $value;
     }
 
-    public static function getConstants()
+    public static function getConstants(): mixed
     {
         return array_keys((new ReflectionClass(get_called_class()))->getConstants());
     }
 
-    public static function getValues()
+    public static function getValues(): mixed
     {
         return array_values((new ReflectionClass(get_called_class()))->getConstants());
     }
 
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
