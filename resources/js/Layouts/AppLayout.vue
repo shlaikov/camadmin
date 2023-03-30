@@ -13,15 +13,22 @@ import { useInstanceStore } from '@/Stores/instance'
 const instanceStore = useInstanceStore()
 
 const instances = computed(() => instanceStore.instances)
+const isMounted = computed(() => instanceStore.mounted)
 
 defineProps({
   title: String,
 })
 
 onMounted(() => {
-  instances.value.forEach((instance) => {
-    instanceStore.fetchDefenitions(instance.id)
-  })
+  if (instances.value && !isMounted.value) {
+    instances.value.forEach((instance) => {
+      instanceStore.fetchDefenitions(instance.id)
+    })
+
+    instanceStore.$patch((state) => {
+      state.mounted = true
+    })
+  }
 })
 
 const showingNavigationDropdown = ref(false)

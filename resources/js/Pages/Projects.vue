@@ -116,7 +116,7 @@ const { uploadFiles } = createUploader(route('diagram.import'))
                         multiple
                         @change="onInputChange"
                       />
-                      <p class="mt-1 text-sm text-gray-500">BPMN (MAX. 400MB).</p>
+                      <p class="mt-1 text-sm text-gray-500">file (MAX. 400MB).</p>
                     </div>
                     <ul class="image-list">
                       <FilePreview

@@ -9,6 +9,7 @@ export const useInstanceStore = defineStore('instance', {
     return {
       /** @type {{ name: string, id: number, url: string }[]} */
       instances: usePage().props.instances,
+      mounted: false,
     }
   },
   getters: {
@@ -17,6 +18,7 @@ export const useInstanceStore = defineStore('instance', {
     },
     instanceStatistics: (state) => {
       let runningInstances = 0,
+        incidents = 0,
         failedJobs = 0
 
       state.instances.forEach((instance) => {
@@ -26,11 +28,12 @@ export const useInstanceStore = defineStore('instance', {
 
         instance.statistics.forEach((i) => {
           runningInstances += i.instances
+          incidents += i.incidents
           failedJobs += i.failedJobs
         })
       })
 
-      return { runningInstances, failedJobs }
+      return { runningInstances, failedJobs, incidents }
     },
   },
   actions: {

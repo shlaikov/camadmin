@@ -18,35 +18,40 @@ function mergeDefenitions(processes) {
   const result = new Array()
 
   const mergedProcesses = processes.reduce((acc, data) => {
-    const { id, definition, instances, failedJobs } = data
+    const { id, definition, instances, failedJobs, incidents } = data
     const { key, name, deploymentId } = definition
 
     acc[key] ??= {
-      '@class': data['@class'],
       key,
+      '@class': data['@class'],
       name,
       versions: [],
       definitions: [],
       instances: 0,
       failedJobs: 0,
+      incidents: 0,
       diagram: null,
     }
 
+    acc[key].definitions.push(definition)
     acc[key].versions.push({
       id,
       version: definition.versionTag,
       deploymentId,
       resource: definition.resource,
     })
-    acc[key].definitions.push(definition)
+
     acc[key].instances += instances
     acc[key].failedJobs += failedJobs
+    acc[key].incidents += incidents.length
+
     acc[key].diagram = {
       id,
       name: definition.name,
       url: `process-definition/${id}/xml`,
       type: getDiagramTypeByCategory(definition.category),
       runningInstances: acc[key].instances,
+      incidents: acc[key].incidents,
       failedJobs: acc[key].failedJobs,
     }
 
