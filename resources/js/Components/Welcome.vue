@@ -22,15 +22,15 @@ const { instanceStatistics } = storeToRefs(instanceStore)
       <div>
         <JetApplicationLogo class="block h-12 w-auto" />
         <div class="inline-block mt-8 text-xl">
-          Welcome,
+          {{ __('welcome') }},
           <span class="rounded-full ring-2 ring-white">
             <img
               class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
               :src="user.profile_photo_url"
               :alt="user.name"
             />
-            {{ user.name }}</span
-          >
+            {{ user.name }}
+          </span>
         </div>
       </div>
 

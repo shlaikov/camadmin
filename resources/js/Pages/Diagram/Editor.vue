@@ -20,8 +20,8 @@ if (diagram.value.category) {
   diagram.value = definitions(diagram.value)
 }
 </script>
-
-<template>
+// Without ssr page
+<template v-if="typeof window !== 'undefined'">
   <AppLayout title="Projects">
     <div class="py-12 relative">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

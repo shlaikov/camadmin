@@ -7,9 +7,9 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createPinia } from 'pinia'
 
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
+import mixinBase from './base'
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
-
 /* global Ziggy */
 createInertiaApp({
   title: (title) => `${title} | ${appName}`,
@@ -23,6 +23,7 @@ createInertiaApp({
       .use(plugin)
       .use(ZiggyVue, Ziggy)
       .use(createPinia())
+      .mixin(mixinBase)
       .mount(el)
   },
 })

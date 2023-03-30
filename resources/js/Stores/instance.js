@@ -46,18 +46,18 @@ export const useInstanceStore = defineStore('instance', {
 
         console.error(`Connection error with "${instance.url}" service`)
 
-        return error
+        return false
       }
     },
     async fetchDefenitions(instanceId) {
       const instance = this.getInstanceById(instanceId)
 
-      if (instance.error) {
-        return
-      }
-
       try {
         const version = await this.getVersion(instanceId)
+
+        if (instance.error || !version) {
+          return
+        }
 
         camundaApi()
           .get(`${instance.id}/process-definition/statistics`, {

@@ -1,0 +1,23 @@
+{
+  "welcome": "Welcome",
+  "welcome.rate_us": "Star this project on GitHub",
+  "welcome.rate_us.action": "View more →",
+
+  "header.menu.dashboard": "Dashboard",
+  "header.menu.instances": "Instances",
+  "header.menu.instances.create": "Add new camunda instance",
+  "header.menu.projects": "Projects",
+  "header.main_dropdown.manage_team": "Manage Team",
+  "header.main_dropdown.team_settings": "Team Settings",
+  "header.main_dropdown.manage_team.create": "Create New Team",
+  "header.main_dropdown.switch_teams": "Switch Teams",
+  "header.user_dropdown.manage_account": "Manage Account",
+  "header.user_dropdown.profile": "Profile",
+  "header.user_dropdown.api_tokens": "API Tokens",
+  "header.user_dropdown.logout": "Log Out",
+
+  "footer.about": "About",
+  "footer.github": "Github",
+  "footer.roadmap": "Roadmap",
+  "footer.twitter": "Twitter"
+}

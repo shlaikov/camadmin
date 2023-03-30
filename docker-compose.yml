@@ -15,6 +15,7 @@ services:
     ports:
       - '${APP_PORT:-80}:80'
       - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+      - '${VITE_INERTIA_SSR_PORT:-13714}:${VITE_INERTIA_SSR_PORT:-13714}'
       - '${SAIL_XDEBUG_PORT:-9003}:${SAIL_XDEBUG_PORT:-9003}'
     environment:
       WWWUSER: '${WWWUSER:-1000}'

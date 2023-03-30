@@ -5,7 +5,6 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CamundaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstanceController;
-use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn () => redirect('/dashboard'));
+Route::get('/', fn () => redirect('/dashboard'))->name('main');
+
+// Route::get('/language/{locale}', function ($locale) {
+//     app()->setLocale($locale);
+//     session()->put('locale', $locale);
+
+//     return redirect()->back();
+// })->name('language');
 
 Route::middleware([
     'auth:sanctum',

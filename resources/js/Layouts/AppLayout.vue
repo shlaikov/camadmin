@@ -65,7 +65,7 @@ const logout = () => {
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                  Dashboard
+                  {{ __('header.menu.dashboard') }}
                 </JetNavLink>
 
                 <JetNavLink>
@@ -75,7 +75,7 @@ const logout = () => {
                         class="flex items-center gap-x-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300"
                         aria-expanded="false"
                       >
-                        Instances
+                        {{ __('header.menu.instances') }}
                         <svg
                           class="h-5 w-5 flex-none text-gray-400"
                           viewBox="0 0 20 20"
@@ -117,7 +117,7 @@ const logout = () => {
                                 d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
                               />
                             </svg>
-                            Add new camunda instance
+                            {{ __('header.menu.instances.create') }}
                           </a>
                         </template>
                       </div>
@@ -126,7 +126,7 @@ const logout = () => {
                 </JetNavLink>
 
                 <JetNavLink :href="route('projects')" :active="route().current('projects')">
-                  Projects
+                  {{ __('header.menu.projects') }}
                 </JetNavLink>
               </div>
             </div>
@@ -163,24 +163,28 @@ const logout = () => {
                     <div class="w-60">
                       <!-- Team Management -->
                       <template v-if="$page.props.jetstream.hasTeamFeatures">
-                        <div class="block px-4 py-2 text-xs text-gray-400">Manage Team</div>
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                          {{ __('header.main_dropdown.manage_team') }}
+                        </div>
 
                         <!-- Team Settings -->
                         <JetDropdownLink :href="route('teams.show', $page.props.user.current_team)">
-                          Team Settings
+                          {{ __('header.main_dropdown.team_settings') }}
                         </JetDropdownLink>
 
                         <JetDropdownLink
                           v-if="$page.props.jetstream.canCreateTeams"
                           :href="route('teams.create')"
                         >
-                          Create New Team
+                          {{ __('header.main_dropdown.manage_team.create') }}
                         </JetDropdownLink>
 
                         <div class="border-t border-gray-100" />
 
                         <!-- Team Switcher -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">Switch Teams</div>
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                          {{ __('header.main_dropdown.switch_teams') }}
+                        </div>
 
                         <template v-for="team in $page.props.user.all_teams" :key="team.id">
                           <form @submit.prevent="switchToTeam(team)">
@@ -249,22 +253,28 @@ const logout = () => {
 
                   <template #content>
                     <!-- Account Management -->
-                    <div class="block px-4 py-2 text-xs text-gray-400">Manage Account</div>
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                      {{ __('header.user_dropdown.manage_account') }}
+                    </div>
 
-                    <JetDropdownLink :href="route('profile.show')"> Profile </JetDropdownLink>
+                    <JetDropdownLink :href="route('profile.show')">
+                      {{ __('header.user_dropdown.profile') }}
+                    </JetDropdownLink>
 
                     <JetDropdownLink
                       v-if="$page.props.jetstream.hasApiFeatures"
                       :href="route('api-tokens.index')"
                     >
-                      API Tokens
+                      {{ __('header.user_dropdown.api_tokens') }}
                     </JetDropdownLink>
 
                     <div class="border-t border-gray-100" />
 
                     <!-- Authentication -->
                     <form @submit.prevent="logout">
-                      <JetDropdownLink as="button"> Log Out </JetDropdownLink>
+                      <JetDropdownLink as="button">
+                        {{ __('header.user_dropdown.logout') }}
+                      </JetDropdownLink>
                     </form>
                   </template>
                 </JetDropdown>
@@ -311,10 +321,10 @@ const logout = () => {
         >
           <div class="pt-2 pb-3 space-y-1">
             <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-              Dashboard
+              {{ __('header.menu.dashboard') }}
             </JetResponsiveNavLink>
             <JetResponsiveNavLink :href="route('projects')" :active="route().current('projects')">
-              Projects
+              {{ __('header.menu.projects') }}
             </JetResponsiveNavLink>
           </div>
 
@@ -344,7 +354,7 @@ const logout = () => {
                 :href="route('profile.show')"
                 :active="route().current('profile.show')"
               >
-                Profile
+                {{ __('header.user_dropdown.profile') }}
               </JetResponsiveNavLink>
 
               <JetResponsiveNavLink
@@ -352,26 +362,30 @@ const logout = () => {
                 :href="route('api-tokens.index')"
                 :active="route().current('api-tokens.index')"
               >
-                API Tokens
+                {{ __('header.user_dropdown.api_tokens') }}
               </JetResponsiveNavLink>
 
               <!-- Authentication -->
               <form method="POST" @submit.prevent="logout">
-                <JetResponsiveNavLink as="button"> Log Out </JetResponsiveNavLink>
+                <JetResponsiveNavLink as="button">
+                  {{ __('header.user_dropdown.logout') }}
+                </JetResponsiveNavLink>
               </form>
 
               <!-- Team Management -->
               <template v-if="$page.props.jetstream.hasTeamFeatures">
                 <div class="border-t border-gray-200" />
 
-                <div class="block px-4 py-2 text-xs text-gray-400">Manage Team</div>
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                  {{ __('header.main_dropdown.manage_team') }}
+                </div>
 
                 <!-- Team Settings -->
                 <JetResponsiveNavLink
                   :href="route('teams.show', $page.props.user.current_team)"
                   :active="route().current('teams.show')"
                 >
-                  Team Settings
+                  {{ __('header.main_dropdown.team_settings') }}
                 </JetResponsiveNavLink>
 
                 <JetResponsiveNavLink
@@ -379,13 +393,15 @@ const logout = () => {
                   :href="route('teams.create')"
                   :active="route().current('teams.create')"
                 >
-                  Create New Team
+                  {{ __('header.main_dropdown.manage_team.create') }}
                 </JetResponsiveNavLink>
 
                 <div class="border-t border-gray-200" />
 
                 <!-- Team Switcher -->
-                <div class="block px-4 py-2 text-xs text-gray-400">Switch Teams</div>
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                  {{ __('header.main_dropdown.switch_teams') }}
+                </div>
 
                 <template v-for="team in $page.props.user.all_teams" :key="team.id">
                   <form @submit.prevent="switchToTeam(team)">
@@ -434,27 +450,33 @@ const logout = () => {
               <a
                 href="#"
                 class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
-                >About</a
               >
+                {{ __('footer.about') }}
+              </a>
               <a
                 href="#"
                 class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
-                >Github</a
               >
+                {{ __('footer.github') }}
+              </a>
               <a
                 href="#"
                 class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
-                >Roadmap</a
               >
+                {{ __('footer.roadmap') }}
+              </a>
               <a
                 href="#"
                 class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
-                >Twitter</a
               >
+                {{ __('footer.twitter') }}
+              </a>
             </nav>
 
-            <div>
-              <p class="text-gray-500">v{{ $page.props.app_version }}</p>
+            <div class="flex">
+              <!-- <LanguageSelector /> -->
+
+              <p class="ml-3 text-gray-500">v{{ $page.props.app_version }}</p>
             </div>
           </div>
         </div>

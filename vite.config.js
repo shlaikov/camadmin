@@ -35,9 +35,9 @@ export default defineConfig(({ command }) => ({
     },
   },
   ssr: {
-    noExternal: ['@inertiajs/vue3/server'],
+    noExternal: ['laravel-vite-plugin', '@inertiajs/vue3/server'],
   },
   optimizeDeps: {
-    include: ['@inertiajs/vue3', 'axios', 'vue', 'ziggy'],
+    include: ['@inertiajs/vue3', 'axios', 'vue', 'ziggy', 'pinia'],
   },
 }))

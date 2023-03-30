@@ -6,24 +6,28 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createPinia } from 'pinia'
 
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
+import mixinBase from './base'
 
 const appName = 'Laravel'
 
-createServer((page) =>
-  createInertiaApp({
-    page,
-    render: renderToString,
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
-      resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
-    setup({ app, props, plugin }) {
-      return createSSRApp({ render: () => h(app, props) })
-        .use(plugin)
-        .use(ZiggyVue, {
-          ...page.props.ziggy,
-          location: new URL(page.props.ziggy.location),
-        })
-        .use(createPinia())
-    },
-  })
+createServer(
+  (page) =>
+    createInertiaApp({
+      page,
+      render: renderToString,
+      title: (title) => `${title} | ${appName}`,
+      resolve: (name) =>
+        resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+      setup({ App, props, plugin }) {
+        return createSSRApp({ render: () => h(App, props) })
+          .use(plugin)
+          .use(ZiggyVue, {
+            ...page.props.ziggy,
+            location: new URL(page.props.ziggy.location),
+          })
+          .use(createPinia())
+          .mixin(mixinBase)
+      },
+    }),
+  process.env.VITE_INERTIA_SSR_PORT || 13714
 )
