@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InstanceController;
+use App\Http\Controllers\CamundaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', fn (Request $request) => $request->user());
+
+    Route::prefix('instances')->group(function () {
+        Route::get('/', [InstanceController::class, 'index']);
+        Route::any('/camunda/{id}/{request}', CamundaController::class)
+            ->where('id', '[0-9]+')
+            ->where('request', '.*');
+    });
 });
