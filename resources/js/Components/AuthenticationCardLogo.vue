@@ -4,15 +4,28 @@ import { Link } from '@inertiajs/vue3'
 
 <template>
   <Link :href="'/'">
-    <svg class="w-16 h-16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z"
-        fill="#6875F5"
-      />
-      <path
-        d="M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z"
-        fill="#6875F5"
-      />
+    <svg class="w-16 h-16" viewBox="40 130 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient
+          id="dba43b13-9a11-4c33-a88e-6e7d86c515e8"
+          gradientTransform="rotate(25)"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
+          <stop offset="0%" stop-color="#3616AC" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#E09BED" stop-opacity="1"></stop>
+        </linearGradient>
+      </defs>
+      <g
+        stroke="none"
+        fill="url(#dba43b13-9a11-4c33-a88e-6e7d86c515e8)"
+        transform="matrix(1.1330647015550575,0,0,1.1330647015550575,40,131.8709647751191)"
+      >
+        <path d="M9.571 20.464l8.064 4.47 8.065-4.47v-8.939l-8.065-4.469-8.064 4.469z"></path>
+        <path d="M32 0H0v32h32l-5.054-5.172H5.054V5.172h21.892z"></path>
+      </g>
     </svg>
   </Link>
 </template>

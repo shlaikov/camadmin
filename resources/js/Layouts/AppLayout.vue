@@ -456,25 +456,25 @@ const logout = () => {
             <nav class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 md:gap-6">
               <a
                 href="#"
-                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
               >
                 {{ __('footer.about') }}
               </a>
               <a
                 href="#"
-                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
               >
                 {{ __('footer.github') }}
               </a>
               <a
                 href="#"
-                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
               >
                 {{ __('footer.roadmap') }}
               </a>
               <a
                 href="#"
-                class="text-gray-500 hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
               >
                 {{ __('footer.twitter') }}
               </a>

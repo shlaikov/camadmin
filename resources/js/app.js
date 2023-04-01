@@ -9,12 +9,12 @@ import { createPinia } from 'pinia'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 import mixinBase from './base'
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Camadmin'
 /* global Ziggy */
 createInertiaApp({
   title: (title) => `${title} | ${appName}`,
   progress: {
-    color: '#4B5563',
+    color: '#4c1d95',
   },
   resolve: (name) =>
     resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),

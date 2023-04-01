@@ -1,9 +1,9 @@
 {
-  "name": "bpmn-hub/bpmn-hub",
+  "name": "camadmin/camadmin",
   "type": "project",
-  "description": "The Laravel Framework.",
+  "description": "The Camadmin tool for manage your business process.",
   "keywords": [
-    "platform",
+    "camadmin",
     "bpmn",
     "dmn",
     "cmmn",

@@ -25,7 +25,7 @@ export default defineComponent({
         <InertiaLink
           v-else
           class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white focus:border-primary focus:text-primary"
-          :class="{ 'bg-indigo-500 text-white': link.active }"
+          :class="{ 'bg-violet-500 text-white': link.active }"
           :href="link.url"
           v-html="link.label"
         />

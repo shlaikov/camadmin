@@ -9,9 +9,9 @@ import Welcome from '@/Components/Welcome.vue'
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
     </template>
 
-    <div class="mt-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <!-- <div class="mt-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
       <a
-        class="flex items-center justify-between p-4 text-sm font-semibold text-white bg-indigo-500 hover:bg-indigo-400 rounded-lg shadow-md transition"
+        class="flex items-center justify-between p-4 text-sm font-semibold text-white bg-violet-500 hover:bg-violet-400 rounded-lg shadow-md transition"
         href="https://github.com/estevanmaito/windmill-dashboard"
       >
         <div class="flex items-center">
@@ -24,7 +24,7 @@ import Welcome from '@/Components/Welcome.vue'
         </div>
         <span>View more →</span>
       </a>
-    </div>
+    </div> -->
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -85,7 +85,7 @@ onMounted(() => {
                     v-model="form.description"
                     name="description"
                     rows="4"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-violet-500 focus:border-violet-500"
                     placeholder="Write your description here..."
                   />
                   <button

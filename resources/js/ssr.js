@@ -8,7 +8,7 @@ import { createPinia } from 'pinia'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 import mixinBase from './base'
 
-const appName = 'Laravel'
+const appName = 'Camadmin'
 
 createServer(
   (page) =>
