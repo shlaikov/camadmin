@@ -20,6 +20,8 @@ return [
 
     'version' => InstalledVersions::getRootPackage()['pretty_version'],
 
+    'latest_hash' => trim(exec('git log --pretty="%h" -n1 HEAD')),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

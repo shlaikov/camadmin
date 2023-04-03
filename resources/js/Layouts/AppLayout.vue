@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { router, Head, Link } from '@inertiajs/vue3'
 
+import Footer from './Footer.vue'
 import JetApplicationMark from '@/Components/ApplicationMark.vue'
 import JetBanner from '@/Components/Banner.vue'
 import JetDropdown from '@/Components/Dropdown.vue'
@@ -450,44 +451,7 @@ const logout = () => {
       </main>
 
       <!-- Page Footer -->
-      <footer class="bg-white max-w border-t text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex flex-col md:flex-row justify-between items-center gap-4 py-2">
-            <nav class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 md:gap-6">
-              <a
-                href="#"
-                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
-              >
-                {{ __('footer.about') }}
-              </a>
-              <a
-                href="#"
-                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
-              >
-                {{ __('footer.github') }}
-              </a>
-              <a
-                href="#"
-                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
-              >
-                {{ __('footer.roadmap') }}
-              </a>
-              <a
-                href="#"
-                class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100"
-              >
-                {{ __('footer.twitter') }}
-              </a>
-            </nav>
-
-            <div class="flex">
-              <!-- <LanguageSelector /> -->
-
-              <p class="ml-3 text-gray-500">v{{ $page.props.app_version }}</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   </div>
 </template>

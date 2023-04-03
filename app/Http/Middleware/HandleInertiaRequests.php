@@ -43,6 +43,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'name' => config('app.name'),
             'app_version' => config('app.version'),
+            'latest_hash' => config('app.latest_hash'),
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
