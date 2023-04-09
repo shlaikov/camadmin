@@ -2,36 +2,42 @@
 {
   "name": "Application",
   "dockerComposeFile": ["../docker-compose.yml"],
-  "settings": {
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[php]": {
-      "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-    },
-    "files.saveConflictResolution": "overwriteFileOnDisk"
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[php]": {
+          "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+        },
+        "files.saveConflictResolution": "overwriteFileOnDisk"
+      },
+      "extensions": [
+        "mikestead.dotenv",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "ryannaddy.laravel-artisan",
+        "onecentlin.laravel5-snippets",
+        "onecentlin.laravel-blade",
+        "xdebug.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "open-southeners.laravel-pint",
+        "marabesi.php-import-checker",
+        "Vue.volar",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "csstools.postcss",
+        "donjayamanne.githistory",
+        "bradlc.vscode-tailwindcss",
+        "ms-azuretools.vscode-docker",
+        "wix.vscode-import-cost"
+      ]
+    }
   },
   "service": "laravel.test",
   "workspaceFolder": "/var/www/html",
-  "extensions": [
-	"mikestead.dotenv",
-	"amiralizadeh9480.laravel-extra-intellisense",
-	"ryannaddy.laravel-artisan",
-	"onecentlin.laravel5-snippets",
-	"onecentlin.laravel-blade",
-	"xdebug.php-debug",
-	"bmewburn.vscode-intelephense-client",
-	"open-southeners.laravel-pint",
-	"marabesi.php-import-checker",
-	"Vue.volar",
-	"esbenp.prettier-vscode",
-	"dbaeumer.vscode-eslint",
-	"csstools.postcss",
-	"donjayamanne.githistory",
-	"bradlc.vscode-tailwindcss"
-],
   "remoteUser": "sail",
   "postCreateCommand": "chown -R 1000:1000 /var/www/html"
 }
