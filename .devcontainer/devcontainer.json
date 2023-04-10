@@ -2,6 +2,7 @@
 {
   "name": "Application",
   "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "camadmin",
   "customizations": {
     "vscode": {
       "settings": {
@@ -36,7 +37,6 @@
       ]
     }
   },
-  "service": "laravel.test",
   "workspaceFolder": "/var/www/html",
   "remoteUser": "sail",
   "postCreateCommand": "chown -R 1000:1000 /var/www/html"

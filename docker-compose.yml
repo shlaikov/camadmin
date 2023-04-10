@@ -1,6 +1,6 @@
 version: '3'
 services:
-  laravel.test:
+  camadmin:
     build:
       context: ./.devcontainer
       dockerfile: Dockerfile
@@ -90,8 +90,6 @@ services:
     image: camunda/camunda-bpm-platform:run-latest
     ports:
       - '8080:8080'
-    volumes:
-      - './.devcontainer/camunda-web-config.xml:/camunda/webapps/engine-rest/WEB-INF/web.xml'
     networks:
       - sail
 networks:
