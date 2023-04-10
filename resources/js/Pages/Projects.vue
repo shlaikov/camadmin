@@ -40,7 +40,7 @@ const { uploadFiles } = createUploader(route('diagram.import'))
                 <Link
                   v-show="!files.length"
                   :href="route('diagram.create')"
-                  class="hover:bg-violet-400 group flex items-center rounded-md bg-violet-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm transition"
+                  class="hover:bg-secondary group flex items-center rounded-md bg-primary text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm transition"
                 >
                   <svg width="20" height="20" fill="currentColor" class="mr-2" aria-hidden="true">
                     <path

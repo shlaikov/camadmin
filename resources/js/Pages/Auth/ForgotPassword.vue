@@ -34,7 +34,7 @@ const submit = () => {
       password reset link that will allow you to choose a new one.
     </div>
 
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+    <div v-if="status" class="mb-4 font-medium text-sm text-success">
       {{ status }}
     </div>
 

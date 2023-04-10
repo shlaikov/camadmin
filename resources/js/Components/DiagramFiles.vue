@@ -61,13 +61,13 @@ const onRowClick = (row) => {
       </span>
       <span
         v-if="file.runningInstances"
-        class="bg-green-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+        class="bg-success text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
       >
         {{ file.runningInstances }} in process
       </span>
       <span
         v-if="file.failedJobs"
-        class="bg-red-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+        class="bg-error text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
       >
         {{ file.failedJobs }} failed
       </span>

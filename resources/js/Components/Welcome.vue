@@ -39,7 +39,7 @@ const { instanceStatistics } = storeToRefs(instanceStore)
           <div>
             <span
               class="inline-flex items-center justify-center p-2 bg-gray-200 rounded-md shadow-lg"
-              :class="{ 'bg-green-200': instanceStatistics.runningInstances > 0 }"
+              :class="{ 'bg-success': instanceStatistics.runningInstances > 0 }"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +128,7 @@ const { instanceStatistics } = storeToRefs(instanceStore)
             <h2 class="font-semibold text-slate-900">Projects</h2>
             <a
               :href="route('instances.create')"
-              class="hover:bg-violet-400 group flex items-center rounded-md bg-violet-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm transition"
+              class="hover:bg-secondary group flex items-center rounded-md bg-primary text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm transition"
             >
               <svg width="20" height="20" fill="currentColor" class="mr-2" aria-hidden="true">
                 <path
@@ -153,7 +153,7 @@ const { instanceStatistics } = storeToRefs(instanceStore)
               />
             </svg>
             <input
-              class="w-full text-sm leading-6 text-slate-900 placeholder-slate-400 py-2 pl-10 border-gray-300 focus:border-violet-300 focus:ring focus:ring-violet-200 focus:ring-opacity-50 rounded-md shadow-sm"
+              class="w-full text-sm leading-6 text-slate-900 placeholder-slate-400 py-2 pl-10 border-gray-300 focus:border-secondary focus:ring focus:ring-primary-200 focus:ring-opacity-50 rounded-md shadow-sm"
               type="text"
               aria-label="Filter projects"
               placeholder="Filter projects..."
@@ -166,27 +166,27 @@ const { instanceStatistics } = storeToRefs(instanceStore)
           <li v-for="instance in instances" :key="instance.id" class="flex">
             <a
               :href="route('instances.show', instance.id)"
-              class="w-full border-gray-300 focus:ring focus:ring-violet-200 focus:ring-opacity-50 group rounded-md p-3 bg-white ring-1 ring-slate-200 shadow-sm transition"
+              class="w-full border-gray-300 focus:ring focus:ring-secondary focus:ring-opacity-50 group rounded-md p-3 bg-white ring-1 ring-slate-200 shadow-sm transition"
               :class="{
-                'hover:shadow-md focus:border-violet-300 ': !instance.error,
-                'bg-red-200 focus:ring-red-200': instance.error,
+                'hover:shadow-md focus:border-secondary': !instance.error,
+                'bg-error focus:ring-error-lighter': instance.error,
               }"
             >
               <dl class="grid sm:block lg:grid xl:block grid-cols-2 grid-rows-2 items-center">
                 <div>
                   <dt class="sr-only">Title</dt>
-                  <dd class="group-hover:text-violet-800 font-semibold text-slate-900">
+                  <dd class="group-hover:text-primary font-semibold text-slate-900">
                     {{ instance.name }}
                   </dd>
                 </div>
                 <div>
                   <dt class="sr-only">Url</dt>
-                  <dd class="group-hover:text-violet-800">{{ instance.url }}</dd>
+                  <dd class="group-hover:text-primary">{{ instance.url }}</dd>
                 </div>
 
                 <div v-if="instance.error">
                   <span
-                    class="bg-red-300 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+                    class="bg-error text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -207,7 +207,7 @@ const { instanceStatistics } = storeToRefs(instanceStore)
                 <div v-else>
                   <span
                     v-if="instance.statistics && instance.statistics.length > 0"
-                    class="bg-green-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
+                    class="bg-success text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
                   >
                     {{ instance.statistics.reduce((sum, i) => sum + i.instances, 0) }}
                     in process
@@ -216,8 +216,7 @@ const { instanceStatistics } = storeToRefs(instanceStore)
                     v-if="instance.statistics && instance.statistics.length > 0"
                     class="bg-slate-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded ml-0 mr-2"
                     :class="{
-                      'bg-red-100':
-                        instance.statistics.reduce((sum, i) => sum + i.failedJobs, 0) > 0,
+                      'bg-error': instance.statistics.reduce((sum, i) => sum + i.failedJobs, 0) > 0,
                     }"
                   >
                     {{ instance.statistics.reduce((sum, i) => sum + i.failedJobs, 0) }} failed
@@ -229,10 +228,10 @@ const { instanceStatistics } = storeToRefs(instanceStore)
           <li class="flex">
             <a
               :href="route('instances.create')"
-              class="hover:border-violet-500 hover:border-solid hover:bg-white group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3 transition"
+              class="hover:border-secondary hover:border-solid hover:bg-white group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3 transition"
             >
               <svg
-                class="group-hover:text-violet-500 mb-1 text-slate-400"
+                class="group-hover:text-primary mb-1 text-slate-400"
                 width="20"
                 height="20"
                 fill="currentColor"

@@ -24,7 +24,7 @@ const isEditMode = ref(!instance.description)
 const logs = ref([])
 
 const form = useForm({
-  description: instance.description,
+  description: instance.description || '',
   version: instance.version,
 })
 
@@ -85,7 +85,7 @@ onMounted(() => {
                     v-model="form.description"
                     name="description"
                     rows="4"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-violet-500 focus:border-violet-500"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-secondary focus:border-secondary"
                     placeholder="Write your description here..."
                   />
                   <button
@@ -96,7 +96,7 @@ onMounted(() => {
                   </button>
                 </dd>
                 <dd v-else class="relative mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  {{ $page.props.instance.description }}
+                  {{ instance.description }}
                   <div class="absolute bottom-0 right-0" @click="isEditMode = true">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

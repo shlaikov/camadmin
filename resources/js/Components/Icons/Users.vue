@@ -5,7 +5,7 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     stroke-width="2"
-    class="text-violet-500 w-12 h-12 mb-3 inline-block"
+    class="text-primary w-12 h-12 mb-3 inline-block"
     viewBox="0 0 24 24"
   >
     <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>

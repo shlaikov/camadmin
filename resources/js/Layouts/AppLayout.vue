@@ -200,7 +200,7 @@ const logout = () => {
                               <div class="flex items-center">
                                 <svg
                                   v-if="team.id == $page.props.user.current_team_id"
-                                  class="mr-2 h-5 w-5 text-green-400"
+                                  class="mr-2 h-5 w-5 text-success"
                                   fill="none"
                                   stroke-linecap="round"
                                   stroke-linejoin="round"
@@ -417,7 +417,7 @@ const logout = () => {
                       <div class="flex items-center">
                         <svg
                           v-if="team.id == $page.props.user.current_team_id"
-                          class="mr-2 h-5 w-5 text-green-400"
+                          class="mr-2 h-5 w-5 text-success"
                           fill="none"
                           stroke-linecap="round"
                           stroke-linejoin="round"

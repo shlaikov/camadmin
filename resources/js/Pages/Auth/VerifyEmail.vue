@@ -32,7 +32,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
       to you? If you didn't receive the email, we will gladly send you another.
     </div>
 
-    <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-green-600">
+    <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-success">
       A new verification link has been sent to the email address you provided in your profile
       settings.
     </div>

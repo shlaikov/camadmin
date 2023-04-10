@@ -13,26 +13,26 @@ const isAboutModalShow = ref(false)
       <div class="flex flex-col md:flex-row justify-between items-center gap-4 py-2">
         <nav class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2 md:gap-6">
           <a
-            class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100 cursor-pointer"
+            class="text-gray-500 hover:text-primary active:text-primary transition duration-100 cursor-pointer"
             @click="isAboutModalShow = true"
           >
             {{ __('footer.about') }}
           </a>
           <a
             href="#"
-            class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100 cursor-pointer"
+            class="text-gray-500 hover:text-secondary active:text-primary transition duration-100 cursor-pointer"
           >
             {{ __('footer.github') }}
           </a>
           <a
             href="#"
-            class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100 cursor-pointer"
+            class="text-gray-500 hover:text-secondary active:text-primary transition duration-100 cursor-pointer"
           >
             {{ __('footer.roadmap') }}
           </a>
           <a
             href="#"
-            class="text-gray-500 hover:text-violet-500 active:text-violet-600 transition duration-100 cursor-pointer"
+            class="text-gray-500 hover:text-secondary active:text-primary transition duration-100 cursor-pointer"
           >
             {{ __('footer.twitter') }}
           </a>
@@ -63,8 +63,8 @@ const isAboutModalShow = ref(false)
 
         <div class="w-full">
           <a
-            class="flex items-center justify-between p-4 text-sm font-semibold text-white bg-violet-500 hover:bg-violet-400 rounded-lg shadow-md transition"
-            href="https://github.com/estevanmaito/windmill-dashboard"
+            class="flex items-center justify-between p-4 text-sm font-semibold text-white bg-primary hover:bg-secondary rounded-lg shadow-md transition"
+            href="https://github.com/shlaikov/camadmin"
           >
             <div class="flex items-center">
               <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">

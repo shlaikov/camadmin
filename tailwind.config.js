@@ -29,6 +29,15 @@ module.exports = {
       fontFamily: {
         sans: ['Arimo', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        primary: '#6c5ce7',
+        secondary: '#a29bfe',
+        'warning-lighter': '#f1c40f',
+        warning: '#f39c12',
+        'error-lighter': '#fab1a0',
+        error: '#e17055',
+        success: '#55efc4',
+      },
     },
   },
 
