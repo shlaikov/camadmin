@@ -37,7 +37,9 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'keycloak-web',
+            'driver' => env('KEYCLOAK_CLIENT_SECRET')
+                ? 'keycloak-web'
+                : 'session',
             'provider' => 'users',
         ],
     ],
