@@ -7,7 +7,7 @@ namespace App\Http\Camunda;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use App\Models\Instance;
-use App\Repository\Services\CamundaRepository;
+use App\Repository\Services\CamundaService;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 abstract class CamundaClient implements ClientInterface
@@ -50,6 +50,6 @@ abstract class CamundaClient implements ClientInterface
 
     protected static function makeIdentifierPath(string $path, array $args): string
     {
-        return CamundaRepository::makeIdentifierPath($path, $args);
+        return CamundaService::makeIdentifierPath($path, $args);
     }
 }

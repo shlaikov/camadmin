@@ -33,6 +33,12 @@ class CreateAdmin extends Command
             return Command::INVALID;
         }
 
+        if (config('keycloak-web.client_secret')) {
+            $this->info("You can only create a user via Keyclock");
+
+            return Command::INVALID;
+        }
+
         try {
             $email = $this->ask('Enter your email');
 

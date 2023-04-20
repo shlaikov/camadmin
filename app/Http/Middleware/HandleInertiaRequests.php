@@ -51,6 +51,7 @@ class HandleInertiaRequests extends Middleware
             },
             'instances' => fn () => $request->user() ? Instance::all() : null,
             'available_locales' => config('app.available_locales'),
+            'has_keycloak' => config()->has('keycloak-web.client_secret'),
             'locale' => fn () => $locale,
             'language' => function () use ($locale) {
                 $path = base_path('lang/' . $locale . '.json');
