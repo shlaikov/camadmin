@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { router, Head, Link } from '@inertiajs/vue3'
+import { router, Head, Link, usePage } from '@inertiajs/vue3'
 
 import Footer from './Footer.vue'
 import JetApplicationMark from '@/Components/ApplicationMark.vue'
@@ -15,6 +15,8 @@ const instanceStore = useInstanceStore()
 
 const instances = computed(() => instanceStore.instances)
 const isMounted = computed(() => instanceStore.mounted)
+
+const hasKeycloak = computed(() => usePage().props.has_keycloak)
 
 defineProps({
   title: String,
@@ -47,6 +49,10 @@ const switchToTeam = (team) => {
 }
 
 const logout = () => {
+  if (hasKeycloak.value) {
+    return (window.location = route('keycloak.logout'))
+  }
+
   router.post(route('logout'))
 }
 </script>

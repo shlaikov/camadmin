@@ -16,6 +16,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        if (config('keycloak-web.client_secret')) {
+            return route('keycloak.login');
+        }
+
         if (!$request->expectsJson()) {
             return route('login');
         }

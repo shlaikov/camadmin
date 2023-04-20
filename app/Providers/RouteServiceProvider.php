@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\SSO\Keycloak\AuthController;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -35,6 +36,37 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            if (!config('keycloak-web.client_secret')) {
+                return;
+            }
+
+            $defaults = [
+                'login' => 'login',
+                'logout' => 'logout',
+                'register' => 'register',
+                'callback' => 'callback',
+            ];
+
+            $routes = config('keycloak-web.routes', []);
+            $routes = array_merge($defaults, $routes);
+            $router = $this->app->make('router');
+
+            if (!empty($routes['login'])) {
+                $router->middleware('web')->get($routes['login'], [AuthController::class, 'login'])->name('keycloak.login');
+            }
+
+            if (!empty($routes['logout'])) {
+                $router->middleware('web')->get($routes['logout'], [AuthController::class, 'logout'])->name('keycloak.logout');
+            }
+
+            if (!empty($routes['register'])) {
+                $router->middleware('web')->get($routes['register'], [AuthController::class, 'register'])->name('keycloak.register');
+            }
+
+            if (!empty($routes['callback'])) {
+                $router->middleware('web')->get($routes['callback'], [AuthController::class, 'callback'])->name('keycloak.callback');
+            }
         });
     }
 

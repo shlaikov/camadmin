@@ -10,7 +10,7 @@ use ReflectionClass;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
-class CamundaRepository
+class CamundaService
 {
     const CAMUNDA_NAMESPACE = "App\Http\Camunda";
 
