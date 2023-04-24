@@ -30,7 +30,7 @@ const onRowClick = (row) => {
       :src="`/diagram/${file.uuid}/preview.svg`"
     />
     <div v-else class="mb-4 mx-auto md:h-64 md:w-64 h-40 w-40">
-      <EmptyFile class="mx-auto md:h-64 md:w-16 h-20 w-20 opacity-25" />
+      <EmptyFile class="mx-auto h-full md:h-64 md:w-16 sm:h-20 w-20 opacity-25" />
     </div>
 
     <h4 class="mb-2 text-lg font-semibold truncate">{{ file.name }}</h4>

@@ -117,7 +117,7 @@ onMounted(() => {
               </div>
               <div
                 v-show="instance.statistics && instance.statistics.length > 0"
-                class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6"
+                class="bg-gray-50 px-4 py-5 sm:grid space-y-4 sm:space-y-0 sm:grid-cols-4 sm:gap-4 sm:px-6"
               >
                 <div v-for="data in instance.statistics" :key="data.key">
                   <DiagramFiles :file="data.diagram" />

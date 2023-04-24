@@ -116,24 +116,24 @@ const logout = () => {
                             {{ instance.name }}
                           </JetDropdownLink>
                           <div class="border-t border-gray-100" />
-                          <a
-                            :href="route('instances.create')"
-                            class="hover:bg-gray-100 focus:bg-gray-100 leading-5 group flex items-center text-gray-700 text-sm w-full px-2 py-2 transition"
-                          >
-                            <svg
-                              width="20"
-                              height="20"
-                              fill="currentColor"
-                              class="mr-2"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
-                              />
-                            </svg>
-                            {{ __('header.menu.instances.create') }}
-                          </a>
                         </template>
+                        <a
+                          :href="route('instances.create')"
+                          class="hover:bg-gray-100 focus:bg-gray-100 leading-5 group flex items-center text-gray-700 text-sm w-full px-2 py-2 transition"
+                        >
+                          <svg
+                            width="20"
+                            height="20"
+                            fill="currentColor"
+                            class="mr-2"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
+                            />
+                          </svg>
+                          {{ __('header.menu.instances.create') }}
+                        </a>
                       </div>
                     </template>
                   </JetDropdown>
