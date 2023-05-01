@@ -22,7 +22,10 @@ watch(message, async () => {
           <div class="w-0 flex-1 flex items-center min-w-0">
             <span
               class="flex p-2 rounded-lg"
-              :class="{ 'bg-secondary': style == 'success', 'bg-error-lighter': style == 'danger' }"
+              :class="{
+                'bg-primary': style == 'success',
+                'bg-error-lighter': style == 'danger',
+              }"
             >
               <svg
                 v-if="style == 'success'"
