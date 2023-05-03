@@ -1,7 +1,7 @@
-# 👋 Welcome to A Product
+# 👋 Welcome to Camadmin documentation
 
 {% hint style="info" %}
-**GitBook tip:** your product docs aren't just a reference of all your features! use them to encourage folks to perform certain actions and discover the value in your product.
+**Tip:** your product docs aren't just a reference of all your features! use them to encourage folks to perform certain actions and discover the value in your product.
 {% endhint %}
 
 ## Overview
@@ -20,8 +20,8 @@ Here are a couple of example overviews from products with really great docs:
 
 ## Quick links
 
-{% content-ref url="overview/what-we-do.md" %}
-[what-we-do.md](overview/what-we-do.md)
+{% content-ref url="overview/introduction.md" %}
+[introduction.md](overview/introduction.md)
 {% endcontent-ref %}
 
 {% content-ref url="overview/our-features.md" %}
@@ -32,12 +32,12 @@ Here are a couple of example overviews from products with really great docs:
 
 We've put together some helpful guides for you to get setup with our product quickly and easily.
 
-{% content-ref url="fundamentals/getting-set-up/" %}
-[getting-set-up](fundamentals/getting-set-up/)
+{% content-ref url="fundamentals/getting-set-up/setting-environments.md" %}
+[setting-environments.md](fundamentals/getting-set-up/setting-environments.md)
 {% endcontent-ref %}
 
-{% content-ref url="fundamentals/getting-set-up/setting-permissions.md" %}
-[setting-permissions.md](fundamentals/getting-set-up/setting-permissions.md)
+{% content-ref url="fundamentals/getting-set-up/" %}
+[getting-set-up](fundamentals/getting-set-up/)
 {% endcontent-ref %}
 
 {% content-ref url="fundamentals/getting-set-up/inviting-members.md" %}

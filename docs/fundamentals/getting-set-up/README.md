@@ -1,8 +1,8 @@
-# 🛠 Getting set up
+# Getting set up
 
 <details>
 
-<summary>Step1: Creating your organization</summary>
+<summary>Step1: Install app</summary>
 
 
 
@@ -18,7 +18,7 @@
 
 <details>
 
-<summary>Step 3: Making your first post</summary>
+<summary>Step 3: Adding your first instance</summary>
 
 
 
@@ -26,7 +26,7 @@
 
 <details>
 
-<summary>Step 4: Publishing a post</summary>
+<summary>Step 4: Publishing a process</summary>
 
 
 
