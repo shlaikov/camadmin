@@ -53,6 +53,10 @@ Route::middleware([
         ->where('id', '[0-9]+')->name('instances.update');
     Route::delete('/instances/camunda/{id}', [InstanceController::class, 'delete'])
         ->where('id', '[0-9]+')->name('instances.delete');
+    Route::get('/instances/camunda/{id}/desicions', [InstanceController::class, 'desicions'])
+        ->name('instances.desicions');
+    Route::get('/instances/camunda/{id}/incidents', [InstanceController::class, 'incidents'])
+        ->name('instances.incidents');
     Route::get('/instances/camunda/{id}/logs', [InstanceController::class, 'logs'])
         ->name('instances.logs');
     Route::get('/instances/camunda/{id}/settings', [InstanceController::class, 'settings'])

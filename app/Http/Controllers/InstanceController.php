@@ -60,6 +60,16 @@ class InstanceController extends Controller
         }
     }
 
+    public function desicions(string $id): InertiaResponse
+    {
+        return Inertia::render('Instance/Desicions', ['instanceId' => $id]);
+    }
+
+    public function incidents(string $id): InertiaResponse
+    {
+        return Inertia::render('Instance/Incidents', ['instanceId' => $id]);
+    }
+
     public function logs(string $id): InertiaResponse
     {
         return Inertia::render('Instance/Logs', ['instanceId' => $id]);

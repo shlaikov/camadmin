@@ -112,6 +112,7 @@ const logout = () => {
                             v-for="instance in instances"
                             :key="instance.id"
                             :href="route('instances.show', instance.id)"
+                            :aria-current="route().current('instances.show', instance.id) ? 'page' : ''"
                           >
                             {{ instance.name }}
                           </JetDropdownLink>

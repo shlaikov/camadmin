@@ -13,20 +13,34 @@ defineProps({
       <a
         :href="route('instances.show', { id: instanceId })"
         class="pr-4 text-gray-500 hover:text-gray-700"
-        aria-current="page"
+        :class="{ 'text-gray-900 hover:text-gray-500': route().current('instances.show') }"
+        :aria-current="route().current('instances.show') ? 'page' : ''"
         >Processes</a
       >
     </li>
     <li>
-      <a href="#" class="pr-3 pl-2 text-gray-500 hover:text-gray-700">Desicions</a>
+      <a
+        :href="route('instances.desicions', { id: instanceId })"
+        class="pr-4 text-gray-500 hover:text-gray-700"
+        :class="{ 'text-gray-900 hover:text-gray-500': route().current('instances.desicions') }"
+        :aria-current="route().current('instances.desicions') ? 'page' : ''"
+        >Desicions</a
+      >
     </li>
     <li>
-      <a href="#" class="pr-3 pl-2 text-gray-500 hover:text-gray-700">Incidents</a>
+      <a
+        :href="route('instances.incidents', { id: instanceId })"
+        class="pr-4 text-gray-500 hover:text-gray-700"
+        :class="{ 'text-gray-900 hover:text-gray-500': route().current('instances.incidents') }"
+        >Incidents</a
+      >
     </li>
     <li>
       <a
         :href="route('instances.logs', { id: instanceId })"
         class="flex items-center pr-3 pl-1 text-gray-500 hover:text-gray-700"
+        :class="{ 'text-gray-900 hover:text-gray-500': route().current('instances.logs') }"
+        :aria-current="route().current('instances.logs') ? 'page' : ''"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +63,8 @@ defineProps({
       <a
         :href="route('instances.settings', { id: instanceId })"
         class="flex items-center pr-3 text-gray-500 hover:text-gray-700"
+        :class="{ 'text-gray-900 hover:text-gray-500': route().current('instances.settings') }"
+        :aria-current="route().current('instances.logs') ? 'settings' : ''"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
