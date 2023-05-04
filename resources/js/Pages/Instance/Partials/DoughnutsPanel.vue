@@ -12,14 +12,16 @@ const props = defineProps({
 })
 
 const doughnutColors = [
-  '#6b21a8',
-  '#6c5ce7',
-  '#9333ea',
-  '#6366f1',
-  '#4338ca',
-  '#a855f7',
-  '#6d28d9',
-  '#9333ea',
+  '#eef2ff',
+  '#ede9fe',
+  '#fdf4ff',
+  '#dbeafe',
+  '#ddd6fe',
+  '#f3e8ff',
+  '#fdf4ff',
+  '#faf5ff',
+  '#dbeafe',
+  '#c4b5fd',
 ]
 
 const plugin = {
@@ -47,7 +49,7 @@ const plugin = {
 
       ctx.beginPath()
       ctx.lineWidth = width || 2
-      ctx.strokeStyle = color || '#e5e5e5'
+      ctx.strokeStyle = color || '#f9fafb'
       ctx.arc(centerX, centerY, r - radiusDecrease || 0, 0, 2 * Math.PI)
       ctx.stroke()
     }
@@ -64,8 +66,10 @@ const options = (title) => ({
       display: true,
       text: title,
     },
+    legend: {
+      display: false,
+    },
     emptyDoughnut: {
-      color: '#e5e5e5',
       width: 70,
       radiusDecrease: 40,
     },

@@ -27,7 +27,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Arimo', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: '#6c5ce7',
@@ -36,7 +36,7 @@ module.exports = {
         warning: '#f39c12',
         'error-lighter': '#ff6348',
         error: '#e74c3c',
-        success: '#7bed9f',
+        success: '#86efac',
       },
     },
   },
