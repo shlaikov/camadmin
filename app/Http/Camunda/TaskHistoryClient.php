@@ -6,9 +6,11 @@ use Illuminate\Support\Arr;
 use App\Data\Camunda\TaskHistory;
 use App\Exceptions\CamundaException;
 use App\Exceptions\ObjectNotFoundException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class TaskHistoryClient extends CamundaClient
 {
+    #[Route("/history/task", method: "GET")]
     public static function find(string $id): TaskHistory
     {
         $response = self::make()->get("history/task?taskId=$id");
@@ -22,6 +24,14 @@ class TaskHistoryClient extends CamundaClient
         }
 
         throw new CamundaException($response->json('message'));
+    }
+
+    #[Route("/history/task/count", method: "GET")]
+    public static function count(): int
+    {
+        $response = self::make()->get('history/task/count', request()->all())->json();
+
+        return $response['count'];
     }
 
     /**

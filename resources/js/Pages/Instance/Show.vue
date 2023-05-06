@@ -41,7 +41,7 @@ onMounted(() => {
 <template>
   <Layout :title="instance.name" :instance-id="instanceId">
     <template #content>
-      <div v-if="instance.statistics" class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <DoughnutsPanel :instance="instance" />
       </div>
       <div

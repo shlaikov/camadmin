@@ -11,7 +11,11 @@ const props = defineProps({
   },
 })
 
+let labels = []
+
 const doughnutColors = [
+  '#a5b4fc',
+  '#c7d2fe',
   '#eef2ff',
   '#ede9fe',
   '#fdf4ff',
@@ -56,7 +60,9 @@ const plugin = {
   },
 }
 
-const labels = props.instance.statistics.map((i) => i.name)
+if (props.instance.statistics) {
+  labels = props.instance.statistics.map((i) => i.name)
+}
 
 const options = (title) => ({
   responsive: true,
@@ -78,7 +84,7 @@ const options = (title) => ({
 </script>
 
 <template>
-  <div class="flex justify-between">
+  <div v-if="instance.statistics && instance.taskStaticstics" class="flex justify-between">
     <Doughnut
       :data="{
         labels,
@@ -106,11 +112,15 @@ const options = (title) => ({
     />
     <Doughnut
       :data="{
-        labels,
+        labels: ['Assigned to a user', 'Assigned to 1 or more groups', 'Unassigned'],
         datasets: [
           {
-            backgroundColor: doughnutColors,
-            data: [40, 20],
+            backgroundColor: [].concat(doughnutColors).reverse(),
+            data: [
+              instance.taskStaticstics.assigned,
+              instance.taskStaticstics.withCandidateGroups,
+              instance.taskStaticstics.withoutCandidateGroups,
+            ],
           },
         ],
       }"

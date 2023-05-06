@@ -78,5 +78,44 @@ export const useInstanceStore = defineStore('instance', {
         return error
       }
     },
+    async fetchTaskStatistics(instanceId) {
+      const unfinished = await camundaApi().get(`${instanceId}/history/task/count`, {
+        params: {
+          unfinished: true,
+        },
+      })
+
+      const assigned = await camundaApi().get(`${instanceId}/history/task/count`, {
+        params: {
+          unfinished: true,
+          assigned: true,
+        },
+      })
+
+      const withCandidateGroups = await camundaApi().get(`${instanceId}/history/task/count`, {
+        params: {
+          unfinished: true,
+          unassigned: true,
+          withCandidateGroups: true,
+        },
+      })
+
+      const withoutCandidateGroups = await camundaApi().get(`${instanceId}/history/task/count`, {
+        params: {
+          unfinished: true,
+          unassigned: true,
+          withoutCandidateGroups: true,
+        },
+      })
+
+      const instance = this.getInstanceById(instanceId)
+
+      instance.taskStaticstics = {
+        unfinished: unfinished.data,
+        assigned: assigned.data,
+        withCandidateGroups: withCandidateGroups.data,
+        withoutCandidateGroups: withoutCandidateGroups.data,
+      }
+    },
   },
 })

@@ -24,8 +24,9 @@ defineProps({
 
 onMounted(() => {
   if (instances.value && !isMounted.value) {
-    instances.value.forEach((instance) => {
-      instanceStore.fetchDefenitions(instance.id)
+    instances.value.forEach(async (instance) => {
+      await instanceStore.fetchDefenitions(instance.id)
+      await instanceStore.fetchTaskStatistics(instance.id)
     })
 
     instanceStore.$patch((state) => {
@@ -112,7 +113,9 @@ const logout = () => {
                             v-for="instance in instances"
                             :key="instance.id"
                             :href="route('instances.show', instance.id)"
-                            :aria-current="route().current('instances.show', instance.id) ? 'page' : ''"
+                            :aria-current="
+                              route().current('instances.show', instance.id) ? 'page' : ''
+                            "
                           >
                             {{ instance.name }}
                           </JetDropdownLink>
