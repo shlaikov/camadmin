@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 
+import Loader from '@/Components/Loader.vue'
 import Layout from './Partials/Layout.vue'
 import camundaApi from '@/Api/Camunda'
 import { useInstanceStore } from '@/Stores/instance'
@@ -14,6 +15,8 @@ const props = defineProps({
     type: String,
   },
 })
+
+const isLoading = ref(true)
 
 const instance = instances.value.find((i) => i.id == props.instanceId)
 const desicions = ref([])
@@ -32,6 +35,7 @@ onMounted(() => {
       })
       .then(({ data }) => {
         desicions.value = data
+        isLoading.value = false
       })
   }
 })
@@ -41,7 +45,7 @@ onMounted(() => {
   <Layout title="Desicions" :instance-id="instanceId">
     <template #content>
       <section class="bg-gray-50 overflow-x-scroll">
-        <table class="table-auto w-full bg-white rounded">
+        <table v-if="!isLoading" class="table-auto w-full bg-white rounded">
           <thead class="border-b border-gray-100">
             <tr>
               <th class="pl-6 py-6">
@@ -92,6 +96,7 @@ onMounted(() => {
             </tr>
           </tbody>
         </table>
+        <Loader v-else />
       </section>
     </template>
   </Layout>

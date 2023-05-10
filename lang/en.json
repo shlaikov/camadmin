@@ -13,6 +13,7 @@
   "header.main_dropdown.switch_teams": "Switch Teams",
   "header.user_dropdown.manage_account": "Manage Account",
   "header.user_dropdown.profile": "Profile",
+  "header.user_dropdown.about": "About",
   "header.user_dropdown.api_tokens": "API Tokens",
   "header.user_dropdown.logout": "Log Out",
 
