@@ -4,7 +4,7 @@
 
 # Camadmin
 
-[![test](https://github.com/shlaikov/camadmin/actions/workflows/laravel.yml/badge.svg?branch=main)](https://github.com/shlaikov/camadmin/actions/workflows/laravel.yml)
+[![test](https://github.com/shlaikov/camadmin/actions/workflows/app-tests.yml/badge.svg?branch=main)](https://github.com/shlaikov/camadmin/actions/workflows/app-tests.yml)
 [![GitHub release](https://img.shields.io/github/release/shlaikov/camadmin.svg)](https://github.com/shlaikov/camadmin/releases/)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -12,7 +12,6 @@ Camadmin is a self-hosted application for business analysts, developers and busi
 
 - ⚙️ Self-hosted
 - 📦 Extremely light
-- 🔬 Open-source
 - 🔌 Extensible
 
 You can also connect to your data sources, such as databases ( PostgreSQL, MongoDB, MySQL & more), API endpoints (Camadmin supports importing OpenAPI spec & OAuth2 authorization), SaaS tools and object storage services ( S3, Minio, etc ) to fetch and write data.
