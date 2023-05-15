@@ -14,22 +14,22 @@ Camadmin is a comprehensive admin panel that provides advanced capabilities for 
 [introduction.md](overview/introduction.md)
 {% endcontent-ref %}
 
-{% content-ref url="fundamentals/getting-set-up.md" %}
-[getting-set-up.md](fundamentals/getting-set-up.md)
+{% content-ref url="fundamentals/getting-set-up/" %}
+[getting-set-up](fundamentals/getting-set-up/)
 {% endcontent-ref %}
 
 ## Get Started
 
 We've put together some helpful guides for you to get setup with our product quickly and easily.
 
-{% content-ref url="fundamentals/getting-set-up.md" %}
-[getting-set-up.md](fundamentals/getting-set-up.md)
+{% content-ref url="fundamentals/getting-set-up/" %}
+[getting-set-up](fundamentals/getting-set-up/)
 {% endcontent-ref %}
 
-{% content-ref url="fundamentals/setting-environments.md" %}
-[setting-environments.md](fundamentals/setting-environments.md)
+{% content-ref url="fundamentals/getting-set-up/setting-environments.md" %}
+[setting-environments.md](fundamentals/getting-set-up/setting-environments.md)
 {% endcontent-ref %}
 
-{% content-ref url="fundamentals/inviting-members.md" %}
-[inviting-members.md](fundamentals/inviting-members.md)
+{% content-ref url="fundamentals/getting-set-up/inviting-members.md" %}
+[inviting-members.md](fundamentals/getting-set-up/inviting-members.md)
 {% endcontent-ref %}
