@@ -5,18 +5,19 @@
 ## Overview
 
 * [Introduction](overview/introduction.md)
-* [✨ Our Features](overview/our-features.md)
+* [Our Features](overview/our-features.md)
 
 ## Product Guides
 
 * [Making a post](product-guides/making-a-post.md)
 * [Understanding Projects](product-guides/understanding-projects.md)
+* [Page 1](product-guides/page-1.md)
 
 ## Fundamentals
 
-* [Getting set up](fundamentals/getting-set-up/README.md)
-  * [Setting environments](fundamentals/getting-set-up/setting-environments.md)
-  * [Inviting Members](fundamentals/getting-set-up/inviting-members.md)
+* [Getting set up](fundamentals/getting-set-up.md)
+* [Inviting Members](fundamentals/inviting-members.md)
+* [Setting environments](fundamentals/setting-environments.md)
 
 ## Use Cases
 
