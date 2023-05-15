@@ -6,7 +6,6 @@ use App\Exceptions\MissingConfigurationException;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use GuzzleHttp;
-use RuntimeException;
 
 class SSOBrokerController extends SSOBroker
 {
@@ -59,7 +58,7 @@ class SSOBrokerController extends SSOBroker
             return;
         }
 
-        if ($this->token = strval(Cookie::get($this->getCookieName(), null))) {
+        if ($this->token = Cookie::get($this->getCookieName(), null)) {
             return;
         }
 

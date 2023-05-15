@@ -35,7 +35,7 @@ abstract class SSOBroker implements SSOBrokerInterface
     /**
      * Random token generated for the client and broker.
      *
-     * @var string|null
+     * @var mixed
      */
     protected $token;
 
