@@ -7,6 +7,7 @@
 [![test](https://github.com/shlaikov/camadmin/actions/workflows/app-tests.yml/badge.svg?branch=main)](https://github.com/shlaikov/camadmin/actions/workflows/app-tests.yml)
 [![GitHub release](https://img.shields.io/github/release/shlaikov/camadmin.svg)](https://github.com/shlaikov/camadmin/releases/)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshlaikov%2Fcamadmin.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshlaikov%2Fcamadmin?ref=badge_shield)
 
 Camadmin is a self-hosted application for business analysts, developers and business representatives. It takes the pain out of development by easing common tasks used in many business process.
 
@@ -31,3 +32,6 @@ If you discover a security vulnerability within Camadmin, please send an e-mail 
 ## License
 
 The Camadmin is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshlaikov%2Fcamadmin.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshlaikov%2Fcamadmin?ref=badge_large)
