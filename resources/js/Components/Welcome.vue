@@ -89,12 +89,11 @@ const { instanceStatistics } = storeToRefs(instanceStore)
             <div>
               <span
                 class="inline-flex items-center justify-center p-2 bg-gray-200 rounded-md shadow-lg"
-                :class="{ 'bg-red-200 ': instanceStatistics.incidents > 0 }"
+                :class="{ 'bg-warning-lighter': instanceStatistics.incidents > 0 }"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-6 w-6 text-slate-900"
-                  :class="{ 'text-red-400': instanceStatistics.incidents > 0 }"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="1.5"

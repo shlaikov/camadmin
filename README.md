@@ -2,7 +2,7 @@
      alt="Camadmin logo"
      src="public/img/logo/vector/default_squared.svg"/>
 
-# Camadmin
+# Camadmin [WIP]
 
 [![test](https://github.com/shlaikov/camadmin/actions/workflows/app-tests.yml/badge.svg?branch=main)](https://github.com/shlaikov/camadmin/actions/workflows/app-tests.yml)
 [![GitHub release](https://img.shields.io/github/release/shlaikov/camadmin.svg)](https://github.com/shlaikov/camadmin/releases/)

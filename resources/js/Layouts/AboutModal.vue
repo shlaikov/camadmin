@@ -43,7 +43,7 @@ const closeModal = () => {
           Camadmin is distributed under
           <a
             class="text-gray-500 hover:text-primary active:text-primary transition duration-100 cursor-pointer"
-            href="https://shlaikov.github.io/"
+            href="https://github.com/shlaikov/camadmin/blob/main/LICENSE.md"
             target="_blank"
           >
             MIT Licence</a
