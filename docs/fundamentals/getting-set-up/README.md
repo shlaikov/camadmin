@@ -60,7 +60,7 @@ Once you have completed these steps, you should have a new super user with the e
 
 <details>
 
-<summary>Step 2: Inviting your team</summary>
+<summary>Step 3: Inviting your team</summary>
 
 To invite a team member in Camadmin, you can follow these steps:
 
@@ -78,7 +78,7 @@ That's it! You have successfully invited a team member to Camadmin.
 
 <details>
 
-<summary>Step 3: Adding your first instance</summary>
+<summary>Step 4: Adding your first instance</summary>
 
 
 
