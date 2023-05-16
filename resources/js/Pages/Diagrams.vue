@@ -22,24 +22,24 @@ const onInputChange = (e) => {
   e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
 }
 
-const { uploadFiles } = createUploader(route('diagram.import'))
+const { uploadFiles } = createUploader(route('diagrams.import'))
 </script>
 
 <template>
-  <AppLayout title="Projects">
+  <AppLayout title="Diagrams">
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Projects</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Diagrams</h2>
     </template>
 
     <div class="py-12 relative">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+      <div class="mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden border border-gray-200 shadow-sm sm:rounded-lg">
           <div class="flex flex-col mb-6">
             <div class="flex flex-col mt-8">
               <div class="mb-4 px-4 flex items-center justify-between">
                 <Link
                   v-show="!files.length"
-                  :href="route('diagram.create')"
+                  :href="route('diagrams.create')"
                   class="hover:bg-secondary group flex items-center rounded-md bg-primary text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm transition"
                 >
                   <svg width="20" height="20" fill="currentColor" class="mr-2" aria-hidden="true">

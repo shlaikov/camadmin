@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Repository\Eloquent;
 
 use App\Enums\DiagramEnum;
-use App\Models\Project;
 use App\Repository\BaseRepository;
 use App\Models\Diagram;
 use Illuminate\Http\JsonResponse;
@@ -14,14 +13,14 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Storage;
 
-class ProjectRepository extends BaseRepository
+class DiagramRepository extends BaseRepository
 {
     /**
-     * ProjectRepository constructor.
+     * DiagramRepository constructor.
      *
-     * @param Project $model
+     * @param Diagram $model
      */
-    public function __construct(Project $model)
+    public function __construct(Diagram $model)
     {
         parent::__construct($model);
     }

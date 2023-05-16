@@ -6,9 +6,9 @@ use Mockery;
 use App\Enums\DiagramEnum;
 use Tests\TestCase;
 
-class ProjectTest extends TestCase
+class DiagramTest extends TestCase
 {
-    protected $projectRepository;
+    protected $diagramRepository;
 
     /**
      * Define test setup.
@@ -19,15 +19,15 @@ class ProjectTest extends TestCase
     {
         parent::setUp();
 
-        $project = Mockery::mock('App\Models\Project');
-        $this->projectRepository = new \App\Repository\Eloquent\ProjectRepository($project);
+        $diagram = Mockery::mock('App\Models\Diagram');
+        $this->diagramRepository = new \App\Repository\Eloquent\DiagramRepository($diagram);
     }
 
     public function test_get_diagram_types(): void
     {
         $diagrams = DiagramEnum::getValues();
-        $projectDiagramTypes = $this->projectRepository->getDiagramTypes();
+        $diagramTypes = $this->diagramRepository->getDiagramTypes();
 
-        $this->assertEquals(count($diagrams), count($projectDiagramTypes));
+        $this->assertEquals(count($diagrams), count($diagramTypes));
     }
 }

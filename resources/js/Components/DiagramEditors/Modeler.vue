@@ -79,7 +79,7 @@ export default {
     }
 
     axios
-      .get(route('diagram.file', { uuid: this.uuid, extension: this.type }), {
+      .get(route('diagrams.file', { uuid: this.uuid, extension: this.type }), {
         headers: { Accept: 'application/xml' },
       })
       .then(({ data }) => {

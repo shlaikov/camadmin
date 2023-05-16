@@ -10,7 +10,7 @@ import CreateForm from '@/Pages/Instance/Partials/CreateForm.vue'
     </template>
 
     <div>
-      <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+      <div class="mx-auto py-10 sm:px-6 lg:px-8">
         <CreateForm />
       </div>
     </div>

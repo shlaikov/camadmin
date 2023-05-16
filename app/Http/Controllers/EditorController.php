@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diagram;
-use App\Repository\Eloquent\ProjectRepository;
+use App\Repository\Eloquent\DiagramRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,7 +14,7 @@ use Storage;
 class EditorController extends Controller
 {
     public function __construct(
-        public ProjectRepository $projectRepository
+        public DiagramRepository $diagramRepository
     ) {
     }
 
@@ -27,7 +27,7 @@ class EditorController extends Controller
 
     public function deploy(string $uuid, Request $request): JsonResponse
     {
-        return $this->projectRepository->deploy($uuid, $request);
+        return $this->diagramRepository->deploy($uuid, $request);
     }
 
     public function file(string $uuid, string $extension): Response

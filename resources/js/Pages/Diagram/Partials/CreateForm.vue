@@ -17,7 +17,7 @@ const form = useForm({
 })
 
 const createDiagram = () => {
-  form.post(route('diagram.store'), {
+  form.post(route('diagrams.store'), {
     errorBag: 'createDiagram',
     preserveScroll: true,
   })

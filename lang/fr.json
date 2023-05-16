@@ -6,7 +6,7 @@
   "header.menu.dashboard": "Dashboard",
   "header.menu.instances": "Instances",
   "header.menu.instances.create": "Add new camunda instance",
-  "header.menu.projects": "Projects",
+  "header.menu.diagrams": "Diagrams",
   "header.main_dropdown.manage_team": "Manage Team",
   "header.main_dropdown.team_settings": "Team Settings",
   "header.main_dropdown.manage_team.create": "Create New Team",
