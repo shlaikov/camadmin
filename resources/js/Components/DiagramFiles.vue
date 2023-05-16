@@ -13,7 +13,7 @@ const onRowClick = (row) => {
     return (window.location = `${pathname}/process-definition/${row.id}/diagram`)
   }
 
-  window.location = `/diagram/${row.uuid}`
+  window.location = `/diagrams/${row.uuid}`
 }
 </script>
 
@@ -27,7 +27,7 @@ const onRowClick = (row) => {
       v-if="file.preview"
       class="mb-4 mx-auto md:h-64 md:w-64 h-40 w-40"
       :alt="file.name"
-      :src="`/diagram/${file.uuid}/preview.svg`"
+      :src="`/diagrams/${file.uuid}/preview.svg`"
     />
     <div v-else class="mb-4 mx-auto md:h-64 md:w-64 h-40 w-40">
       <EmptyFile class="mx-auto h-full md:h-64 md:w-16 sm:h-20 w-20 opacity-25" />

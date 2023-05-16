@@ -1,20 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { router, Link } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 
 import AboutModal from './AboutModal.vue'
-import JetApplicationMark from '@/Components/ApplicationMark.vue'
 import JetDropdown from '@/Components/Dropdown.vue'
 import JetDropdownLink from '@/Components/DropdownLink.vue'
-import JetNavLink from '@/Components/NavLink.vue'
 import JetResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 import { useAppStore } from '@/Stores/app'
-import { useInstanceStore } from '@/Stores/instance'
 
 const appStore = useAppStore()
-const instanceStore = useInstanceStore()
-
-const instances = computed(() => instanceStore.instances)
 const hasKeycloak = computed(() => appStore.hasKeycloak)
 
 const showingNavigationDropdown = ref(false)
@@ -47,86 +41,12 @@ const logout = () => {
 </script>
 
 <template>
-  <nav class="bg-white border-b border-gray-100">
+  <nav class="bg-white shadow">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex">
-          <!-- Logo -->
-          <div class="shrink-0 flex items-center">
-            <Link :href="route('dashboard')">
-              <JetApplicationMark class="block h-9 w-auto" />
-            </Link>
-          </div>
-
-          <!-- Navigation Links -->
-          <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-            <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-              {{ __('header.menu.dashboard') }}
-            </JetNavLink>
-
-            <JetNavLink>
-              <JetDropdown align="center" width="160">
-                <template #trigger>
-                  <button
-                    class="flex items-center gap-x-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300"
-                    aria-expanded="false"
-                  >
-                    {{ __('header.menu.instances') }}
-                    <svg
-                      class="h-5 w-5 flex-none text-gray-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </template>
-
-                <template #content>
-                  <div class="w-60">
-                    <template v-if="instances.length > 0">
-                      <JetDropdownLink
-                        v-for="instance in instances"
-                        :key="instance.id"
-                        :href="route('instances.show', instance.id)"
-                        :aria-current="route().current('instances.show', instance.id) ? 'page' : ''"
-                      >
-                        {{ instance.name }}
-                      </JetDropdownLink>
-                      <div class="border-t border-gray-100" />
-                    </template>
-                    <a
-                      :href="route('instances.create')"
-                      class="hover:bg-gray-100 focus:bg-gray-100 leading-5 group flex items-center text-gray-700 text-sm w-full px-2 py-2 transition"
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        fill="currentColor"
-                        class="mr-2"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z"
-                        />
-                      </svg>
-                      {{ __('header.menu.instances.create') }}
-                    </a>
-                  </div>
-                </template>
-              </JetDropdown>
-            </JetNavLink>
-
-            <JetNavLink :href="route('projects')" :active="route().current('projects')">
-              {{ __('header.menu.projects') }}
-            </JetNavLink>
-          </div>
+          <slot />
         </div>
 
         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -327,8 +247,8 @@ const logout = () => {
         <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
           {{ __('header.menu.dashboard') }}
         </JetResponsiveNavLink>
-        <JetResponsiveNavLink :href="route('projects')" :active="route().current('projects')">
-          {{ __('header.menu.projects') }}
+        <JetResponsiveNavLink :href="route('diagrams')" :active="route().current('diagrams')">
+          {{ __('header.menu.diagrams') }}
         </JetResponsiveNavLink>
       </div>
 

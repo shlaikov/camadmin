@@ -24,7 +24,7 @@ if (diagram.value.category) {
 <template v-if="typeof window !== 'undefined'">
   <AppLayout title="Projects">
     <div class="py-12 relative">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
           <div v-if="diagram.type === 'bpmn'">
             <component

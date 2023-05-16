@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue'
 import { Head } from '@inertiajs/vue3'
 
 import Navigation from './Navigation.vue'
+import Sidebar from './Sidebar.vue'
 import Footer from './Footer.vue'
 import JetBanner from '@/Components/Banner.vue'
 import { useInstanceStore } from '@/Stores/instance'
@@ -36,15 +37,16 @@ onMounted(() => {
 
     <JetBanner />
 
-    <div class="flex flex-col min-h-screen bg-gray-100 justify-between">
-      <Navigation />
+    <Sidebar />
 
-      <!-- Page Heading -->
-      <header v-if="$slots.header" class="bg-white shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col min-h-screen bg-gray-100 justify-between md:ml-64">
+      <Navigation>
+        <div v-if="$slots.header" class="flex mx-auto h-full items-center">
           <slot name="header" />
         </div>
-      </header>
+      </Navigation>
+
+      <!-- Page Heading -->
 
       <!-- Page Content -->
       <main class="mb-auto min-h-max">

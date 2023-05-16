@@ -39,16 +39,7 @@ const closeModal = () => {
             >Alexey Shlaikov</a
           >
         </p>
-        <p>
-          Camadmin is distributed under
-          <a
-            class="text-gray-500 hover:text-primary active:text-primary transition duration-100 cursor-pointer"
-            href="https://github.com/shlaikov/camadmin/blob/main/LICENSE.md"
-            target="_blank"
-          >
-            MIT Licence</a
-          >
-        </p>
+        <p>Camadmin is distributed under MIT Licence</p>
         <br />
         For comments or questions you can
         <a
@@ -60,7 +51,7 @@ const closeModal = () => {
         or
         <a
           class="text-gray-500 hover:text-primary active:text-primary transition duration-100 cursor-pointer"
-          href="mailto:alexey.shlaikov@camadmin.dev"
+          href="mailto:shlaikov@camadmin.dev"
           >send me an email</a
         >.<br />If you find a bug, please report it on
         <a
