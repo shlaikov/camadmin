@@ -1,6 +1,9 @@
 FROM php:8.1-fpm
 
 LABEL maintainer="Alexey Shlaikov (@shlaikov)"
+LABEL org.opencontainers.image.source=https://github.com/shlaikov/camadmin
+LABEL org.opencontainers.image.description="Comprehensive admin panel that provides advanced capabilities for managing and monitoring processes"
+LABEL org.opencontainers.image.licenses=MIT
 
 ARG APP_KEY
 ARG NODE_VERSION=16
