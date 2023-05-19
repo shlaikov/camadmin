@@ -9,12 +9,16 @@
 
 ## Fundamentals
 
-* [Getting set up](fundamentals/getting-set-up/README.md)
-* [Inviting Members](fundamentals/getting-set-up/inviting-members.md)
-* [Setting environments](fundamentals/getting-set-up/setting-environments.md)
+* [Getting set up](fundamentals/getting-set-up.md)
+* [Inviting Members](fundamentals/inviting-members.md)
+* [Setting environments](fundamentals/setting-environments.md)
 
 ## Use Cases
 
 * [📊 For Business Analytics](use-cases/for-business-analytics.md)
 * [🖥 For Developers](use-cases/for-developers.md)
 * [⚙ For System Analytics](use-cases/for-system-analytics.md)
+
+## Terms of use
+
+* [Privacy Policy](terms-of-use/privacy-policy.md)
