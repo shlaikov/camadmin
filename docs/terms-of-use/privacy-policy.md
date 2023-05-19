@@ -1,6 +1,6 @@
 # Privacy Policy
 
-### Use of Google Analytics Cookies ([camadmin.dev](https://camadmin.dev/))
+### Use of Google Analytics Cookies ([camadmin.dev](https://camadmin.dev/) and [docs.camadmin.dev](https://docs.camadmin.dev/))
 
 This Privacy Policy outlines how we use Google Analytics cookies on Camadmin public website. We are committed to protecting your privacy and ensuring that any information collected is used responsibly and in accordance with applicable laws and regulations. By using our website, you consent to the use of Google Analytics cookies as described in this policy.
 

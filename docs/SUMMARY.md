@@ -9,9 +9,9 @@
 
 ## Fundamentals
 
-* [Getting set up](fundamentals/getting-set-up.md)
-* [Inviting Members](fundamentals/inviting-members.md)
-* [Setting environments](fundamentals/setting-environments.md)
+* [Getting set up](fundamentals/getting-set-up/README.md)
+* [Inviting Members](fundamentals/getting-set-up/inviting-members.md)
+* [Setting environments](fundamentals/getting-set-up/setting-environments.md)
 
 ## Use Cases
 
