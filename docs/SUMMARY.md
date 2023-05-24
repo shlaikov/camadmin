@@ -18,3 +18,7 @@
 * [📊 For Business Analytics](use-cases/for-business-analytics.md)
 * [🖥 For Developers](use-cases/for-developers.md)
 * [⚙ For System Analytics](use-cases/for-system-analytics.md)
+
+## Terms of use
+
+* [Privacy Policy](terms-of-use/privacy-policy.md)
