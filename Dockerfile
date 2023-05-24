@@ -57,6 +57,7 @@ COPY docker/conf.d/nginx.conf /etc/nginx/sites-enabled/default
 
 RUN composer install --optimize-autoloader --no-dev
 RUN npm install && npm run build-client
+RUN rm -rf node_modules
 
 RUN chmod +x /var/www/docker/run.sh
 

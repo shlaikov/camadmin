@@ -17,24 +17,25 @@
         "files.saveConflictResolution": "overwriteFileOnDisk"
       },
       "extensions": [
-        "mikestead.dotenv",
-        "amiralizadeh9480.laravel-extra-intellisense",
-        "ryannaddy.laravel-artisan",
-        "onecentlin.laravel5-snippets",
-        "onecentlin.laravel-blade",
-        "xdebug.php-debug",
-        "bmewburn.vscode-intelephense-client",
-        "open-southeners.laravel-pint",
-        "marabesi.php-import-checker",
-        "Vue.volar",
-        "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint",
-        "csstools.postcss",
-        "donjayamanne.githistory",
-        "bradlc.vscode-tailwindcss",
-        "ms-azuretools.vscode-docker",
-        "wix.vscode-import-cost"
-      ]
+		"mikestead.dotenv",
+		"amiralizadeh9480.laravel-extra-intellisense",
+		"ryannaddy.laravel-artisan",
+		"onecentlin.laravel5-snippets",
+		"onecentlin.laravel-blade",
+		"xdebug.php-debug",
+		"bmewburn.vscode-intelephense-client",
+		"open-southeners.laravel-pint",
+		"marabesi.php-import-checker",
+		"Vue.volar",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"csstools.postcss",
+		"donjayamanne.githistory",
+		"bradlc.vscode-tailwindcss",
+		"ms-azuretools.vscode-docker",
+		"wix.vscode-import-cost",
+		"cssho.vscode-svgviewer"
+	]
     }
   },
   "workspaceFolder": "/var/www/html",
