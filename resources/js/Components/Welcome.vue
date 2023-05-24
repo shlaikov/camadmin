@@ -1,41 +1,59 @@
 <script setup>
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  TimeSeriesScale,
+  LinearScale,
+} from 'chart.js'
+import { Doughnut, Bar } from 'vue-chartjs'
 
-import JetApplicationLogo from '@/Components/ApplicationLogo.vue'
 import DiagramFiles from '@/Components/DiagramFiles.vue'
-import { useUserStore } from '@/Stores/user'
 import { useInstanceStore } from '@/Stores/instance'
 
-Chart.register(ArcElement, Tooltip, Legend)
+ChartJS.register(
+  ArcElement,
+  Title,
+  Tooltip,
+  TimeSeriesScale,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+)
 
-const userStore = useUserStore()
 const instanceStore = useInstanceStore()
-
-const user = computed(() => userStore.user)
 const instances = computed(() => instanceStore.instances)
 
-const { instanceStatistics } = storeToRefs(instanceStore)
+const { instanceStatistics, instanceActivity } = storeToRefs(instanceStore)
 </script>
 
 <template>
   <div>
     <div class="block sm:flex p-6 sm:px-20 bg-white border-b border-gray-200">
-      <div class="block">
-        <JetApplicationLogo class="block h-12 w-auto" />
-        <div class="inline-block mt-8 text-xl">
-          {{ __('welcome') }},
-          <span class="rounded-full ring-2 ring-white">
-            <img
-              class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-              :src="user.profile_photo_url"
-              :alt="user.name"
-            />
-            {{ user.name }}
-          </span>
-        </div>
+      <div class="block w-full rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-sm mr-4">
+        <Bar
+          :options="{
+            responsive: true,
+            interaction: {
+              intersect: false,
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: 'Last 6 month activity in Instances',
+              },
+              legend: false,
+            },
+          }"
+          :data="instanceActivity"
+        />
       </div>
 
       <div

@@ -168,3 +168,7 @@ export function formatDate(date, format, utc) {
 
   return format.replace(/\\(.)/g, '$1')
 }
+
+export function valueOrDefault(value, defaultValue) {
+  return typeof value === 'undefined' ? defaultValue : value
+}

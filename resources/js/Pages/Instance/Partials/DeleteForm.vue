@@ -5,34 +5,39 @@ import { useForm } from '@inertiajs/vue3'
 import JetActionSection from '@/Components/ActionSection.vue'
 import JetDialogModal from '@/Components/DialogModal.vue'
 import JetDangerButton from '@/Components/DangerButton.vue'
-import JetInput from '@/Components/Input.vue'
 import JetInputError from '@/Components/InputError.vue'
 import JetSecondaryButton from '@/Components/SecondaryButton.vue'
 
-const confirmingUserDeletion = ref(false)
-const passwordInput = ref(null)
+const confirmingDeletion = ref(false)
 
-const form = useForm({
-  confirmationText: '',
+const props = defineProps({
+  instanceId: {
+    required: true,
+    type: String,
+  },
 })
 
-const confirmUserDeletion = () => {
-  confirmingUserDeletion.value = true
+const form = useForm({})
 
-  setTimeout(() => passwordInput.value.focus(), 250)
+const confirmDeletion = () => {
+  confirmingDeletion.value = true
 }
 
 const deleteInstance = () => {
-  form.delete(route('instances.delete'), {
+  form.delete(route('instances.delete', props.instanceId), {
     preserveScroll: true,
-    onSuccess: () => closeModal(),
-    onError: () => passwordInput.value.focus(),
+    onSuccess: () => {
+      closeModal()
+
+      return (window.location = route('dashboard'))
+    },
+    onError: () => form.reset(),
     onFinish: () => form.reset(),
   })
 }
 
 const closeModal = () => {
-  confirmingUserDeletion.value = false
+  confirmingDeletion.value = false
 
   form.reset()
 }
@@ -52,28 +57,17 @@ const closeModal = () => {
       </div>
 
       <div class="mt-5">
-        <JetDangerButton @click="confirmUserDeletion"> Delete Instance </JetDangerButton>
+        <JetDangerButton @click="confirmDeletion"> Delete Instance </JetDangerButton>
       </div>
 
-      <JetDialogModal :show="confirmingUserDeletion" @close="closeModal">
+      <JetDialogModal :show="confirmingDeletion" @close="closeModal">
         <template #title> Delete Instance </template>
 
         <template #content>
-          Are you sure you want to delete your account? Once your account is deleted, all of its
-          resources and data will be permanently deleted. Please enter your password to confirm you
-          would like to permanently delete your account.
+          Are you sure you want to delete your camunda instance?
 
           <div class="mt-4">
-            <JetInput
-              ref="passwordInput"
-              v-model="form.password"
-              type="password"
-              class="mt-1 block w-3/4"
-              placeholder="Password"
-              @keyup.enter="deleteInstance"
-            />
-
-            <JetInputError :message="form.errors.password" class="mt-2" />
+            <JetInputError :message="form.errors.confirmingDeletion" class="mt-2" />
           </div>
         </template>
 

@@ -2,6 +2,8 @@
 import { Chart, ArcElement, Tooltip, Title } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
 
+import * as Utils from '@/Utils/charts'
+
 Chart.register(ArcElement, Tooltip, Title)
 
 const props = defineProps({
@@ -12,21 +14,6 @@ const props = defineProps({
 })
 
 let labels = []
-
-const doughnutColors = [
-  '#a5b4fc',
-  '#c7d2fe',
-  '#eef2ff',
-  '#ede9fe',
-  '#fdf4ff',
-  '#dbeafe',
-  '#ddd6fe',
-  '#f3e8ff',
-  '#fdf4ff',
-  '#faf5ff',
-  '#dbeafe',
-  '#c4b5fd',
-]
 
 const plugin = {
   id: 'emptyDoughnut',
@@ -90,7 +77,7 @@ const options = (title) => ({
         labels,
         datasets: [
           {
-            backgroundColor: doughnutColors,
+            backgroundColor: Utils.COLORS,
             data: instance.statistics.map((i) => i.instances),
           },
         ],
@@ -102,7 +89,7 @@ const options = (title) => ({
         labels,
         datasets: [
           {
-            backgroundColor: doughnutColors,
+            backgroundColor: Utils.COLORS,
             data: instance.statistics.map((i) => i.incidents),
           },
         ],
@@ -115,7 +102,7 @@ const options = (title) => ({
         labels: ['Assigned to a user', 'Assigned to 1 or more groups', 'Unassigned'],
         datasets: [
           {
-            backgroundColor: [].concat(doughnutColors).reverse(),
+            backgroundColor: [].concat(Utils.COLORS).reverse(),
             data: [
               instance.taskStaticstics.assigned,
               instance.taskStaticstics.withCandidateGroups,

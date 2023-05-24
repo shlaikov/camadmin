@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 
-import JetApplicationMark from '@/Components/ApplicationMark.vue'
+import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import JetDropdown from '@/Components/Dropdown.vue'
 import JetDropdownLink from '@/Components/DropdownLink.vue'
 import { useInstanceStore } from '@/Stores/instance'
@@ -18,7 +18,7 @@ const instance = instances.value.find((i) => i.id == instanceId.value)
   <aside class="hidden fixed sm:flex sm:flex-col top-0 left-0 w-64 bg-white h-full border-r">
     <div class="flex items-center px-5 h-16">
       <Link :href="route('dashboard')">
-        <JetApplicationMark class="block h-9 w-auto" />
+        <ApplicationLogo class="block h-9 w-auto" />
       </Link>
     </div>
     <div class="overflow-y-auto overflow-x-hidden flex-grow">

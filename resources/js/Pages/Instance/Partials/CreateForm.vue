@@ -11,15 +11,17 @@ import JetCheckbox from '@/Components/Checkbox.vue'
 const form = useForm({
   name: '',
   type: 'camunda',
-  authentication_type: 'bearer',
+  authentication_type: 'none',
   url: '',
   tenant_id: null,
-  token: '',
   has_counter: false,
 })
 
 const addInstance = () => {
   form.post(route('instances.store'), {
+    onSuccess: () => {
+      return (window.location = route('dashboard'))
+    },
     errorBag: 'createInstance',
     preserveScroll: true,
   })
@@ -61,11 +63,11 @@ const addInstance = () => {
         <span class="ml-2 text-sm text-gray-600">Process definition counters</span>
         <JetInputError :message="form.errors.has_counter" class="mt-2" />
       </div>
-      <div class="col-span-6 sm:col-span-4">
+      <!-- <div class="col-span-6 sm:col-span-4">
         <JetLabel for="token" value="Bearer token" />
         <JetInput id="token" v-model="form.token" type="text" class="block w-full mt-1" required />
         <JetInputError :message="form.errors.token" class="mt-2" />
-      </div>
+      </div> -->
     </template>
 
     <template #actions>

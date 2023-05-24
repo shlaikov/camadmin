@@ -20,6 +20,8 @@ defineProps({
 onMounted(() => {
   if (instances.value && !isMounted.value) {
     instances.value.forEach(async (instance) => {
+      instanceStore.fetchInstanceActivity(instance.id)
+
       await instanceStore.fetchDefenitions(instance.id)
       await instanceStore.fetchTaskStatistics(instance.id)
     })

@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 
 import camundaApi from '@/Api/Camunda'
 import { mergeDefenitions } from '@/DTO/defenitions'
+import * as Utils from '../Utils/charts'
 
 export const useInstanceStore = defineStore('instance', {
   state: () => {
@@ -34,6 +35,42 @@ export const useInstanceStore = defineStore('instance', {
       })
 
       return { runningInstances, failedJobs, incidents }
+    },
+    instanceActivity: (state) => {
+      const datasets = []
+
+      const labels = Utils.getLastMonths({
+        count: 6,
+        // section: 3,
+      })
+
+      state.instances.forEach((instance, index) => {
+        if (instance.error || !instance.logs) {
+          return
+        }
+
+        const logs = instance.logs.map((i) => {
+          const date = new Date(i.startTime)
+          const year = date.getFullYear()
+
+          return {
+            x: `${Utils.MONTHS[date.getMonth()]} ${String(year).slice(-2)}`,
+            y: 1,
+          }
+        })
+
+        const filled = logs.reduce((m, { x, y }) => m.set(x, (m.get(x) || 0) + y), new Map())
+        const data = labels.map((i) => filled.get(i) || 0)
+
+        datasets.push({
+          label: instance.name,
+          data: data,
+          borderSkipped: true,
+          backgroundColor: Utils.colorize(true, index),
+        })
+      })
+
+      return { labels, datasets }
     },
   },
   actions: {
@@ -116,6 +153,23 @@ export const useInstanceStore = defineStore('instance', {
         withCandidateGroups: withCandidateGroups.data,
         withoutCandidateGroups: withoutCandidateGroups.data,
       }
+    },
+    async fetchInstanceActivity(instanceId) {
+      const instance = this.getInstanceById(instanceId)
+
+      camundaApi()
+        .get(`${instanceId}/history/activity-instance`, {
+          params: {
+            sortBy: 'startTime',
+            sortOrder: 'desc',
+          },
+        })
+        .then(({ data }) => {
+          instance.logs = data
+        })
+        .catch(() => {
+          instance.logs = []
+        })
     },
   },
 })

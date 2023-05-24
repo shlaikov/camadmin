@@ -1,6 +1,9 @@
 FROM php:8.1-fpm
 
 LABEL maintainer="Alexey Shlaikov (@shlaikov)"
+LABEL org.opencontainers.image.source=https://github.com/shlaikov/camadmin
+LABEL org.opencontainers.image.description="Comprehensive admin panel that provides advanced capabilities for managing and monitoring processes"
+LABEL org.opencontainers.image.licenses=MIT
 
 ARG APP_KEY
 ARG NODE_VERSION=16
@@ -54,6 +57,7 @@ COPY docker/conf.d/nginx.conf /etc/nginx/sites-enabled/default
 
 RUN composer install --optimize-autoloader --no-dev
 RUN npm install && npm run build-client
+RUN rm -rf node_modules
 
 RUN chmod +x /var/www/docker/run.sh
 

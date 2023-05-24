@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string('url');
             $table->string('tenant_id')->nullable();
             $table->enum('authentication_type', [
+                'none',
                 'bearer',
                 'basic'
-            ])->default('bearer');
+            ])->default('none');
             $table->boolean('has_counter')->default(false);
         });
     }
